@@ -21,12 +21,14 @@ namespace NewLeagueApp
     public partial class Stats : Window
     {
         private Boolean canScroll=false;
+        private List<DockPanel> matches;
+        private List<DockPanel> scrollSegment;
         public Stats()
         {
             InitializeComponent();
 
-            ArrayList matches = new ArrayList();
-
+            matches = new List<DockPanel>();
+            scrollSegment = new List<DockPanel>();
             BrushConverter bc = new BrushConverter();
             Brush brush = (Brush)bc.ConvertFrom("#C7DFFC");
 
@@ -74,13 +76,25 @@ namespace NewLeagueApp
             }
         }
         private void mouseScroll(object sender, MouseWheelEventArgs e)
-        {
-          
-            
+        {  
             if (e.Delta < 0 && canScroll)
             {
-                HistoryPannel.Children.RemoveAt(0);
+                if (HistoryPannel.Children.Count > 3)
+                {
+                    HistoryPannel.Children.Remove(matches[0]);
+                    scrollSegment.Add(matches[0]);
+                    matches.RemoveAt(0);
+                }
 
+            }
+            else if(e.Delta > 0 && canScroll)
+            {
+                int temp = matches.Count - HistoryPannel.Children.Count;
+                HistoryPannel.Children.Clear();
+                for(int i = temp; i < matches.Count; i++)
+                {
+                    HistoryPannel.Children.Add(matches[i]);
+                }
             }
         }
     }
