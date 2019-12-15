@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,15 +15,11 @@ using System.Collections;
 
 namespace NewLeagueApp
 {
-
-
-    
     /// <summary>
     /// Interaction logic for Stats.xaml
     /// </summary>
     public partial class Stats : Window
     {
-        private int counter = 0;
         private Boolean canScroll=false;
         private List<DockPanel> matches;
         private List<DockPanel> scrollSegment;
@@ -37,9 +33,9 @@ namespace NewLeagueApp
             Brush brush = (Brush)bc.ConvertFrom("#C7DFFC");
 
 
-            for (int i = 0; i<5; i++)
+            for (int i = 0; i<4; i++)
             {
-                createMatch();
+                addMatch();
 
             }
            foreach(DockPanel a in matches)
@@ -54,22 +50,6 @@ namespace NewLeagueApp
 
 
 
-        }
-        private DockPanel createMatch(){
-                DockPanel match = new DockPanel();
-                match.Height = HistoryPannel.Height / 3;
-                match.Background = new SolidColorBrush(Colors.Plum);
-
-
-                Label test = new Label();
-                test.Content = " Test" + counter;
-                counter++;
-                test.FontSize = 24;
-                match.Children.Add(test);
-                DockPanel.SetDock(match, Dock.Top);
-                Canvas.SetTop(match, Canvas.GetTop(HistoryPannel));
-                matches.Add(match);
-                return match;
         }
         private void mouseHover(object sender, EventArgs e)
         {
@@ -90,30 +70,39 @@ namespace NewLeagueApp
             {
                 if (HistoryPannel.Children.Count > 3)
                 {
-                    HistoryPannel.Children.RemoveAt((0));
+                    HistoryPannel.Children.Remove(0);
+                    //scrollSegment.Add(matches[0]);
+                    //matches.RemoveAt(0);
                 }
                 else{
-                    HistoryPannel.Children.RemoveAt(0);
-                    
-                    HistoryPannel.Children.Add(createMatch());
-                    
+                    HistoryPannel.Children.Remove(0);
+                    addMatch();
                 }
 
             }
             else if(e.Delta > 0 && canScroll)
             {
-               // int temp = matches.Count - HistoryPannel.Children.Count;
-               int temp = matches.IndexOf((DockPanel)HistoryPannel.Children[0])-1;
-                
-                if(temp > 0){
+                int temp = matches.Count - HistoryPannel.Children.Count;
                 HistoryPannel.Children.Clear();
-                for(int i = temp; i < temp+3; i++)
+                for(int i = temp; i < l; i++)
                 {
                     HistoryPannel.Children.Add(matches[i]);
-                     
-
                 }
-            }           }
+            }
+        }
+        private void addMatch(){
+                 DockPanel match = new DockPanel();
+                match.Height = HistoryPannel.Height / 3;
+                match.Background = new SolidColorBrush(Colors.Plum);
+
+
+                Label test = new Label();
+                test.Content = " Test" + i;
+                test.FontSize = 24;
+                match.Children.Add(test);
+                DockPanel.SetDock(match, Dock.Top);
+                Canvas.SetTop(match, Canvas.GetTop(HistoryPannel));
+                matches.Add(match);
         }
     }
 }
