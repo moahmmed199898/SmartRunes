@@ -31,6 +31,11 @@ namespace NewLeagueApp
         {
             InitializeComponent();
 
+
+            ProfileApiCalls calls = new ProfileApiCalls("Naymliss");
+            calls.GetMatchHistory();
+
+
             matches = new List<DockPanel>();
             scrollSegment = new List<DockPanel>();
             BrushConverter bc = new BrushConverter();
