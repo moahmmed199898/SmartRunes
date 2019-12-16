@@ -59,7 +59,7 @@ namespace NewLeagueApp
 
 
 
-        async public void GetMatchHistory(int index)
+        async public Task<GameStatsStructure_participants_stats> GetMatchHistory(int index)
         {
 
             GameStatsStructure data = await MatchInfo(hist.matches[index].gameID);
@@ -82,8 +82,10 @@ namespace NewLeagueApp
                     Console.WriteLine("Kills: " + data.participants[i].stats.kills + "Deaths: " + data.participants[i]
                         .stats.deaths + " Assists: " + data.participants[i].stats.assists);
                     history.Add(data);
+                    return data.participants[i].stats;
                 }
             }
+            return null;
         }
 
 
