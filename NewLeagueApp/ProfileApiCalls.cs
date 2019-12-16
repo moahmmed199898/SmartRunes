@@ -18,7 +18,8 @@ namespace NewLeagueApp
         private String apikey;
         private String SummonerName;
         private List<GameStatsStructure> history;
-
+        private SummonerClass summoner;
+        private HistoryClass hist;
 
 
         private WebClient myWebClient = new WebClient();
@@ -26,31 +27,56 @@ namespace NewLeagueApp
 
         public ProfileApiCalls(String SummonerName)
         {
+
+            Task.Run(() => LoadProfile());
+           
+            history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
-            apikey = "RGAPI-d4495231-31c3-467a-8c5c-4ba80033d3a3";
+            apikey = "RGAPI-7618296f-31e5-4760-8647-ce17f57bb39f";
         }
 
-        public void WriteToMem()
+        private async Task LoadProfile()
         {
-            JsonSerializer ser = new JsonSerializer();
+            this.summoner = await SummonerInfo(SummonerName);
+            this.hist = await HistoryInfo(summoner.accountID);
+        }
+
+        async public Task WriteToMem()
+        {
             System.Xml.Serialization.XmlSerializer writer =
             new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            System.IO.FileStream file = System.IO.File.Create("file.json");
-            writer.Serialize(file, history);
-
-           
+            System.IO.FileStream file = System.IO.File.Create("matches.xml");
+            writer.Serialize(file, history);           
         }
 
-        async public void GetMatchHistory()
+        public List<GameStatsStructure> ReadFromMem()
         {
-            SummonerClass summoner = await SummonerInfo(SummonerName);
-            HistoryClass hist = await HistoryInfo(summoner.accountID);
-            GameStatsStructure data = await MatchInfo(hist.matches[0].gameID);
+            System.Xml.Serialization.XmlSerializer reader =
+            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
+            System.IO.FileStream file = System.IO.File.Create("matches.xml");
+            return (List<GameStatsStructure>)reader.Deserialize(file);
+        }
+
+
+
+        async public void GetMatchHistory(int index)
+        {
+
+            GameStatsStructure data = await MatchInfo(hist.matches[index].gameID);
             
-            int playernum;
+            int playernum = 0;
             for(int i = 0; i < 10; i++)
             {
-                if(SummonerName.Equals( data.participantIdentities[i].player.summonerName))
+                if (SummonerName.Equals(data.participantIdentities[i].player.summonerName))
+                {
+                    playernum = data.participantIdentities[i].participantId;
+                }
+            }
+
+
+            for(int i = 0; i < 10; i++)
+            {
+                if(playernum == data.participantIdentities[i].participantId)
                 {
                     //playernum = data.participantIdentities[i].participantId;
                     Console.WriteLine("Kills: " + data.participants[i].stats.kills + "Deaths: " + data.participants[i]
@@ -63,7 +89,8 @@ namespace NewLeagueApp
 
         private string APIProcsser(string callURL, string calldata)
         {
-            Console.WriteLine(callURL + "|||" + calldata);
+           // Console.WriteLine(callURL + "|||" + calldata);
+           
             string key = $"?api_key=" + apikey;
             string name = calldata;
             myWebClient.BaseAddress = callURL;
@@ -221,7 +248,7 @@ namespace NewLeagueApp
             }
             public class GameStatsStructure_participants_stats
             {
-            [JsonProperty("assits")]
+            [JsonProperty("assists")]
             public int assists { get; set; }
                 public int champLevel { get; set; }
                 public int combatPlayerScore { get; set; }
@@ -335,7 +362,16 @@ namespace NewLeagueApp
             public double kda;
             public GameStatsStructure_participants_stats()
             {
-                this.kda = (kills + assists) / deaths;
+                int temp = 0;
+                if(deaths == 0)
+                {
+                    temp = 1; 
+                }
+                else
+                {
+                    temp = deaths;
+                }
+                this.kda = (kills + assists) / temp;
             }
 
             }

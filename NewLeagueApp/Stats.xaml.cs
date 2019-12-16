@@ -27,13 +27,15 @@ namespace NewLeagueApp
         private Boolean canScroll=false;
         private List<DockPanel> matches;
         private List<DockPanel> scrollSegment;
+        private ProfileApiCalls calls;
         public Stats()
         {
             InitializeComponent();
 
 
-            ProfileApiCalls calls = new ProfileApiCalls("Naymliss");
-            calls.GetMatchHistory();
+             calls = new ProfileApiCalls("Naymliss");
+            
+           
 
 
             matches = new List<DockPanel>();
@@ -96,12 +98,14 @@ namespace NewLeagueApp
                 if (HistoryPannel.Children.Count > 3)
                 {
                     HistoryPannel.Children.RemoveAt((0));
+                    
                 }
                 else{
                     HistoryPannel.Children.RemoveAt(0);
                     
                     HistoryPannel.Children.Add(createMatch());
-                    
+                   
+
                 }
 
             }
