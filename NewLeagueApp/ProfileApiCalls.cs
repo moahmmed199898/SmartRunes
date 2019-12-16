@@ -17,6 +17,7 @@ namespace NewLeagueApp
     {
         private String apikey;
         private String SummonerName;
+        private List<GameStatsStructure> history;
 
 
 
@@ -29,23 +30,34 @@ namespace NewLeagueApp
             apikey = "RGAPI-d4495231-31c3-467a-8c5c-4ba80033d3a3";
         }
 
+        public void WriteToMem()
+        {
+            JsonSerializer ser = new JsonSerializer();
+            System.Xml.Serialization.XmlSerializer writer =
+            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
+            System.IO.FileStream file = System.IO.File.Create("file.json");
+            writer.Serialize(file, history);
+
+           
+        }
+
         async public void GetMatchHistory()
         {
             SummonerClass summoner = await SummonerInfo(SummonerName);
             HistoryClass hist = await HistoryInfo(summoner.accountID);
             GameStatsStructure data = await MatchInfo(hist.matches[0].gameID);
+            
             int playernum;
             for(int i = 0; i < 10; i++)
             {
-                if(SummonerName.Equals( data.participantIdentities[i].player.summonerId))
+                if(SummonerName.Equals( data.participantIdentities[i].player.summonerName))
                 {
                     //playernum = data.participantIdentities[i].participantId;
                     Console.WriteLine("Kills: " + data.participants[i].stats.kills + "Deaths: " + data.participants[i]
                         .stats.deaths + " Assists: " + data.participants[i].stats.assists);
+                    history.Add(data);
                 }
             }
-            Console.WriteLine();
-            // HistoryClass history = await HistoryInfo(summoner.accountID);
         }
 
 
@@ -225,7 +237,8 @@ namespace NewLeagueApp
                 public bool firstInhibitorKill { get; set; }
                 public bool firstTowerAssist { get; set; }
                 public bool firstTowerKill { get; set; }
-                public int goldEarned { get; set; }
+            [JsonProperty("goldEarned")]
+            public int goldEarned { get; set; }
                 public int goldSpent { get; set; }
                 public int inhibitorKills { get; set; }
                 public int item0 { get; set; }
@@ -291,12 +304,14 @@ namespace NewLeagueApp
                 public int playerScore8 { get; set; }
                 public int playerScore9 { get; set; }
                 public int quadraKills { get; set; }
-                public int sightWardsBoughtInGame { get; set; }
+            [JsonProperty("sightWardsBoughtInGame")]
+            public int sightWardsBoughtInGame { get; set; }
                 public int statPerk0 { get; set; }
                 public int statPerk1 { get; set; }
                 public int statPerk2 { get; set; }
                 public int timeCCingOthers { get; set; }
-                public int totalDamageDealt { get; set; }
+            [JsonProperty("totalDamageDealt")]
+            public int totalDamageDealt { get; set; }
                 public int totalDamageDealtToChampions { get; set; }
                 public int totalDamageTaken { get; set; }
                 public int totalHeal { get; set; }
@@ -315,7 +330,14 @@ namespace NewLeagueApp
                 public int visionWardsBoughtInGame { get; set; }
                 public int wardsKilled { get; set; }
                 public int wardsPlaced { get; set; }
-                public bool win { get; set; }
+            [JsonProperty("win")]
+            public bool win { get; set; }
+            public double kda;
+            public GameStatsStructure_participants_stats()
+            {
+                this.kda = (kills + assists) / deaths;
+            }
+
             }
 
             public class GameStatsStructure_teams
