@@ -21,13 +21,13 @@ namespace NewLeagueApp
     /// <summary>
     /// Interaction logic for Stats.xaml
     /// </summary>
-    public partial class Stats : Window
+     public partial class Stats : Window
     {
         private int counter = 0;
         private Boolean canScroll=false;
         private List<DockPanel> matches;
         private List<DockPanel> scrollSegment;
-        public Stats()
+         public Stats()
         {
             InitializeComponent();
 
