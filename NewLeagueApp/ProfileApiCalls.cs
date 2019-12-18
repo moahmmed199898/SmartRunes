@@ -34,7 +34,7 @@ namespace NewLeagueApp
            
             history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
-            apikey = "RGAPI-7618296f-31e5-4760-8647-ce17f57bb39f";
+            apikey = "RGAPI-c1b5caec-5d9f-4a48-806d-4d7a51b59503";
         }
 
         private async Task LoadProfile()
@@ -43,20 +43,23 @@ namespace NewLeagueApp
             this.hist = await HistoryInfo(summoner.accountID);
         }
 
-        async public Task WriteToMem()
+        async public Task WriteToMem(List<GameStatsStructure> list)
         {
             System.Xml.Serialization.XmlSerializer writer =
             new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            System.IO.FileStream file = System.IO.File.Create("matches.xml");
-            writer.Serialize(file, history);           
+            StreamWriter myWriter = new StreamWriter(@"C:\matches.xml");
+
+            writer.Serialize(myWriter,history );
+            myWriter.Close();
+
         }
 
         public async Task <List<GameStatsStructure>> ReadFromMem()
         {
             System.Xml.Serialization.XmlSerializer reader =
             new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            System.IO.FileStream file = System.IO.File.OpenRead("matches.xml");
-            return (List<GameStatsStructure>)reader.Deserialize(file);
+            StreamReader myReader = new StreamReader(@"C:\matches.xml");
+            return (List<GameStatsStructure>)reader.Deserialize(myReader);
         }
 
 

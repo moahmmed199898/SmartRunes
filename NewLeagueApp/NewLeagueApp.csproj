@@ -92,7 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="File.cs" />
+    <Compile Include="Files.cs" />
     <Compile Include="LCU\LCU.cs" />
     <Compile Include="LCU\Types\RunesPage.cs" />
     <Compile Include="RateLimiter.cs" />

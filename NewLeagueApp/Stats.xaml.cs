@@ -26,7 +26,7 @@ namespace NewLeagueApp
         private int counter = 0;
         private Boolean canScroll=false;
         private List<DockPanel> matches;
-        private ProfileApiCalls calls;
+        private Files file;
         private List<Label> name;
         private List<Label> kda;
         
@@ -35,7 +35,11 @@ namespace NewLeagueApp
             InitializeComponent();
 
 
-             calls = new ProfileApiCalls("Naymliss");
+             file = new Files("Naymliss");
+            file.DetermineDifference();
+            // file.AddUnaddedMatches(3);
+            file.GetFirstMatch();
+           // file.AddUnaddedMatches(3);
             
            
 
@@ -61,12 +65,9 @@ namespace NewLeagueApp
 
         }
 
-        async private Task<ProfileApiCalls.GameStatsStructure_participants_stats> LoadMatch(int index)
-        {
-            
-            ProfileApiCalls.GameStatsStructure_participants_stats match = await calls.GetMatchHistory(index);
-            return match;
-        }
+
+
+        
          private DockPanel createMatch(){
                 DockPanel match = new DockPanel();
                 match.Height = HistoryPannel.Height / 3;
@@ -112,7 +113,7 @@ namespace NewLeagueApp
                 else{
                     HistoryPannel.Children.RemoveAt(0);
                     
-                    HistoryPannel.Children.Add(createMatch());
+                    
                    
 
                 }

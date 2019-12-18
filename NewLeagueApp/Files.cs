@@ -8,15 +8,15 @@ namespace NewLeagueApp
 {
 
     
-    class File
+    class Files
     {
-        private List<ProfileApiCalls.GameStatsStructure> stats { get => stats; set=> stats = value; }
+        public List<ProfileApiCalls.GameStatsStructure> stats;
         private List<bool> exists;
         private ProfileApiCalls.HistoryClass hist;
         private List<int> matchids;
         private ProfileApiCalls calls;
         private string summonerName;
-        public File(String summonerName)
+        public Files(String summonerName)
         {
             this.summonerName = summonerName;
             calls = new ProfileApiCalls(summonerName);
@@ -25,9 +25,10 @@ namespace NewLeagueApp
 
         /***
          * Determines if a match needs to be added via parralel arraylists
+         * TODO: search by endindex or begintime
          */
         public async Task DetermineDifference()
-        {
+        {           
             await GetHist();
             await ReadFromMemory();            
             for (int j = 0; j < hist.matches.Count; j++)
@@ -37,10 +38,14 @@ namespace NewLeagueApp
                 {
                     if (hist.matches[j] == hist.matches[i])
                     {
-                        exists[j] = true;
+                        exists[j] = true;     
                     }
                 }
             }
+            /*        IEnumerable<int> scoreQuery =
+            from score in scores
+            where score > 80
+            select score;*/
         }
 
         public async Task AddUnaddedMatches(int number)
@@ -57,6 +62,10 @@ namespace NewLeagueApp
                 }
             }
         }
+        public async Task UpdateFile()
+        {
+            await calls.WriteToMem(stats);
+        }
 
         private async Task ReadFromMemory()
         {
@@ -66,6 +75,14 @@ namespace NewLeagueApp
         {
             ProfileApiCalls.SummonerClass profile = await calls.SummonerInfo(summonerName);
             hist = await calls.HistoryInfo(profile.accountID);
+        }
+        public async Task GetFirstMatch()
+        {
+            await GetHist();
+            ProfileApiCalls.GameStatsStructure temp = await (calls.MatchInfo(hist.matches[0].gameID));
+            stats.Add(temp);
+            await calls.WriteToMem(stats);
+
         }
 
 
