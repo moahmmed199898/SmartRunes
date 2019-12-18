@@ -21,28 +21,32 @@ namespace NewLeagueApp
     /// <summary>
     /// Interaction logic for Stats.xaml
     /// </summary>
-     public partial class Stats : Window
+    public partial class Stats : Window
     {
         private int counter = 0;
         private Boolean canScroll=false;
         private List<DockPanel> matches;
-        private List<DockPanel> scrollSegment;
-         public Stats()
+        private ProfileApiCalls calls;
+        private List<Label> name;
+        private List<Label> kda;
+        
+        public Stats()
         {
             InitializeComponent();
 
 
-            ProfileApiCalls calls = new ProfileApiCalls("Naymliss");
-            calls.GetMatchHistory();
+             calls = new ProfileApiCalls("Naymliss");
+            
+           
 
 
             matches = new List<DockPanel>();
-            scrollSegment = new List<DockPanel>();
+    
             BrushConverter bc = new BrushConverter();
             Brush brush = (Brush)bc.ConvertFrom("#C7DFFC");
 
 
-            for (int i = 0; i<5; i++)
+            for (int i = 0; i<3; i++)
             {
                 createMatch();
 
@@ -55,18 +59,24 @@ namespace NewLeagueApp
             HistoryPannel.MouseLeave += new MouseEventHandler(mouseHover);
             HistoryPannel.MouseWheel += new MouseWheelEventHandler(mouseScroll);
 
-
-
-
-
         }
-        private DockPanel createMatch(){
+
+        async private Task<ProfileApiCalls.GameStatsStructure_participants_stats> LoadMatch(int index)
+        {
+            
+            ProfileApiCalls.GameStatsStructure_participants_stats match = await calls.GetMatchHistory(index);
+            return match;
+        }
+         private DockPanel createMatch(){
                 DockPanel match = new DockPanel();
                 match.Height = HistoryPannel.Height / 3;
                 match.Background = new SolidColorBrush(Colors.Plum);
 
 
                 Label test = new Label();
+                
+
+
                 test.Content = " Test" + counter;
                 counter++;
                 test.FontSize = 24;
@@ -96,12 +106,15 @@ namespace NewLeagueApp
                 if (HistoryPannel.Children.Count > 3)
                 {
                     HistoryPannel.Children.RemoveAt((0));
+
+                    
                 }
                 else{
                     HistoryPannel.Children.RemoveAt(0);
                     
                     HistoryPannel.Children.Add(createMatch());
-                    
+                   
+
                 }
 
             }

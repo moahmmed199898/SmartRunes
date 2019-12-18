@@ -12,46 +12,87 @@ namespace NewLeagueApp
 
 {
 
-    public class ProfileApiCalls
+    class ProfileApiCalls
 
     {
         private String apikey;
         private String SummonerName;
-
+        private List<GameStatsStructure> history;
+        private SummonerClass summoner;
+        private HistoryClass hist;
 
 
         private WebClient myWebClient = new WebClient();
         System.IO.Stream myStream = new System.IO.MemoryStream();
 
-         public ProfileApiCalls(String SummonerName)
+        public ProfileApiCalls(String SummonerName)
         {
+
+            Task.Run(() => LoadProfile());
+           
+            history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
-            apikey = "RGAPI-d4495231-31c3-467a-8c5c-4ba80033d3a3";
+            apikey = "RGAPI-7618296f-31e5-4760-8647-ce17f57bb39f";
         }
 
-        public async  void GetMatchHistory()
+        private async Task LoadProfile()
         {
-            SummonerClass summoner = await SummonerInfo(SummonerName);
-            HistoryClass hist = await HistoryInfo(summoner.accountID);
-            GameStatsStructure data = await MatchInfo(hist.matches[0].gameID);
-            int playernum;
+            this.summoner = await SummonerInfo(SummonerName);
+            this.hist = await HistoryInfo(summoner.accountID);
+        }
+
+        async public Task WriteToMem()
+        {
+            System.Xml.Serialization.XmlSerializer writer =
+            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
+            System.IO.FileStream file = System.IO.File.Create("matches.xml");
+            writer.Serialize(file, history);           
+        }
+
+        public List<GameStatsStructure> ReadFromMem()
+        {
+            System.Xml.Serialization.XmlSerializer reader =
+            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
+            System.IO.FileStream file = System.IO.File.Create("matches.xml");
+            return (List<GameStatsStructure>)reader.Deserialize(file);
+        }
+
+
+
+        async public Task<GameStatsStructure_participants_stats> GetMatchHistory(int index)
+        {
+
+            GameStatsStructure data = await MatchInfo(hist.matches[index].gameID);
+            
+            int playernum = 0;
             for(int i = 0; i < 10; i++)
             {
-                if(SummonerName.Equals( data.participantIdentities[i].player.summonerId))
+                if (SummonerName.Equals(data.participantIdentities[i].player.summonerName))
+                {
+                    playernum = data.participantIdentities[i].participantId;
+                }
+            }
+
+
+            for(int i = 0; i < 10; i++)
+            {
+                if(playernum == data.participantIdentities[i].participantId)
                 {
                     //playernum = data.participantIdentities[i].participantId;
                     Console.WriteLine("Kills: " + data.participants[i].stats.kills + "Deaths: " + data.participants[i]
                         .stats.deaths + " Assists: " + data.participants[i].stats.assists);
+                    history.Add(data);
+                    return data.participants[i].stats;
                 }
             }
-            Console.WriteLine();
-            // HistoryClass history = await HistoryInfo(summoner.accountID);
+            return null;
         }
 
 
         private string APIProcsser(string callURL, string calldata)
         {
-            Console.WriteLine(callURL + "|||" + calldata);
+           // Console.WriteLine(callURL + "|||" + calldata);
+           
             string key = $"?api_key=" + apikey;
             string name = calldata;
             myWebClient.BaseAddress = callURL;
@@ -64,7 +105,7 @@ namespace NewLeagueApp
 
 
 
-        async  Task<SummonerClass> SummonerInfo(string summonerName)
+        async public Task<SummonerClass> SummonerInfo(string summonerName)
         //This class simply exists to get info about the summoner.
         {
             string request = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
@@ -74,7 +115,7 @@ namespace NewLeagueApp
             return summoner;
         }
 
-        async  Task<HistoryClass> HistoryInfo(string accID)
+        async public Task<HistoryClass> HistoryInfo(string accID)
         //This class simply exists to get info about the summoner.
         {
             string request = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/";
@@ -83,7 +124,7 @@ namespace NewLeagueApp
             history = JsonConvert.DeserializeObject<HistoryClass>(JsonString);
             return history;
         }
-        async  Task<GameStatsStructure> MatchInfo(String matchIndex)
+        async public Task<GameStatsStructure> MatchInfo(String matchIndex)
         {
             string request = "https://na1.api.riotgames.com/lol/match/v4/matches/";
             string JsonString = APIProcsser(request, matchIndex);
@@ -98,35 +139,35 @@ namespace NewLeagueApp
 
 
         //Structure classes 
-         public class SummonerClass
+        public class SummonerClass
         {
             [JsonProperty("profilelconid")]
-             int profileicon_id { get; set; }
+            public int profileicon_id { get; set; }
             [JsonProperty("name")]
-             string name { get; set; }
+            public string name { get; set; }
             [JsonProperty("puuid")]
-             string puu_id { get; set; }
+            public string puu_id { get; set; }
             [JsonProperty("summonerLevel")]
-             string summonerLevel { get; set; }
+            public string summonerLevel { get; set; }
             [JsonProperty("revisionDate")]
-             string revisionDate { get; set; }
+            public string revisionDate { get; set; }
             [JsonProperty("id")]
-             string id { get; set; }
+            public string id { get; set; }
             [JsonProperty("accountID")]
-             public string accountID { get; set; }
+            public string accountID { get; set; }
         }
 
 
         public class HistoryClass
         {
             [JsonProperty("matches")]
-             public List<Match> matches { get; set; }
+            public List<Match> matches { get; set; }
             [JsonProperty("totalGames")]
-             int totalGames { get; set; }
+            public int totalGames { get; set; }
             [JsonProperty("startIndex")]
-             int startIndex { get; set; }
+            public int startIndex { get; set; }
             [JsonProperty("endIndex")]
-             int endIndex { get; set; }
+            public int endIndex { get; set; }
 
 
         }
@@ -134,213 +175,232 @@ namespace NewLeagueApp
         public class Match
         {
             [JsonProperty("lane")]
-             string lane { get; set; }
+            public string lane { get; set; }
             [JsonProperty("gameID")]
-             public string gameID { get; set; }
+            public string gameID { get; set; }
             [JsonProperty("champion")]
-             string champion { get; set; }
+            public string champion { get; set; }
             [JsonProperty("platformId")]
-             string platformId { get; set; }
+            public string platformId { get; set; }
             [JsonProperty("timestamp")]
-             string timestamp { get; set; }
+            public string timestamp { get; set; }
             [JsonProperty("queue")]
-             string queue { get; set; }
+            public string queue { get; set; }
             [JsonProperty("role")]
-             string role { get; set; }
+            public string role { get; set; }
             [JsonProperty("season")]
-             string season { get; set; }
+            public string season { get; set; }
 
 
 
         }
 
+       
 
 
-
-        public class GameStatsStructure
+            public class GameStatsStructure
             {
-                 long gameCreation { get; set; }
-                 int gameDuration { get; set; }
-                 long gameId { get; set; }
-                 string gameMode { get; set; }
-                 string gameType { get; set; }
-                 string gameVersion { get; set; }
-                 int mapId { get; set; }
-                 string platformId { get; set; }
-                 int queueId { get; set; }
-                 int seasonId { get; set; }
+                public long gameCreation { get; set; }
+                public int gameDuration { get; set; }
+                public long gameId { get; set; }
+                public string gameMode { get; set; }
+                public string gameType { get; set; }
+                public string gameVersion { get; set; }
+                public int mapId { get; set; }
+                public string platformId { get; set; }
+                public int queueId { get; set; }
+                public int seasonId { get; set; }
             [JsonProperty("participantIdentities")]
-             public List<GameStatsStructure_participantIdentities> participantIdentities { get; set; }
+            public List<GameStatsStructure_participantIdentities> participantIdentities { get; set; }
             [JsonProperty("participants")]
-                 public List<GameStatsStructure_participants> participants { get; set; }
-                 List<GameStatsStructure_teams> teams { get; set; }
+                public List<GameStatsStructure_participants> participants { get; set; }
+                public List<GameStatsStructure_teams> teams { get; set; }
             }
 
-        public class GameStatsStructure_participantIdentities
+            public class GameStatsStructure_participantIdentities
             {
            [JsonProperty("participantId")]
-                 int participantId { get; set; }
+                public int participantId { get; set; }
             [JsonProperty("player")]
-                 public GameStatsStructure_participantIdentities_player player { get; set; }
+                public GameStatsStructure_participantIdentities_player player { get; set; }
             }
-        public class GameStatsStructure_participantIdentities_player
+            public class GameStatsStructure_participantIdentities_player
             {
-                 string accountId { get; set; }
+                public string accountId { get; set; }
           
-                 string currentAccountId { get; set; }
-                 string currentPlatformId { get; set; }
-                 string matchHistoryUri { get; set; }
-                 string platformId { get; set; }
-                 int profileIcon { get; set; }
-                 public string summonerId { get; set; }
+                public string currentAccountId { get; set; }
+                public string currentPlatformId { get; set; }
+                public string matchHistoryUri { get; set; }
+                public string platformId { get; set; }
+                public int profileIcon { get; set; }
+                public string summonerId { get; set; }
             [JsonProperty("summonerName")]
-                 string summonerName { get; set; }
+                public string summonerName { get; set; }
             }
-        public class GameStatsStructure_participants
+            public class GameStatsStructure_participants
             {
-                 int championId { get; set; }
-                 string highestAchievedSeasonTier { get; set; }
-                 int participantId { get; set; }
-                 int spell1Id { get; set; }
-                 int spell2Id { get; set; }
-                 int teamId { get; set; }
+                public int championId { get; set; }
+                public string highestAchievedSeasonTier { get; set; }
+                public int participantId { get; set; }
+                public int spell1Id { get; set; }
+                public int spell2Id { get; set; }
+                public int teamId { get; set; }
             [JsonProperty("stats")]
-             public GameStatsStructure_participants_stats stats { get; set; }
+            public GameStatsStructure_participants_stats stats { get; set; }
             }
-        public class GameStatsStructure_participants_stats
+            public class GameStatsStructure_participants_stats
             {
-            [JsonProperty("assits")]
-             public int assists { get; set; }
-                 int champLevel { get; set; }
-                 int combatPlayerScore { get; set; }
-                 int damageDealtToObjectives { get; set; }
-                 int damageDealtToTurrets { get; set; }
-                 int damageSelfMitigated { get; set; }
+            [JsonProperty("assists")]
+            public int assists { get; set; }
+                public int champLevel { get; set; }
+                public int combatPlayerScore { get; set; }
+                public int damageDealtToObjectives { get; set; }
+                public int damageDealtToTurrets { get; set; }
+                public int damageSelfMitigated { get; set; }
             [JsonProperty("deaths")]
-             public int deaths { get; set; }
-                 int doubleKills { get; set; }
-                 bool firstBloodAssist { get; set; }
-                 bool firstBloodKill { get; set; }
-                 bool firstInhibitorAssist { get; set; }
-                 bool firstInhibitorKill { get; set; }
-                 bool firstTowerAssist { get; set; }
-                 bool firstTowerKill { get; set; }
-                 int goldEarned { get; set; }
-                 int goldSpent { get; set; }
-                 int inhibitorKills { get; set; }
-                 int item0 { get; set; }
-                 int item1 { get; set; }
-                 int item2 { get; set; }
-                 int item3 { get; set; }
-                 int item4 { get; set; }
-                 int item5 { get; set; }
-                 int item6 { get; set; }
-                 int killingSprees { get; set; }
+            public int deaths { get; set; }
+                public int doubleKills { get; set; }
+                public bool firstBloodAssist { get; set; }
+                public bool firstBloodKill { get; set; }
+                public bool firstInhibitorAssist { get; set; }
+                public bool firstInhibitorKill { get; set; }
+                public bool firstTowerAssist { get; set; }
+                public bool firstTowerKill { get; set; }
+            [JsonProperty("goldEarned")]
+            public int goldEarned { get; set; }
+                public int goldSpent { get; set; }
+                public int inhibitorKills { get; set; }
+                public int item0 { get; set; }
+                public int item1 { get; set; }
+                public int item2 { get; set; }
+                public int item3 { get; set; }
+                public int item4 { get; set; }
+                public int item5 { get; set; }
+                public int item6 { get; set; }
+                public int killingSprees { get; set; }
             [JsonProperty("kills")]
-             public int kills { get; set; }
-                 int largestCriticalStrike { get; set; }
-                 int largestKillingSpree { get; set; }
-                 int largestMultiKill { get; set; }
-                 int longestTimeSpentLiving { get; set; }
-                 int magicDamageDealt { get; set; }
-                 int magicDamageDealtToChampions { get; set; }
-                 int magicalDamageTaken { get; set; }
-                 int neutralMinionsKilled { get; set; }
-                 int neutralMinionsKilledEnemyJungle { get; set; }
-                 int neutralMinionsKilledTeamJungle { get; set; }
-                 int objectivePlayerScore { get; set; }
-                 int participantId { get; set; }
-                 int pentaKills { get; set; }
-                 int perk0 { get; set; }
-                 int perk0Var1 { get; set; }
-                 int perk0Var2 { get; set; }
-                 int perk0Var3 { get; set; }
-                 int perk1 { get; set; }
-                 int perk1Var1 { get; set; }
-                 int perk1Var2 { get; set; }
-                 int perk1Var3 { get; set; }
-                 int perk2 { get; set; }
-                 int perk2Var1 { get; set; }
-                 int perk2Var2 { get; set; }
-                 int perk2Var3 { get; set; }
-                 int perk3 { get; set; }
-                 int perk3Var1 { get; set; }
-                 int perk3Var2 { get; set; }
-                 int perk3Var3 { get; set; }
-                 int perk4 { get; set; }
-                 int perk4Var1 { get; set; }
-                 int perk4Var2 { get; set; }
-                 int perk4Var3 { get; set; }
-                 int perk5 { get; set; }
-                 int perk5Var1 { get; set; }
-                 int perk5Var2 { get; set; }
-                 int perk5Var3 { get; set; }
-                 int perkPrimaryStyle { get; set; }
-                 int perkSubStyle { get; set; }
-                 int physicalDamageDealt { get; set; }
-                 int physicalDamageDealtToChampions { get; set; }
-                 int physicalDamageTaken { get; set; }
-                 int playerScore0 { get; set; }
-                 int playerScore1 { get; set; }
-                 int playerScore2 { get; set; }
-                 int playerScore3 { get; set; }
-                 int playerScore4 { get; set; }
-                 int playerScore5 { get; set; }
-                 int playerScore6 { get; set; }
-                 int playerScore7 { get; set; }
-                 int playerScore8 { get; set; }
-                 int playerScore9 { get; set; }
-                 int quadraKills { get; set; }
-                 int sightWardsBoughtInGame { get; set; }
-                 int statPerk0 { get; set; }
-                 int statPerk1 { get; set; }
-                 int statPerk2 { get; set; }
-                 int timeCCingOthers { get; set; }
-                 int totalDamageDealt { get; set; }
-                 int totalDamageDealtToChampions { get; set; }
-                 int totalDamageTaken { get; set; }
-                 int totalHeal { get; set; }
-                 int totalMinionsKilled { get; set; }
-                 int totalPlayerScore { get; set; }
-                 int totalScoreRank { get; set; }
-                 int totalTimeCrowdControlDealt { get; set; }
-                 int totalUnitsHealed { get; set; }
-                 int tripleKills { get; set; }
-                 int trueDamageDealt { get; set; }
-                 int trueDamageDealtToChampions { get; set; }
-                 int trueDamageTaken { get; set; }
-                 int turretKills { get; set; }
-                 int unrealKills { get; set; }
-                 int visionScore { get; set; }
-                 int visionWardsBoughtInGame { get; set; }
-                 int wardsKilled { get; set; }
-                 int wardsPlaced { get; set; }
-                 bool win { get; set; }
+            public int kills { get; set; }
+                public int largestCriticalStrike { get; set; }
+                public int largestKillingSpree { get; set; }
+                public int largestMultiKill { get; set; }
+                public int longestTimeSpentLiving { get; set; }
+                public int magicDamageDealt { get; set; }
+                public int magicDamageDealtToChampions { get; set; }
+                public int magicalDamageTaken { get; set; }
+                public int neutralMinionsKilled { get; set; }
+                public int neutralMinionsKilledEnemyJungle { get; set; }
+                public int neutralMinionsKilledTeamJungle { get; set; }
+                public int objectivePlayerScore { get; set; }
+                public int participantId { get; set; }
+                public int pentaKills { get; set; }
+                public int perk0 { get; set; }
+                public int perk0Var1 { get; set; }
+                public int perk0Var2 { get; set; }
+                public int perk0Var3 { get; set; }
+                public int perk1 { get; set; }
+                public int perk1Var1 { get; set; }
+                public int perk1Var2 { get; set; }
+                public int perk1Var3 { get; set; }
+                public int perk2 { get; set; }
+                public int perk2Var1 { get; set; }
+                public int perk2Var2 { get; set; }
+                public int perk2Var3 { get; set; }
+                public int perk3 { get; set; }
+                public int perk3Var1 { get; set; }
+                public int perk3Var2 { get; set; }
+                public int perk3Var3 { get; set; }
+                public int perk4 { get; set; }
+                public int perk4Var1 { get; set; }
+                public int perk4Var2 { get; set; }
+                public int perk4Var3 { get; set; }
+                public int perk5 { get; set; }
+                public int perk5Var1 { get; set; }
+                public int perk5Var2 { get; set; }
+                public int perk5Var3 { get; set; }
+                public int perkPrimaryStyle { get; set; }
+                public int perkSubStyle { get; set; }
+                public int physicalDamageDealt { get; set; }
+                public int physicalDamageDealtToChampions { get; set; }
+                public int physicalDamageTaken { get; set; }
+                public int playerScore0 { get; set; }
+                public int playerScore1 { get; set; }
+                public int playerScore2 { get; set; }
+                public int playerScore3 { get; set; }
+                public int playerScore4 { get; set; }
+                public int playerScore5 { get; set; }
+                public int playerScore6 { get; set; }
+                public int playerScore7 { get; set; }
+                public int playerScore8 { get; set; }
+                public int playerScore9 { get; set; }
+                public int quadraKills { get; set; }
+            [JsonProperty("sightWardsBoughtInGame")]
+            public int sightWardsBoughtInGame { get; set; }
+                public int statPerk0 { get; set; }
+                public int statPerk1 { get; set; }
+                public int statPerk2 { get; set; }
+                public int timeCCingOthers { get; set; }
+            [JsonProperty("totalDamageDealt")]
+            public int totalDamageDealt { get; set; }
+                public int totalDamageDealtToChampions { get; set; }
+                public int totalDamageTaken { get; set; }
+                public int totalHeal { get; set; }
+                public int totalMinionsKilled { get; set; }
+                public int totalPlayerScore { get; set; }
+                public int totalScoreRank { get; set; }
+                public int totalTimeCrowdControlDealt { get; set; }
+                public int totalUnitsHealed { get; set; }
+                public int tripleKills { get; set; }
+                public int trueDamageDealt { get; set; }
+                public int trueDamageDealtToChampions { get; set; }
+                public int trueDamageTaken { get; set; }
+                public int turretKills { get; set; }
+                public int unrealKills { get; set; }
+                public int visionScore { get; set; }
+                public int visionWardsBoughtInGame { get; set; }
+                public int wardsKilled { get; set; }
+                public int wardsPlaced { get; set; }
+            [JsonProperty("win")]
+            public bool win { get; set; }
+            public double kda;
+            public GameStatsStructure_participants_stats()
+            {
+                int temp = 0;
+                if(deaths == 0)
+                {
+                    temp = 1; 
+                }
+                else
+                {
+                    temp = deaths;
+                }
+                this.kda = (kills + assists) / temp;
             }
 
-             class GameStatsStructure_teams
-            {
-                 int baronKills { get; set; }
-                 int dominionVictoryScore { get; set; }
-                 int dragonKills { get; set; }
-                 bool firstBaron { get; set; }
-                 bool firstBlood { get; set; }
-                 bool firstDragon { get; set; }
-                 bool firstInhibitor { get; set; }
-                 bool firstRiftHerald { get; set; }
-                 bool firstTower { get; set; }
-                 int inhibitorKills { get; set; }
-                 int riftHeraldKills { get; set; }
-                 int teamId { get; set; }
-                 int towerKills { get; set; }
-                 int vilemawKills { get; set; }
-                 string win { get; set; }
-                 List<GameStatsStructure_teams_bans> bans { get; set; }
             }
-        public class GameStatsStructure_teams_bans
+
+            public class GameStatsStructure_teams
             {
-                 int championId { get; set; }
-                 int pickTurn { get; set; }
+                public int baronKills { get; set; }
+                public int dominionVictoryScore { get; set; }
+                public int dragonKills { get; set; }
+                public bool firstBaron { get; set; }
+                public bool firstBlood { get; set; }
+                public bool firstDragon { get; set; }
+                public bool firstInhibitor { get; set; }
+                public bool firstRiftHerald { get; set; }
+                public bool firstTower { get; set; }
+                public int inhibitorKills { get; set; }
+                public int riftHeraldKills { get; set; }
+                public int teamId { get; set; }
+                public int towerKills { get; set; }
+                public int vilemawKills { get; set; }
+                public string win { get; set; }
+                public List<GameStatsStructure_teams_bans> bans { get; set; }
+            }
+            public class GameStatsStructure_teams_bans
+            {
+                public int championId { get; set; }
+                public int pickTurn { get; set; }
             }
         }
     }
