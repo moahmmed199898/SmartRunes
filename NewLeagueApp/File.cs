@@ -43,6 +43,21 @@ namespace NewLeagueApp
             }
         }
 
+        public async Task AddUnaddedMatches(int number)
+        {
+            int counter = 0;
+            for(int i = 0; i < hist.matches.Count; i++)
+            {
+                if (!exists[i])
+                {
+                    ProfileApiCalls.GameStatsStructure temp = await (calls.MatchInfo(hist.matches[i].gameID));
+                    stats.Add(temp);
+                    counter++;
+                    if (counter == number) break;
+                }
+            }
+        }
+
         private async Task ReadFromMemory()
         {
             stats = await calls.ReadFromMem();
