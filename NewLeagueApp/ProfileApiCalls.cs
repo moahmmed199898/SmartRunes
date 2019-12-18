@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 
 namespace NewLeagueApp
 
@@ -49,11 +51,11 @@ namespace NewLeagueApp
             writer.Serialize(file, history);           
         }
 
-        public List<GameStatsStructure> ReadFromMem()
+        public async Task <List<GameStatsStructure>> ReadFromMem()
         {
             System.Xml.Serialization.XmlSerializer reader =
             new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            System.IO.FileStream file = System.IO.File.Create("matches.xml");
+            System.IO.FileStream file = System.IO.File.OpenRead("matches.xml");
             return (List<GameStatsStructure>)reader.Deserialize(file);
         }
 
