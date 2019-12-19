@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
-namespace NewLeagueApp
+namespace NewLeagueApp.ProfilePage
 
 
 {
@@ -35,7 +35,7 @@ namespace NewLeagueApp
            
             history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
-            apikey = "RGAPI-c1b5caec-5d9f-4a48-806d-4d7a51b59503";
+            apikey = "RGAPI-52dcb52c-ef20-4d11-b198-7baa1afce1e3";
         }
 
         private async Task LoadProfile()

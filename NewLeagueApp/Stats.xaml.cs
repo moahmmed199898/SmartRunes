@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
+using NewLeagueApp.ProfilePage;
 
 namespace NewLeagueApp
 {
@@ -29,14 +30,15 @@ namespace NewLeagueApp
         private Files file;
         private List<Label> name;
         private List<Label> kda;
+        private String summonerName;
         
         public Stats()
         {
             InitializeComponent();
+            summonerName = "Naymliss";
 
-
-             file = new Files("Naymliss");
-
+             file = new Files(summonerName);
+            matches = new List<DockPanel>();
             //file.UpdateFile();
             //file.GetFirstMatch();
             loadmatches();
@@ -47,24 +49,12 @@ namespace NewLeagueApp
           
            // file.AddUnaddedMatches(3);
             
-           
-
-
-            matches = new List<DockPanel>();
+             
     
             BrushConverter bc = new BrushConverter();
             Brush brush = (Brush)bc.ConvertFrom("#C7DFFC");
 
 
-            for (int i = 0; i<3; i++)
-            {
-                createMatch(Convert.ToString(i));
-
-            }
-           foreach(DockPanel a in matches)
-            {
-                HistoryPannel.Children.Add(a);
-            }
             HistoryPannel.MouseEnter += new MouseEventHandler(mouseHover);
             HistoryPannel.MouseLeave += new MouseEventHandler(mouseHover);
             HistoryPannel.MouseWheel += new MouseWheelEventHandler(mouseScroll);
@@ -73,13 +63,23 @@ namespace NewLeagueApp
 
         private async Task loadmatches()
         {
-            await file.DetermineDifference();
-           await file.AddUnaddedMatches(5);
-            await file.UpdateFile();
-            foreach(ProfileApiCalls.GameStatsStructure stat in file.stats)
+            //await file.DetermineDifference();
+           //await file.AddUnaddedMatches(5);
+         
+            List<ProfileApiCalls.GameStatsStructure_participants> player = await file.GetSummonerStats(summonerName);
+            foreach (ProfileApiCalls.GameStatsStructure_participants stat in player )
             {
-               
-                HistoryPannel.Children.Insert(0, createMatch(Convert.ToString(stat.participants[0].stats.kda)));
+                try
+                {
+                    // HistoryPannel.Children.Insert(0, createMatch(Convert.ToString(stat.mapId)));
+                    //HistoryPannel.Children.Add(createMatch(stat.participantIdentities[0].player.summonerName));
+                    HistoryPannel.Children.Add(createMatch(Convert.ToString (stat.stats.kills)));
+                    
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -96,7 +96,7 @@ namespace NewLeagueApp
                 
 
 
-                test.Content = Name + counter;
+                test.Content = name;
                 counter++;
                 test.FontSize = 24;
                 match.Children.Add(test);

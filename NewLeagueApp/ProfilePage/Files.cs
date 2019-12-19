@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewLeagueApp
+namespace NewLeagueApp.ProfilePage
 {
 
     
@@ -65,11 +65,30 @@ namespace NewLeagueApp
                     if (counter == number) break;
                 }
             }
+           await UpdateFile();
         }
         public async Task UpdateFile()
         {
             //Console.WriteLine("sdfesd");
             await calls.WriteToMem(stats);
+        }
+
+        public async Task<List<ProfileApiCalls.GameStatsStructure_participants>> GetSummonerStats(String summonerName)
+        {
+            await ReadFromMemory();
+            List<ProfileApiCalls.GameStatsStructure_participants> summ = new List<ProfileApiCalls.GameStatsStructure_participants>();
+           foreach (ProfileApiCalls.GameStatsStructure stat in stats)
+            {
+                for(int i = 0; i<9;i++)
+                {
+                   if(stat.participantIdentities[i].player.summonerName.Equals(summonerName))
+                    {
+                        summ.Add(stat.participants[i]);
+                    }
+                }
+                
+            }
+            return summ;
         }
 
         private async Task ReadFromMemory()
