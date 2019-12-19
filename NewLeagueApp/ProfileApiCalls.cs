@@ -45,21 +45,24 @@ namespace NewLeagueApp
 
         async public Task WriteToMem(List<GameStatsStructure> list)
         {
-            System.Xml.Serialization.XmlSerializer writer =
-            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            StreamWriter myWriter = new StreamWriter(@"C:\matches.xml");
-
-            writer.Serialize(myWriter,history );
+            JsonSerializer jwriter = new JsonSerializer();
+            StreamWriter myWriter = new StreamWriter(@"C:\matches.json");
+            jwriter.Serialize(myWriter, history);
+            Console.WriteLine("Hi");
             myWriter.Close();
 
         }
 
         public async Task <List<GameStatsStructure>> ReadFromMem()
         {
-            System.Xml.Serialization.XmlSerializer reader =
-            new System.Xml.Serialization.XmlSerializer(typeof(List<GameStatsStructure>));
-            StreamReader myReader = new StreamReader(@"C:\matches.xml");
-            return (List<GameStatsStructure>)reader.Deserialize(myReader);
+            //TextReader text = System.IO.TextReader();
+            StreamReader text = File.OpenText(@"C:\matches.json");
+
+            JsonTextReader myreader = new JsonTextReader(text);
+            String test = myreader.ReadAsString();
+            //StreamReader myReader = new StreamReader(@"C:\matches.xml");
+            Console.WriteLine(test);
+            return JsonConvert.DeserializeObject<List<GameStatsStructure>>(test);
         }
 
 
