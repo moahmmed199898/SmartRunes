@@ -20,7 +20,7 @@ namespace NewLeagueApp
         {
             this.summonerName = summonerName;
             calls = new ProfileApiCalls(summonerName);
-
+            stats = new List<ProfileApiCalls.GameStatsStructure>();
         }
 
         /***
@@ -30,6 +30,7 @@ namespace NewLeagueApp
         public async Task DetermineDifference()
         {           
             await GetHist();
+            Console.WriteLine("Boop");
             await ReadFromMemory();            
             for (int j = 0; j < hist.matches.Count; j++)
                 {
@@ -64,6 +65,7 @@ namespace NewLeagueApp
         }
         public async Task UpdateFile()
         {
+            //Console.WriteLine("sdfesd");
             await calls.WriteToMem(stats);
         }
 
@@ -74,14 +76,22 @@ namespace NewLeagueApp
         private async Task GetHist()
         {
             ProfileApiCalls.SummonerClass profile = await calls.SummonerInfo(summonerName);
+           
             hist = await calls.HistoryInfo(profile.accountID);
+           
         }
         public async Task GetFirstMatch()
         {
+            
             await GetHist();
             ProfileApiCalls.GameStatsStructure temp = await (calls.MatchInfo(hist.matches[0].gameID));
-            stats.Add(temp);
-            await calls.WriteToMem(stats);
+           
+           stats.Add(temp);
+           Console.WriteLine("i'm done!!!!");
+            //Console.WriteLine(stats[0].participantIdentities[0].player.summonerName);
+            // stats.Add(new ProfileApiCalls.GameStatsStructure());
+           await calls.WriteToMem(stats);
+           Console.WriteLine("i'm an idiot");
 
         }
 

@@ -22,6 +22,7 @@ namespace NewLeagueApp
         private List<GameStatsStructure> history;
         private SummonerClass summoner;
         private HistoryClass hist;
+        private Boolean firstRun = true;
 
 
         private WebClient myWebClient = new WebClient();
@@ -30,7 +31,7 @@ namespace NewLeagueApp
         public ProfileApiCalls(String SummonerName)
         {
 
-            Task.Run(() => LoadProfile());
+           // Task.Run(() => LoadProfile());
            
             history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
@@ -43,23 +44,29 @@ namespace NewLeagueApp
             this.hist = await HistoryInfo(summoner.accountID);
         }
 
-        async public Task WriteToMem(List<GameStatsStructure> list)
+     
+        public async Task WriteToMem(List<GameStatsStructure> list)
         {
+          
+
             JsonSerializer jwriter = new JsonSerializer();
-            StreamWriter myWriter = new StreamWriter(@"C:\matches.json");
-            jwriter.Serialize(myWriter, history);
-            Console.WriteLine("Hi");
+            StreamWriter myWriter = new StreamWriter("matches.json");
+            jwriter.Serialize(myWriter, list);
+
+            Console.WriteLine("Hi!");
+
             myWriter.Close();
+            
 
         }
 
-        public async Task <List<GameStatsStructure>> ReadFromMem()
+        public async Task< List<GameStatsStructure>> ReadFromMem()
         {
             //TextReader text = System.IO.TextReader();
-            StreamReader text = File.OpenText(@"C:\matches.json");
+            StreamReader text = File.OpenText("matches.json");
 
             JsonTextReader myreader = new JsonTextReader(text);
-            String test = myreader.ReadAsString();
+            String test = await myreader.ReadAsStringAsync();
             //StreamReader myReader = new StreamReader(@"C:\matches.xml");
             Console.WriteLine(test);
             return JsonConvert.DeserializeObject<List<GameStatsStructure>>(test);

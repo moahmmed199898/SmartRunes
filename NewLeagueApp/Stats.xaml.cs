@@ -36,9 +36,14 @@ namespace NewLeagueApp
 
 
              file = new Files("Naymliss");
-            file.DetermineDifference();
-            // file.AddUnaddedMatches(3);
+
+            //file.UpdateFile();
             file.GetFirstMatch();
+           // file.DetermineDifference();
+            // file.AddUnaddedMatches(3);
+            // file.GetFirstMatch();
+            
+          
            // file.AddUnaddedMatches(3);
             
            
