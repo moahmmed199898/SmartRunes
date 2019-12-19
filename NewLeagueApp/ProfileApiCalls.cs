@@ -62,14 +62,23 @@ namespace NewLeagueApp
 
         public async Task< List<GameStatsStructure>> ReadFromMem()
         {
-            //TextReader text = System.IO.TextReader();
-            StreamReader text = File.OpenText("matches.json");
+            try
+            {
+                //TextReader text = System.IO.TextReader();
+ 
+         
+                String test = File.ReadAllText("matches.json");
+                Console.WriteLine(test);
+                return  JsonConvert.DeserializeObject<List<GameStatsStructure>>(test);
+ 
 
-            JsonTextReader myreader = new JsonTextReader(text);
-            String test = await myreader.ReadAsStringAsync();
-            //StreamReader myReader = new StreamReader(@"C:\matches.xml");
-            Console.WriteLine(test);
-            return JsonConvert.DeserializeObject<List<GameStatsStructure>>(test);
+                
+            }
+            catch(JsonReaderException e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
         }
 
 
@@ -150,6 +159,7 @@ namespace NewLeagueApp
 
         }
 
+        
 
 
 

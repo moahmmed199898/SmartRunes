@@ -38,7 +38,8 @@ namespace NewLeagueApp
              file = new Files("Naymliss");
 
             //file.UpdateFile();
-            file.GetFirstMatch();
+            //file.GetFirstMatch();
+            loadmatches();
            // file.DetermineDifference();
             // file.AddUnaddedMatches(3);
             // file.GetFirstMatch();
@@ -57,7 +58,7 @@ namespace NewLeagueApp
 
             for (int i = 0; i<3; i++)
             {
-                createMatch();
+                createMatch(Convert.ToString(i));
 
             }
            foreach(DockPanel a in matches)
@@ -70,10 +71,22 @@ namespace NewLeagueApp
 
         }
 
+        private async Task loadmatches()
+        {
+            await file.DetermineDifference();
+           await file.AddUnaddedMatches(5);
+            await file.UpdateFile();
+            foreach(ProfileApiCalls.GameStatsStructure stat in file.stats)
+            {
+               
+                HistoryPannel.Children.Insert(0, createMatch(Convert.ToString(stat.participants[0].stats.kda)));
+            }
+        }
+
 
 
         
-         private DockPanel createMatch(){
+         private DockPanel createMatch(String name){
                 DockPanel match = new DockPanel();
                 match.Height = HistoryPannel.Height / 3;
                 match.Background = new SolidColorBrush(Colors.Plum);
@@ -83,7 +96,7 @@ namespace NewLeagueApp
                 
 
 
-                test.Content = " Test" + counter;
+                test.Content = Name + counter;
                 counter++;
                 test.FontSize = 24;
                 match.Children.Add(test);
@@ -116,6 +129,8 @@ namespace NewLeagueApp
                     
                 }
                 else{
+                    this.createMatch(Convert.ToString(":D"));
+
                     HistoryPannel.Children.RemoveAt(0);
                     
                     
@@ -134,10 +149,12 @@ namespace NewLeagueApp
                 for(int i = temp; i < temp+3; i++)
                 {
                     HistoryPannel.Children.Add(matches[i]);
+                    
                      
 
                 }
-            }           }
+            }
+            }
         }
     }
 }
