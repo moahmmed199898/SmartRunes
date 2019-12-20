@@ -1,10 +1,19 @@
-﻿public class RuneInfo {
+﻿using Newtonsoft.Json;
+public class RuneInfo {
     public int id { get; set; }
     public string key { get; set; }
     public string icon { get; set; }
     public string name { get; set; }
     public string shortDesc { get; set; }
     public string longDesc { get; set; }
+}
+
+
+public class RuneTree {
+    public int id { get; set; }
+    public string icon { get; set; }
+    public string name { get; set; }
+
 }
 
 
@@ -45,13 +54,15 @@ public class DominationRow3 {
     public RuneInfo UltimateHunter { get; set; }
 }
 
-public class Domination {
-    public int id { get; set; }
-    public string icon { get; set; }
-    public string name { get; set; }
+public class Domination:RuneTree {
+    
+    [JsonProperty("DominationRow0")]
     public DominationRow0 Row0 { get; set; }
+    [JsonProperty("DominationRow1")]
     public DominationRow1 Row1 { get; set; }
+    [JsonProperty("DominationRow2")]
     public DominationRow2 Row2 { get; set; }
+    [JsonProperty("DominationRow3")]
     public DominationRow3 Row3 { get; set; }
 }
 
@@ -79,13 +90,14 @@ public class InspirationRow3 {
     public RuneInfo TimeWarpTonic { get; set; }
 }
 
-public class Inspiration {
-    public int id { get; set; }
-    public string icon { get; set; }
-    public string name { get; set; }
+public class Inspiration:RuneTree {
+    [JsonProperty("InspirationRow0")]
     public InspirationRow0 Row0 { get; set; }
+    [JsonProperty("InspirationRow1")]
     public InspirationRow1 Row1 { get; set; }
+    [JsonProperty("InspirationRow2")]
     public InspirationRow2 Row2 { get; set; }
+    [JsonProperty("InspirationRow3")]
     public InspirationRow3 Row3 { get; set; }
 }
 
@@ -113,13 +125,14 @@ public class PrecisionRow3 {
     public RuneInfo LastStand { get; set; }
 }
 
-public class Precision {
-    public int id { get; set; }
-    public string icon { get; set; }
-    public string name { get; set; }
+public class Precision:RuneTree {
+    [JsonProperty("PrecisionRow0")]
     public PrecisionRow0 Row0 { get; set; }
+    [JsonProperty("PrecisionRow1")]
     public PrecisionRow1 Row1 { get; set; }
+    [JsonProperty("PrecisionRow2")]
     public PrecisionRow2 Row2 { get; set; }
+    [JsonProperty("PrecisionRow3")]
     public PrecisionRow3 Row3 { get; set; }
 }
 
@@ -147,13 +160,14 @@ public class ResolveRow3 {
     public RuneInfo Unflinching { get; set; }
 }
 
-public class Resolve {
-    public int id { get; set; }
-    public string icon { get; set; }
-    public string name { get; set; }
+public class Resolve:RuneTree {
+    [JsonProperty("ResolveRow0")]
     public ResolveRow0 Row0 { get; set; }
+    [JsonProperty("ResolveRow1")]
     public ResolveRow1 Row1 { get; set; }
+    [JsonProperty("ResolveRow2")]
     public ResolveRow2 Row2 { get; set; }
+    [JsonProperty("ResolveRow3")]
     public ResolveRow3 Row3 { get; set; }
 }
 
@@ -183,13 +197,14 @@ public class SorceryRow3 {
     public RuneInfo GatheringStorm { get; set; }
 }
 
-public class Sorcery {
-    public int id { get; set; }
-    public string icon { get; set; }
-    public string name { get; set; }
+public class Sorcery:RuneTree {
+    [JsonProperty("SorceryRow0")]
     public SorceryRow0 Row0 { get; set; }
+    [JsonProperty("SorceryRow1")]
     public SorceryRow1 Row1 { get; set; }
+    [JsonProperty("SorceryRow2")]
     public SorceryRow2 Row2 { get; set; }
+    [JsonProperty("SorceryRow3")]
     public SorceryRow3 Row3 { get; set; }
 }
 
