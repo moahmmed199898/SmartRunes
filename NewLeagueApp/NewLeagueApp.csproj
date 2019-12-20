@@ -95,6 +95,7 @@
     <Compile Include="ProfilePage\Files.cs" />
     <Compile Include="LCU\LCU.cs" />
     <Compile Include="LCU\Types\RunesPage.cs" />
+    <Compile Include="ProfilePage\MatchDock.cs" />
     <Compile Include="ProfilePage\Statistics.cs" />
     <Compile Include="RateLimiter.cs" />
     <Compile Include="Stats.xaml.cs">

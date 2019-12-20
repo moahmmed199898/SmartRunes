@@ -65,7 +65,10 @@ namespace NewLeagueApp
         {
             //await file.DetermineDifference();
            //await file.AddUnaddedMatches(5);
-         
+            for(int i = 0; i < 3; i++)
+            {
+                HistoryPannel.Children.Add(new MatchDock(i, summonerName));
+            }
             List<ProfileApiCalls.GameStatsStructure_participants> player = await file.GetSummonerStats(summonerName);
             foreach (ProfileApiCalls.GameStatsStructure_participants stat in player )
             {
@@ -73,7 +76,7 @@ namespace NewLeagueApp
                 {
                     // HistoryPannel.Children.Insert(0, createMatch(Convert.ToString(stat.mapId)));
                     //HistoryPannel.Children.Add(createMatch(stat.participantIdentities[0].player.summonerName));
-                    HistoryPannel.Children.Add(createMatch(Convert.ToString (stat.stats.kills)));
+                   // HistoryPannel.Children.Add(createMatch(Convert.ToString (stat.stats.kills)));
                     
                 }
                 catch(Exception e)
