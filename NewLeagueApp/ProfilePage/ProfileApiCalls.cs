@@ -68,7 +68,7 @@ namespace NewLeagueApp.ProfilePage
  
          
                 String test = File.ReadAllText("matches.json");
-                Console.WriteLine(test);
+                //Console.WriteLine(test);
                 return  JsonConvert.DeserializeObject<List<GameStatsStructure>>(test);
  
 
@@ -386,19 +386,28 @@ namespace NewLeagueApp.ProfilePage
                 public int wardsPlaced { get; set; }
             [JsonProperty("win")]
             public bool win { get; set; }
-            public double kda;
+            private double _kda;
+             public double kda
+            {
+                get
+                {
+                    double temp = 0;
+                    if (deaths == 0)
+                    {
+                        temp = 1;
+                    }
+                    else
+                    {
+                        temp = deaths;
+                    }
+                    return (double)((kills + assists) / temp);
+                }
+    
+
+            }
             public GameStatsStructure_participants_stats()
             {
-                int temp = 0;
-                if(deaths == 0)
-                {
-                    temp = 1; 
-                }
-                else
-                {
-                    temp = deaths;
-                }
-                this.kda = (kills + assists) / temp;
+
             }
 
             }

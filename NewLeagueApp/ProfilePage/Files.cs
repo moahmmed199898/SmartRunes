@@ -29,7 +29,7 @@ namespace NewLeagueApp.ProfilePage
          * Determines if a match needs to be added via parralel arraylists
          * TODO: search by endindex or begintime
          */
-        public async Task DetermineDifference()
+        private async Task DetermineDifference()
         {           
             await GetHist();
             Console.WriteLine("Boop");
@@ -53,6 +53,7 @@ namespace NewLeagueApp.ProfilePage
 
         public async Task AddUnaddedMatches(int number)
         {
+            await DetermineDifference();
             Console.WriteLine("Boop, the reckonning");
             int counter = 0;
             for(int i = 0; i < hist.matches.Count; i++)

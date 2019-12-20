@@ -64,13 +64,18 @@ namespace NewLeagueApp
         private async Task loadmatches()
         {
             //await file.DetermineDifference();
-           //await file.AddUnaddedMatches(5);
-            for(int i = 0; i < 3; i++)
-            {
-                HistoryPannel.Children.Add(new MatchDock(i, summonerName));
-            }
+            //await file.AddUnaddedMatches(5);
             List<ProfileApiCalls.GameStatsStructure_participants> player = await file.GetSummonerStats(summonerName);
-            foreach (ProfileApiCalls.GameStatsStructure_participants stat in player )
+            for (int i = 0; i < 3; i++)
+            {
+                MatchDock matchd = new MatchDock(i, summonerName,player );
+                matchd.Height = (HistoryPannel.Height / 3);
+                matchd.Width = HistoryPannel.Width;
+                DockPanel.SetDock(matchd, Dock.Top);
+                HistoryPannel.Children.Add(matchd);
+            }
+            ;
+            /*foreach (ProfileApiCalls.GameStatsStructure_participants stat in player )
             {
                 try
                 {
@@ -84,6 +89,7 @@ namespace NewLeagueApp
                     Console.WriteLine(e);
                 }
             }
+            */
         }
 
 
