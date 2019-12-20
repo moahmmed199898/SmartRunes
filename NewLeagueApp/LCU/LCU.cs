@@ -19,6 +19,9 @@ namespace NewLeagueApp.LCU {
 
             var pageID = await League.MakeApiRequest(HttpMethod.Put, "/lol-perks/v1/pages/1701818929", runes);
             Console.WriteLine(JsonConvert.SerializeObject(runes));
+
+            var a = new Rune();
+            a.Domination.DominationRow1.CheapShot.id = 0;
         }
     }
 }
