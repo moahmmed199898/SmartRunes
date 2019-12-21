@@ -68,52 +68,19 @@ namespace NewLeagueApp
             List<ProfileApiCalls.GameStatsStructure_participants> player = await file.GetSummonerStats(summonerName);
             for (int i = 0; i < 3; i++)
             {
-                MatchDock matchd = new MatchDock(i, summonerName,player );
+                MatchDock matchd = new MatchDock(i, summonerName,player, new MatchStats(file.stats[i],player[i].participantId-1));
                 matchd.Height = (HistoryPannel.Height / 3);
                 matchd.Width = HistoryPannel.Width;
                 DockPanel.SetDock(matchd, Dock.Top);
                 HistoryPannel.Children.Add(matchd);
             }
             ;
-            /*foreach (ProfileApiCalls.GameStatsStructure_participants stat in player )
-            {
-                try
-                {
-                    // HistoryPannel.Children.Insert(0, createMatch(Convert.ToString(stat.mapId)));
-                    //HistoryPannel.Children.Add(createMatch(stat.participantIdentities[0].player.summonerName));
-                   // HistoryPannel.Children.Add(createMatch(Convert.ToString (stat.stats.kills)));
-                    
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-            */
+
         }
 
 
 
-        
-         private DockPanel createMatch(String name){
-                DockPanel match = new DockPanel();
-                match.Height = HistoryPannel.Height / 3;
-                match.Background = new SolidColorBrush(Colors.Plum);
-
-
-                Label test = new Label();
-                
-
-
-                test.Content = name;
-                counter++;
-                test.FontSize = 24;
-                match.Children.Add(test);
-                DockPanel.SetDock(match, Dock.Top);
-                Canvas.SetTop(match, Canvas.GetTop(HistoryPannel));
-                matches.Add(match);
-                return match;
-        }
+   
         private void mouseHover(object sender, EventArgs e)
         {
             if (canScroll == false)
@@ -138,7 +105,7 @@ namespace NewLeagueApp
                     
                 }
                 else{
-                    this.createMatch(Convert.ToString(":D"));
+                   
 
                     HistoryPannel.Children.RemoveAt(0);
                     

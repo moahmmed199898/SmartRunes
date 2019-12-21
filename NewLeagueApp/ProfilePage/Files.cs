@@ -16,18 +16,21 @@ namespace NewLeagueApp.ProfilePage
         private List<int> matchids;
         private ProfileApiCalls calls;
         private string summonerName;
+       // public List<int> playerindex;
         public Files(String summonerName)
         {
             this.summonerName = summonerName;
             calls = new ProfileApiCalls(summonerName);
             stats = new List<ProfileApiCalls.GameStatsStructure>();
             hist = new ProfileApiCalls.HistoryClass();
+           // playerindex = new List<int>();
             exists = new List<bool>();
         }
 
         /***
          * Determines if a match needs to be added via parralel arraylists
          * TODO: search by endindex or begintime
+         * TODO: Filtering
          */
         private async Task DetermineDifference()
         {           
@@ -85,11 +88,21 @@ namespace NewLeagueApp.ProfilePage
                    if(stat.participantIdentities[i].player.summonerName.Equals(summonerName))
                     {
                         summ.Add(stat.participants[i]);
+                        //playerindex.Add(i);
                     }
                 }
                 
             }
             return summ;
+        }
+        public async Task<List<ProfileApiCalls.GameStatsStructure>> GetMatchHistory(List<int> matchindexes)
+        {
+            List<ProfileApiCalls.GameStatsStructure> temp = new List<ProfileApiCalls.GameStatsStructure>();
+            foreach(int i in matchindexes)
+            {
+                temp.Add(stats[i]);
+            }
+            return temp;
         }
 
         private async Task ReadFromMemory()

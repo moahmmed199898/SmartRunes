@@ -15,15 +15,16 @@ namespace NewLeagueApp.ProfilePage
    
     class MatchDock : DockPanel
     {
-        Files file;
-        String summonerName;
-        List<ProfileApiCalls.GameStatsStructure_participants> player;
+       
+        private String summonerName;
+        private List<ProfileApiCalls.GameStatsStructure_participants> player;
+        private MatchStats matchstat;
 
-        public MatchDock(int matchnum, string summonerName, List<ProfileApiCalls.GameStatsStructure_participants> player)
+        public MatchDock(int matchnum, string summonerName, List<ProfileApiCalls.GameStatsStructure_participants> player, MatchStats matchstat)
         {
 
             this.summonerName = summonerName;
-            file = new Files(summonerName);
+            this.matchstat = matchstat;
             
             this.Children.Add(new Label());
             this.player = player;
@@ -41,9 +42,10 @@ namespace NewLeagueApp.ProfilePage
         private async void LoadData(int matchnum )
         {
            
-            await file.AddUnaddedMatches(5);
+           // await file.AddUnaddedMatches(5);
            //player = await file.GetSummonerStats(summonerName);
             await AddKda(player[matchnum]);
+            await AddDPM();
         }
         private async Task AddKda(ProfileApiCalls.GameStatsStructure_participants player)
         {
@@ -52,6 +54,13 @@ namespace NewLeagueApp.ProfilePage
             this.Children.Add(kdalbl);
             DockPanel.SetDock(kdalbl, Dock.Top);
 
+        }
+        private async Task AddDPM()
+        {
+            Label kdalbl = new Label();
+            double damage = await matchstat.getDPM();
+            kdalbl.Content = "Damage Per Minute: " + damage;
+            Children.Add(kdalbl);
         }
 
     }

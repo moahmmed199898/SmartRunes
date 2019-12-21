@@ -226,7 +226,8 @@ namespace NewLeagueApp.ProfilePage
             public class GameStatsStructure
             {
                 public long gameCreation { get; set; }
-                public int gameDuration { get; set; }
+            [JsonProperty("gameDuration")]
+            public int gameDuration { get; set; }
                 public long gameId { get; set; }
                 public string gameMode { get; set; }
                 public string gameType { get; set; }
@@ -366,10 +367,12 @@ namespace NewLeagueApp.ProfilePage
                 public int timeCCingOthers { get; set; }
             [JsonProperty("totalDamageDealt")]
             public int totalDamageDealt { get; set; }
-                public int totalDamageDealtToChampions { get; set; }
+            [JsonProperty("totalDamageDealtToChampions")]
+            public int totalDamageDealtToChampions { get; set; }
                 public int totalDamageTaken { get; set; }
                 public int totalHeal { get; set; }
-                public int totalMinionsKilled { get; set; }
+            [JsonProperty("totalMinionsKilled")]
+            public int totalMinionsKilled { get; set; }
                 public int totalPlayerScore { get; set; }
                 public int totalScoreRank { get; set; }
                 public int totalTimeCrowdControlDealt { get; set; }
