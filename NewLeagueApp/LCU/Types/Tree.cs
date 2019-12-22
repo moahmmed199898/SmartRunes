@@ -208,7 +208,7 @@ public class Sorcery:RuneTree {
     public SorceryRow3 Row3 { get; set; }
 }
 
-public class Rune {
+public class Tree {
     public Domination Domination { get; set; }
     public Inspiration Inspiration { get; set; }
     public Precision Precision { get; set; }

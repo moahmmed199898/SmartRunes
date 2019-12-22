@@ -8,7 +8,7 @@
         public bool? isDeletable { get; private set; } = true;
         public bool? isEditable { get; private set; } = true;
         public bool? isValid { get; private set; } = true;
-        public int? lastModified { get; private set; } = 0;
+        public long? lastModified { get; private set; } = 0;
         public string name { get; set; }
         public int? order { get; private set; } = 0;
         public int primaryStyleId { get; set; }
