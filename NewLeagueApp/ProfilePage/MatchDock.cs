@@ -30,11 +30,13 @@ namespace NewLeagueApp.ProfilePage
             this.player = player;
             if (player[matchnum].stats.win)
             {
-                Background = new SolidColorBrush(Colors.ForestGreen);
+                var converter = new System.Windows.Media.BrushConverter();
+                Background = ((Brush)converter.ConvertFromString("#95bda1"));
             }
             else
             {
-                Background = new SolidColorBrush(Colors.LightPink);
+                var converter = new System.Windows.Media.BrushConverter();
+                Background = ((Brush)converter.ConvertFromString("#a87979"));
             }
             LoadData(matchnum);
         }
@@ -54,11 +56,11 @@ namespace NewLeagueApp.ProfilePage
             kdalbl.Content = player.stats.kills + "/" + player.stats.deaths + "/" + player.stats.assists + " (" + player.stats.kda+")";
             this.Children.Add(kdalbl);
             DockPanel.SetDock(kdalbl, Dock.Top);
-
         }
         private async Task AddDPM()
         {
             Label label = new Label();
+  
             double damage = await matchstat.getDPM();
             label.Content = "Damage Per Minute: " + damage;
             Children.Add(label);
@@ -69,6 +71,8 @@ namespace NewLeagueApp.ProfilePage
             label.Content = "CS/Min: " + cs;
             Children.Add(label);
         }
+
+
 
     }
 }

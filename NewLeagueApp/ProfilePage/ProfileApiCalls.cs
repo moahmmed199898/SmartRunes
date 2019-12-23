@@ -385,8 +385,10 @@ namespace NewLeagueApp.ProfilePage
                 public int unrealKills { get; set; }
                 public int visionScore { get; set; }
                 public int visionWardsBoughtInGame { get; set; }
-                public int wardsKilled { get; set; }
-                public int wardsPlaced { get; set; }
+            [JsonProperty("wardsKilled")]
+            public int wardsKilled { get; set; }
+            [JsonProperty("wardsPlaced")]
+            public int wardsPlaced { get; set; }
             [JsonProperty("win")]
             public bool win { get; set; }
             private double _kda;

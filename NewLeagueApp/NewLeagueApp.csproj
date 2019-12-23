@@ -171,6 +171,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ProfilePage\Temp\Anivia_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ProfilePage\Temp\Loss.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
