@@ -46,6 +46,7 @@ namespace NewLeagueApp.ProfilePage
            //player = await file.GetSummonerStats(summonerName);
             await AddKda(player[matchnum]);
             await AddDPM();
+            await AddCSM();
         }
         private async Task AddKda(ProfileApiCalls.GameStatsStructure_participants player)
         {
@@ -57,10 +58,16 @@ namespace NewLeagueApp.ProfilePage
         }
         private async Task AddDPM()
         {
-            Label kdalbl = new Label();
+            Label label = new Label();
             double damage = await matchstat.getDPM();
-            kdalbl.Content = "Damage Per Minute: " + damage;
-            Children.Add(kdalbl);
+            label.Content = "Damage Per Minute: " + damage;
+            Children.Add(label);
+        }
+        private async Task AddCSM(){
+            Label label = new Label();
+            double cs = await matchstat.getCSM();
+            label.Content = "CS/Min: " + cs;
+            Children.Add(label);
         }
 
     }

@@ -39,10 +39,10 @@ namespace NewLeagueApp
 
              file = new Files(summonerName);
             matches = new List<DockPanel>();
-            //file.UpdateFile();
+           // file.UpdateFile();
             //file.GetFirstMatch();
-            loadmatches();
-           // file.DetermineDifference();
+            
+           //file.DetermineDifference();
             // file.AddUnaddedMatches(3);
             // file.GetFirstMatch();
             
@@ -59,28 +59,39 @@ namespace NewLeagueApp
             HistoryPannel.MouseLeave += new MouseEventHandler(mouseHover);
             HistoryPannel.MouseWheel += new MouseWheelEventHandler(mouseScroll);
 
+            loadmatches();
+
         }
 
         private async Task loadmatches()
         {
-            //await file.DetermineDifference();
-            //await file.AddUnaddedMatches(5);
+
             List<ProfileApiCalls.GameStatsStructure_participants> player = await file.GetSummonerStats(summonerName);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < player.Count; i++)
             {
                 MatchDock matchd = new MatchDock(i, summonerName,player, new MatchStats(file.stats[i],player[i].participantId-1));
+                matches.Add(matchd);
                 matchd.Height = (HistoryPannel.Height / 3);
                 matchd.Width = HistoryPannel.Width;
                 DockPanel.SetDock(matchd, Dock.Top);
-                HistoryPannel.Children.Add(matchd);
+               
             }
-            ;
+            for(int i = 0; i < 3; i++){
+                 HistoryPannel.Children.Add(matches[i]);
+            }
+
+        }
+
+        private async void AddMatches()
+        {
+            
+   
 
         }
 
 
 
-   
+
         private void mouseHover(object sender, EventArgs e)
         {
             if (canScroll == false)
@@ -98,21 +109,21 @@ namespace NewLeagueApp
         {  
             if (e.Delta < 0 && canScroll)
             {
-                if (HistoryPannel.Children.Count > 3)
-                {
-                    HistoryPannel.Children.RemoveAt((0));
 
+                int temp = matches.IndexOf((DockPanel)HistoryPannel.Children[HistoryPannel.Children.Count - 1]);
+                if (HistoryPannel.Children.Count < matches.Count&&counter < matches.Count-1&& temp+1 < matches.Count-1) {
+
+                    //int temp = matches.IndexOf((DockPanel)HistoryPannel.Children[HistoryPannel.Children.Count - 1]);
+                    HistoryPannel.Children.RemoveAt(0);
+                    HistoryPannel.Children.Add(matches[temp + 1]);
                     
                 }
                 else{
-                   
-
-                    HistoryPannel.Children.RemoveAt(0);
-                    
-                    
-                   
+                    AddMatches();
 
                 }
+                
+
 
             }
             else if(e.Delta > 0 && canScroll)
@@ -120,13 +131,12 @@ namespace NewLeagueApp
                // int temp = matches.Count - HistoryPannel.Children.Count;
                int temp = matches.IndexOf((DockPanel)HistoryPannel.Children[0])-1;
                 
-                if(temp > 0){
+                if(temp >= 0){
                 HistoryPannel.Children.Clear();
                 for(int i = temp; i < temp+3; i++)
                 {
                     HistoryPannel.Children.Add(matches[i]);
-                    
-                     
+                                      
 
                 }
             }

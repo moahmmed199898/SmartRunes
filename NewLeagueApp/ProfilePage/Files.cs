@@ -32,7 +32,7 @@ namespace NewLeagueApp.ProfilePage
          * TODO: search by endindex or begintime
          * TODO: Filtering
          */
-        private async Task DetermineDifference()
+        public async Task DetermineDifference()
         {           
             await GetHist();
             Console.WriteLine("Boop");
@@ -56,7 +56,8 @@ namespace NewLeagueApp.ProfilePage
 
         public async Task AddUnaddedMatches(int number)
         {
-            await DetermineDifference();
+            //todo: Run determine difference on first run and add a button to update it.
+            //await DetermineDifference();
             Console.WriteLine("Boop, the reckonning");
             int counter = 0;
             for(int i = 0; i < hist.matches.Count; i++)

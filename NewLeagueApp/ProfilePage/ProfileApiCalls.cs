@@ -35,7 +35,7 @@ namespace NewLeagueApp.ProfilePage
            
             history = new List<GameStatsStructure>();
             this.SummonerName = SummonerName;
-            apikey = "RGAPI-52dcb52c-ef20-4d11-b198-7baa1afce1e3";
+            apikey = "RGAPI-538c5124-4ff5-453a-9eca-9262b47ab73a";
         }
 
         private async Task LoadProfile()

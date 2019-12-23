@@ -16,11 +16,14 @@ namespace NewLeagueApp.ProfilePage
         }
         public async Task<double> getCSM()
         {
-            return match.participants[playerIndex].stats.totalMinionsKilled / match.gameDuration;
+            return match.participants[playerIndex].stats.totalMinionsKilled / (double)(match.gameDuration/60);
         }
         public async Task<double> getDPM()
         {
-            return match.participants[playerIndex].stats.totalDamageDealtToChampions / match.gameDuration;
+            return match.participants[playerIndex].stats.totalDamageDealtToChampions / (double)(match.gameDuration/60);
         }
+
+
+
     }
 }
