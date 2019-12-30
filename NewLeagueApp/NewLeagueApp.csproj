@@ -92,9 +92,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LCU\Runes.cs" />
-    <Compile Include="LCU\SmartRunes.cs" />
-    <Compile Include="LCU\statRunes.cs" />
+    <Compile Include="LCU\champions.cs" />
+    <Compile Include="LCU\RiotConnecter.cs" />
+    <Compile Include="LCU\Runes\Runes.cs" />
+    <Compile Include="LCU\Runes\SmartRunes.cs" />
+    <Compile Include="LCU\Types\sessionData.cs" />
+    <Compile Include="LCU\Types\statRunes.cs" />
     <Compile Include="LCU\Types\RunesRESTResponse.cs" />
     <Compile Include="LCU\Types\Tree.cs" />
     <Compile Include="LCU\Types\RuneDictionary.cs" />
@@ -148,6 +151,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="static\champion.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\runeDictionaryData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -178,6 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ProfilePage\Temp\Loss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LCU\Types\championsData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

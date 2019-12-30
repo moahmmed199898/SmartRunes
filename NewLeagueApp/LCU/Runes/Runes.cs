@@ -7,12 +7,12 @@ using Newtonsoft.Json;
 using LCUSharp;
 using NewLeagueApp.LCU.Types;
 using System.Net.Http;
-namespace NewLeagueApp.LCU {
-    class Runes {
+namespace NewLeagueApp.LCU.Runes {
+    class Runes:RiotConnecter {
         /// <summary>
         /// Rune page name
         /// </summary>
-        public string name { get; set; } = "NewLeageApp";
+        public string PageName { get; set; } = "NewLeageApp";
         /// <summary>
         /// Rune tree which includes the name of the rune as well as the path to it's icon
         /// </summary>
@@ -21,7 +21,7 @@ namespace NewLeagueApp.LCU {
         /// This class can send and receive rune pages from the client and contains the Tree property which has the name and the icon path of every rune ( except stat runes )
         /// </summary>
         public Runes() {
-            Tree = getRuneDetails();
+            Tree = GetRuneDetails();
         }
 
         /// <summary>
@@ -56,15 +56,15 @@ namespace NewLeagueApp.LCU {
         /// <param name="secondaryPath">The path for the secondary keystone</param>
         /// <param name="runes">An array of runes that includes the primary and secondary keystones. Example: new Runes.Tree.Domination.Row0.DarkHarvest</param>
         /// <param name="statRunes">An array of stat runes (Offense, Defense, and Flex). Example: NewLeagueApp.LCU.Types.StatRunes.AdaptiveForce</param>
-        public async Task add(RuneTree primaryPath, RuneTree secondaryPath, RuneInfo[] runes, StatRunes[] statRunes) {
+        public async Task Add(RuneTree primaryPath, RuneTree secondaryPath, RuneInfo[] runes, StatRunes[] statRunes) {
             try {
                 var primaryKeyStoneID = primaryPath.id;
                 var secondaryRuneStoneID = secondaryPath.id;
                 int[] statRunesIDs = (from statRune in statRunes select (int)statRune).ToArray();
                 int[] runeIDs = (from rune in runes select rune.id).ToArray();
                 runeIDs = runeIDs.Concat(statRunesIDs).ToArray();
-                var page = makeRunePage(primaryKeyStoneID, secondaryRuneStoneID, runeIDs);
-                await sendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                var page = MakeRunePage(primaryKeyStoneID, secondaryRuneStoneID, runeIDs);
+                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch(Exception error) {
                 Console.WriteLine(error);
             }
@@ -74,14 +74,14 @@ namespace NewLeagueApp.LCU {
         /// Get the current runes from the client 
         /// </summary>
         /// <returns></returns>
-        public async Task getCurrentRunes() {
+        public async Task GetCurrentRunes() {
             try {
-                var runesString = await sendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
+                var runesString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
                 var runesIDs = JsonConvert.DeserializeObject<RunesPage>(runesString);
                 var runes = new List<string>();
                 for (int i = 0; i < runesIDs.selectedPerkIds.Length; i++) {
                     var id = runesIDs.selectedPerkIds[i];
-                    var name = getRuneName(id);
+                    var name = GetRuneName(id);
                     runes.Add(name);
                 }
             } catch(Exception error) {
@@ -89,8 +89,12 @@ namespace NewLeagueApp.LCU {
             }
         }
 
-
-        protected string getRuneName(int id) {
+        /// <summary>
+        /// Gets the rune name from it's id
+        /// </summary>
+        /// <param name="id">The rune id</param>
+        /// <returns>The rune name</returns>
+        protected string GetRuneName(int id) {
             var data = File.ReadAllText("static/runeDictionaryData.json");
             var runeDictionary = JsonConvert.DeserializeObject<RuneDictionary[]>(data);
             var runeNameCollection = from rune in runeDictionary where rune.id == id select rune.name;
@@ -99,25 +103,22 @@ namespace NewLeagueApp.LCU {
             return runeName;
         }
 
-
-        protected RunesPage makeRunePage(int primaryKeyStoneID, int secondaryRuneStoneID, int[] runeIDs) {
-            var runes = new RunesPage(name, primaryKeyStoneID, secondaryRuneStoneID, runeIDs);
+        /// <summary>
+        /// Makes a rune page that can be send to League client
+        /// </summary>
+        /// <param name="primaryPathID">The primary path id</param>
+        /// <param name="secondaryPathID">The secondary path id</param>
+        /// <param name="runeIDs">The runes id ( does not include stat runes )</param>
+        /// <returns>A rune page</returns>
+        protected RunesPage MakeRunePage(int primaryPathID, int secondaryPathID, int[] runeIDs) {
+            var runes = new RunesPage(PageName, primaryPathID, secondaryPathID, runeIDs);
             return runes;
         }
-        protected async Task<string> sendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url) {
-            var League = await LeagueClient.Connect();
-            HttpResponseMessage results;
-            results = await League.MakeApiRequest(httpMethodType, url);
-            var data = await results.Content.ReadAsStringAsync();
-            return data;
-        }
-        protected async Task<HttpResponseMessage> sendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url, object data) {
-            var League = await LeagueClient.Connect();
-            HttpResponseMessage results;
-            results = await League.MakeApiRequest(httpMethodType, url,data);
-            return results;
-        }
-        protected Tree getRuneDetails() {
+        /// <summary>
+        /// Gets more detailed information about the runes 
+        /// </summary>
+        /// <returns>A more detailed information about the runes</returns>
+        protected Tree GetRuneDetails() {
         var file = File.ReadAllText("static/runes.json");
         var runes = JsonConvert.DeserializeObject<Tree>(file);
         return runes;
