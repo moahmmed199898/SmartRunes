@@ -99,6 +99,7 @@
     <Compile Include="LCU\Types\sessionData.cs" />
     <Compile Include="LCU\Types\statRunes.cs" />
     <Compile Include="LCU\Types\RunesRESTResponse.cs" />
+    <Compile Include="LCU\Types\SummonerInfo.cs" />
     <Compile Include="LCU\Types\Tree.cs" />
     <Compile Include="LCU\Types\RuneDictionary.cs" />
     <Compile Include="ProfilePage\Files.cs" />
@@ -160,6 +161,9 @@
     <None Include="static\runes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="static\TempDraftPick.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -186,7 +190,7 @@
     <Resource Include="ProfilePage\Temp\Loss.png" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LCU\Types\championsData.cs" />
+    <Compile Include="LCU\Types\ChampionsData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

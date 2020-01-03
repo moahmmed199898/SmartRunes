@@ -28,7 +28,7 @@ namespace NewLeagueApp
         {
            
             InitializeComponent();
-            //_ = new LCU.LCU();
+            _ = new LCU.LCU();
             
             Stats.MouseLeftButtonDown+= new MouseButtonEventHandler(mouseClickedResponse);
             Stats.MouseEnter += new MouseEventHandler(mouseHover);

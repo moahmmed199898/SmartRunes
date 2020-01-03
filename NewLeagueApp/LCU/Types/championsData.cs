@@ -17,8 +17,8 @@ namespace NewLeagueApp.LCU.Types
 public partial class Datum
 {
     public string Version { get; set; }
-    public int Id { get; set; }
-    public long Key { get; set; }
+    public string Id { get; set; }
+    public int Key { get; set; }
     public string Name { get; set; }
     public string Title { get; set; }
     public string Blurb { get; set; }

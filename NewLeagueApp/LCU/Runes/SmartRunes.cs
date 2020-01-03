@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Net;
 using Newtonsoft.Json;
 using NewLeagueApp.LCU.Types;
@@ -28,7 +29,8 @@ namespace NewLeagueApp.LCU.Runes {
         public async void AutoRuneSetter() {
             var champions = new Champions();
             var currentChamp = await champions.GetCurrentChamp();
-            while (currentChamp.Equals("NA")) currentChamp = await champions.GetCurrentChamp();
+            while (currentChamp.Equals("NA")) currentChamp = await champions.GetCurrentChamp(); Thread.Sleep(2000);
+
 
         }    
         /// <summary>
