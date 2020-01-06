@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Media.Imaging;
 
 namespace NewLeagueApp.ProfilePage
 {
@@ -28,24 +31,85 @@ namespace NewLeagueApp.ProfilePage
             
             this.Children.Add(new Label());
             this.player = player;
+
+            
+            
+            //fix this to run one time only. It increases load times currently.
+
+
+            //TODO: invert text color
+            System.Drawing.Image imageBackground = System.Drawing.Image.FromFile("Anivia_0.jpg");
+
+
+            var converter = new System.Windows.Media.BrushConverter();
+            System.Drawing.Image  imageOverlayWin = System.Drawing.Image.FromFile("Win.png");
+
+            System.Drawing.Image imageOverlayLoss = System.Drawing.Image.FromFile("Loss.png");
+
+
+
+
+            
+
             if (player[matchnum].stats.win)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                Background = ((Brush)converter.ConvertFromString("#95bda1"));
+                System.Drawing.Image img = new Bitmap(imageBackground.Width, imageBackground.Height);
+                using (Graphics gr = Graphics.FromImage(img))
+                {
+                    gr.DrawImage(imageBackground, new Point(0, 0));
+                    imageOverlayWin = (new Bitmap(imageOverlayWin, new Size(imageBackground.Width, imageBackground.Height)));
+                    gr.DrawImage(imageOverlayWin, new Point(0, 0));
+                }
+                if (System.IO.File.Exists("outputWin.png"))
+                    System.IO.File.Delete("outputWin.png");
+                img.Save("outputWin.png", ImageFormat.Png);
+                img.Dispose();
             }
-            else
+            else if(!player[matchnum].stats.win)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                Background = ((Brush)converter.ConvertFromString("#a87979"));
+                System.Drawing.Image img = new Bitmap(imageBackground.Width, imageBackground.Height);
+                using (Graphics gr = Graphics.FromImage(img))
+                {
+                    gr.DrawImage(imageBackground, new Point(0, 0));
+                    imageOverlayLoss =  (new Bitmap(imageOverlayLoss, new Size(imageBackground.Width, imageBackground.Height)));
+                    gr.DrawImage(imageOverlayLoss, new Point(0, 0));
+                }
+                if (System.IO.File.Exists("outputLoss.png"))
+                    System.IO.File.Delete("outputLoss.png");
+                img.Save("outputLoss.png", ImageFormat.Png);
+                img.Dispose();
             }
+            
+
+            try
+            {
+                if (player[matchnum].stats.win)
+                {
+                    var convert = new System.Windows.Media.ImageBrush();
+                    convert.ImageSource = new BitmapImage(new Uri("outputWin.png", UriKind.Relative));
+                    this.Background = (System.Windows.Media.Brush)convert;
+                }
+                else
+                {
+                    var convert = new System.Windows.Media.ImageBrush();
+                    convert.ImageSource = new BitmapImage(new Uri("outputLoss.png", UriKind.Relative));
+                    this.Background = (System.Windows.Media.Brush)convert;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             LoadData(matchnum);
         }
 
         private async void LoadData(int matchnum )
         {
-           
-           // await file.AddUnaddedMatches(5);
-           //player = await file.GetSummonerStats(summonerName);
+
+            // await file.AddUnaddedMatches(5);
+            //player = await file.GetSummonerStats(summonerName);
+            Console.WriteLine(player[matchnum].championId);
             await AddKda(player[matchnum]);
             await AddDPM();
             await AddCSM();
