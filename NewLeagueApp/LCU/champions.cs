@@ -20,6 +20,22 @@ namespace NewLeagueApp.LCU {
             return currentChampName;
         }
 
+
+        public string GetChampNameById(int id) {
+            string champName = (from champ in championsInformation.Data where champ.Value.Key == id select champ.Key).Single();
+            return champName;
+        }
+
+        public string GetChampImagePath(int id) {
+            string champName = GetChampNameById(id);
+            var path = $"static/img/splash/{champName}_0.jpg";
+            return path;
+        }
+        public string GetChampImagePath(string name) {
+            var path = $"static/img/splash/{name}_0.jpg";
+            return path;
+        }
+
         private championData GetChampInfo() {
             var jsonstring = File.ReadAllText("static/champion.json");
             return JsonConvert.DeserializeObject<championData>(jsonstring);

@@ -14,9 +14,9 @@ namespace NewLeagueApp.LCU {
         }
 
         public async void init() {
-            var runes = new SmartRunes();
-            summonerID = await GetCurrentSummnerID();
-            runes.AutoRuneSetter();
+            //var runes = new SmartRunes();
+            //summonerID = await GetCurrentSummnerID();
+            //runes.AutoRuneSetter();
         }
 
         public async Task<string> GetDeclaredLane() {
