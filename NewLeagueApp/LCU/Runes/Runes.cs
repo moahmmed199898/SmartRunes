@@ -16,7 +16,8 @@ namespace NewLeagueApp.LCU.Runes {
         /// <summary>
         /// Rune tree which includes the name of the rune as well as the path to it's icon
         /// </summary>
-        public Tree Tree { get; private set; }
+        public Tree[] Tree { get; private set; }
+        
         /// <summary>
         /// This class can send and receive rune pages from the client and contains the Tree property which has the name and the icon path of every rune ( except stat runes )
         /// </summary>
@@ -27,43 +28,15 @@ namespace NewLeagueApp.LCU.Runes {
         /// <summary>
         /// Adds a rune page to the League Client Asynchronously . 
         /// <para>This will not check if the runes you set are valid so if you entered invalid runes you will end up with invalid page on the League client</para>
-        /// <para>
-        /// Example:
-        /// <code>
-        ///    //init the runes
-        ///    var a = new Runes();
-        ///    //make the runes array
-        ///    var miniRunes = new RuneInfo[] {
-        ///            a.Tree.Domination.Row0.DarkHarvest,
-        ///            a.Tree.Domination.Row1.CheapShot,
-        ///            a.Tree.Domination.Row2.EyeballCollection,
-        ///            a.Tree.Domination.Row3.IngeniousHunter,
-        ///            a.Tree.Inspiration.Row1.HextechFlashtraption,
-        ///            a.Tree.Inspiration.Row2.BiscuitDelivery,
-        ///        };
-        ///    //make the stat runes array
-        ///    var statRunes = new StatRunes[] {
-        ///            StatRunes.CDR,
-        ///            StatRunes.AdaptiveForce,
-        ///            StatRunes.Health
-        ///        };
-        ///    //send the runes to the client
-        ///    await a.add(a.Tree.Domination, a.Tree.Inspiration, miniRunes, statRunes);
-        /// </code>
-        /// </para>
         /// </summary>
         /// <param name="primaryPath">The path for the primary keystone</param>
         /// <param name="secondaryPath">The path for the secondary keystone</param>
         /// <param name="runes">An array of runes that includes the primary and secondary keystones. Example: new Runes.Tree.Domination.Row0.DarkHarvest</param>
         /// <param name="statRunes">An array of stat runes (Offense, Defense, and Flex). Example: NewLeagueApp.LCU.Types.StatRunes.AdaptiveForce</param>
-        public async Task Add(RuneTree primaryPath, RuneTree secondaryPath, RuneInfo[] runes, StatRunes[] statRunes) {
+        public async Task Add(int primaryPathID, int secondaryPathID, int[] runes, int[] statRunesIDs) {
             try {
-                var primaryKeyStoneID = primaryPath.id;
-                var secondaryRuneStoneID = secondaryPath.id;
-                int[] statRunesIDs = (from statRune in statRunes select (int)statRune).ToArray();
-                int[] runeIDs = (from rune in runes select rune.id).ToArray();
-                runeIDs = runeIDs.Concat(statRunesIDs).ToArray();
-                var page = MakeRunePage(primaryKeyStoneID, secondaryRuneStoneID, runeIDs);
+                var runeIDs = (int[])runes.Concat(statRunesIDs);
+                var page = MakeRunePage(primaryPathID, secondaryPathID, runeIDs);
                 await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch(Exception error) {
                 Console.WriteLine(error);
@@ -71,22 +44,54 @@ namespace NewLeagueApp.LCU.Runes {
         }
 
         /// <summary>
+        /// Adds a rune page to the League Client Asynchronously . 
+        /// <para>This will not check if the runes you set are valid so if you entered invalid runes you will end up with invalid page on the League client</para>
+        /// </summary>
+        /// <param name="primaryPath">The path for the primary keystone</param>
+        /// <param name="secondaryPath">The path for the secondary keystone</param>
+        /// <param name="runes">An array of runes that includes the primary and secondary keystones including the stat runes </param>
+        public async Task Add(int primaryPathID, int secondaryPathID, int[] runes) {
+            try {
+                var page = MakeRunePage(primaryPathID, secondaryPathID, runes);
+                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+            } catch (Exception error) {
+                Console.WriteLine(error);
+            }
+        }
+        /// <summary>
         /// Get the current runes from the client 
         /// </summary>
-        /// <returns></returns>
-        public async Task GetCurrentRunes() {
+        /// <returns>A list of runes</returns>
+        public async Task<int[]> GetCurrentRunes() {
             try {
                 var runesString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
                 var runesIDs = JsonConvert.DeserializeObject<RunesPage>(runesString);
-                var runes = new List<string>();
-                for (int i = 0; i < runesIDs.selectedPerkIds.Length; i++) {
-                    var id = runesIDs.selectedPerkIds[i];
-                    var name = GetRuneName(id);
-                    runes.Add(name);
-                }
+                return runesIDs.selectedPerkIds;
             } catch(Exception error) {
-                Console.WriteLine(error);
+                throw error;
             }
+        }
+        public Slot getRuneSlot(int runeID) {
+            if(runeID == 5002 || runeID == 5008 || runeID == 5003 || runeID == 5005 || runeID == 5007) {
+                var dictionary = GetRuneDictionary();
+                var runeInfo = (from runeItem in dictionary where runeItem.id == runeID select runeItem).Single();
+                var slot = new Slot();
+                var runes = new List<Rune>();
+                var rune = new Rune();
+                rune.Id = runeInfo.id;
+                rune.Icon = runeInfo.IconPath;
+                rune.Name = runeInfo.name;
+                runes.Add(rune);
+                slot.Runes = runes;
+                return slot;
+            }
+
+            var runesSlot = (from path in Tree
+                            from slot in path.Slots
+                            from rune in slot.Runes
+                            where rune.Id == runeID
+                            select slot).Single();
+            return runesSlot;
         }
 
         /// <summary>
@@ -95,12 +100,24 @@ namespace NewLeagueApp.LCU.Runes {
         /// <param name="id">The rune id</param>
         /// <returns>The rune name</returns>
         protected string GetRuneName(int id) {
-            var data = File.ReadAllText("static/runeDictionaryData.json");
-            var runeDictionary = JsonConvert.DeserializeObject<RuneDictionary[]>(data);
+
+            var runeDictionary = GetRuneDictionary();
             var runeNameCollection = from rune in runeDictionary where rune.id == id select rune.name;
             if (runeNameCollection.Count() == 0) return id.ToString();
             var runeName = runeNameCollection.Single();
             return runeName;
+        }
+        public RuneDictionary GetRuneInfo(int id) {
+            var runeDictionary = GetRuneDictionary();
+            var runeNameCollection = from rune in runeDictionary where rune.id == id select rune;
+            var runeName = runeNameCollection.Single();
+            return runeName;
+        }
+
+        private RuneDictionary[] GetRuneDictionary() {
+            var data = File.ReadAllText("static/runeDictionaryData.json");
+            var runeDictionary = JsonConvert.DeserializeObject<RuneDictionary[]>(data);
+            return runeDictionary;
         }
 
         /// <summary>
@@ -118,9 +135,9 @@ namespace NewLeagueApp.LCU.Runes {
         /// Gets more detailed information about the runes 
         /// </summary>
         /// <returns>A more detailed information about the runes</returns>
-        protected Tree GetRuneDetails() {
+        protected Tree[] GetRuneDetails() {
         var file = File.ReadAllText("static/runes.json");
-        var runes = JsonConvert.DeserializeObject<Tree>(file);
+        var runes = JsonConvert.DeserializeObject<Tree[]>(file);
         return runes;
     }
 

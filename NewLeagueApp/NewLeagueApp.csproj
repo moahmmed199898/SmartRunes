@@ -97,6 +97,7 @@
     <Compile Include="LCU\RiotConnecter.cs" />
     <Compile Include="LCU\Runes\Runes.cs" />
     <Compile Include="LCU\Runes\SmartRunes.cs" />
+    <Compile Include="LCU\Types\ChampMatchups.cs" />
     <Compile Include="LCU\Types\sessionData.cs" />
     <Compile Include="LCU\Types\statRunes.cs" />
     <Compile Include="LCU\Types\RunesRESTResponse.cs" />
@@ -110,6 +111,9 @@
     <Compile Include="ProfilePage\MatchDock.cs" />
     <Compile Include="ProfilePage\MatchStats.cs" />
     <Compile Include="RateLimiter.cs" />
+    <Compile Include="RunesWindow.xaml.cs">
+      <DependentUpon>RunesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Stats.xaml.cs">
       <DependentUpon>Stats.xaml</DependentUpon>
     </Compile>
@@ -126,6 +130,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RunesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Stats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +163,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="static\champion.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\champMatchUps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="static\runeDictionaryData.json">
@@ -636,6 +647,120 @@
     <None Include="static\img\splash\Zyra_0.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Aatrox_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Aatrox_1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7200_Domination.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\7201_Precision.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\7202_Sorcery.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\7203_Whimsy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\7204_Resolve.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\Domination\CheapShot\CheapShot.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\DarkHarvest\DarkHarvest.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\Electrocute\Electrocute.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\EyeballCollection\EyeballCollection.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\GhostPoro\GhostPoro.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\HailOfBlades\HailOfBlades.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\IngeniousHunter\IngeniousHunter.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\Predator\Predator.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\RavenousHunter\RavenousHunter.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\RelentlessHunter\RelentlessHunter.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\SuddenImpact\SuddenImpact.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\TasteOfBlood\GreenTerror_TasteOfBlood.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\UltimateHunter\UltimateHunter.png" />
+    <Resource Include="static\img\perk-images\Styles\Domination\ZombieWard\ZombieWard.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\BiscuitDelivery\BiscuitDelivery.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\CelestialBody\CelestialBody.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\CosmicInsight\CosmicInsight.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\FuturesMarket\FuturesMarket.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\GlacialAugment\GlacialAugment.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\HextechFlashtraption\HextechFlashtraption.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\Kleptomancy\Kleptomancy.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MagicalFootwear\MagicalFootwear.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MasterKey\MasterKey.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MinionDematerializer\MinionDematerializer.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\PerfectTiming\PerfectTiming.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\TimeWarpTonic\TimeWarpTonic.png" />
+    <Resource Include="static\img\perk-images\Styles\Inspiration\UnsealedSpellbook\UnsealedSpellbook.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\Conqueror\Conqueror.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\CoupDeGrace\CoupDeGrace.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\CutDown\CutDown.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\FleetFootwork\FleetFootwork.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendAlacrity\LegendAlacrity.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendBloodline\LegendBloodline.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendTenacity\LegendTenacity.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\LethalTempo\LethalTempoTemp.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\Overheal.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\PresenceOfMind\PresenceOfMind.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\PressTheAttack\PressTheAttack.png" />
+    <Resource Include="static\img\perk-images\Styles\Precision\Triumph.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\ApproachVelocity\ApproachVelocity.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\BonePlating\BonePlating.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Chrysalis\Chrysalis.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Conditioning\Conditioning.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Demolish\Demolish.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\FontOfLife\FontOfLife.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\GraspOfTheUndying\GraspOfTheUndying.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Guardian\Guardian.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\IronSkin\IronSkin.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\MirrorShell\MirrorShell.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Overgrowth\Overgrowth.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\Revitalize\Revitalize.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\SecondWind\SecondWind.png" />
+    <Resource Include="static\img\perk-images\Styles\Resolve\VeteranAftershock\VeteranAftershock.png" />
+    <Resource Include="static\img\perk-images\Styles\RunesIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\AbsoluteFocus\AbsoluteFocus.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\ArcaneComet\ArcaneComet.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Celerity\CelerityTemp.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\GatheringStorm\GatheringStorm.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\LastStand\LastStand.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\ManaflowBand\ManaflowBand.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\NimbusCloak\6361.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\NullifyingOrb\Pokeshield.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\PhaseRush\PhaseRush.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Scorch\Scorch.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\SummonAery\SummonAery.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\TheUltimateHat\TheUltimateHat.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Transcendence\Transcendence.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Unflinching\Unflinching.png" />
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Waterwalking\Waterwalking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsAdaptiveForceIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\StatMods\StatModsArmorIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\StatMods\StatModsAttackSpeedIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\StatMods\StatModsCDRScalingIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\StatMods\StatModsHealthScalingIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="static\img\perk-images\StatMods\StatModsMagicResIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

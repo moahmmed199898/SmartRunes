@@ -7,6 +7,8 @@ using System.Threading;
 using System.Net;
 using Newtonsoft.Json;
 using NewLeagueApp.LCU.Types;
+using System.Net.Http;
+
 namespace NewLeagueApp.LCU.Runes {
     class SmartRunes:Runes {
         /// <summary>
@@ -26,11 +28,26 @@ namespace NewLeagueApp.LCU.Runes {
         /// <summary>
         /// This will automate the rune setting process 
         /// </summary>
-        public async void AutoRuneSetter() {
-            var champions = new Champions();
-            var currentChamp = await champions.GetCurrentChamp();
-            while (currentChamp.Equals("NA")) currentChamp = await champions.GetCurrentChamp(); Thread.Sleep(2000);
-
+        public async Task AutoRuneSetter() {
+            try {
+                var champions = new Champions();
+                var lcu = new LCU();
+                await champions.Init();
+                await lcu.init();
+                var currentChamp = await champions.GetCurrentChamp();
+                while (currentChamp.Equals("NA")) {
+                    currentChamp = await champions.GetCurrentChamp(); Thread.Sleep(2000);
+                };
+                var lane = await lcu.GetDeclaredLane();
+                var enamyChamp = await champions.GetChampLanningAginst(lane);
+                await SetOptimalRunes(lane, currentChamp, enamyChamp);
+            } catch(HttpRequestException error) {
+                Thread.Sleep(3000);
+                await AutoRuneSetter();
+            }
+            catch(Exception error) {
+                throw error;
+            }
 
         }    
         /// <summary>
@@ -60,9 +77,9 @@ namespace NewLeagueApp.LCU.Runes {
                 var Runes = await RunesGetRequest($"?currentChamp={currentChamp}&enemyChamp={enamyChamp}&lane={lane}");
                 var runeIds = GetRunesIDs(Runes);
                 var page = MakeRunePage(Runes.PrimaryPath, Runes.SecondaryPath, runeIds);
-                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                await SendRequestToRiot(LCUSharp.HttpMethod.Delete, "/lol-perks/v1/pages");
+                await SendRequestToRiot(LCUSharp.HttpMethod.Post, "/lol-perks/v1/pages", page);
             } catch (Exception error) {
-                Console.WriteLine(error.Message);
                 throw error;
             }
         }

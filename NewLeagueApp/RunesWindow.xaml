@@ -1,0 +1,43 @@
+﻿<Window x:Class="NewLeagueApp.RunesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewLeagueApp"
+        mc:Ignorable="d"
+        Title="RunesWindow" Height="500" Width="1000" Background="#FF000421">
+    <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Ellipse Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" MinHeight="100" Stroke="Blue">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="currentChampPic" ImageSource="Aatrox_1.jpg"></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Grid x:Name="PrimaryRunes" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="SecoundryRunes" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Ellipse Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" MinHeight="100" Stroke="Red">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="enamyChampPic" ImageSource="Aatrox_1.jpg"></ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Grid>
+</Window>

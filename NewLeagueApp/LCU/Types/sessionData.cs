@@ -21,7 +21,7 @@ namespace NewLeagueApp.LCU.Types {
     public partial class Team {
         public string AssignedPosition { get; set; }
         public long CellId { get; set; }
-        public long ChampionId { get; set; }
+        public int ChampionId { get; set; }
         public long ChampionPickIntent { get; set; }
         public string EntitledFeatureType { get; set; }
         public string PlayerType { get; set; }

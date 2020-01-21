@@ -6,6 +6,8 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using NewLeagueApp.LCU.Runes;
+using System;
+
 namespace NewLeagueApp.LCU {
     class LCU:RiotConnecter {
         private long summonerID; 
@@ -13,17 +15,29 @@ namespace NewLeagueApp.LCU {
             init();
         }
 
-        public async void init() {
-            //var runes = new SmartRunes();
-            //summonerID = await GetCurrentSummnerID();
-            //runes.AutoRuneSetter();
+        public async Task init() {
+            summonerID = await GetCurrentSummnerID();
         }
 
-        public async Task<string> GetDeclaredLane() {
-            var stringJSON = File.ReadAllText("static/TempDraftPick.json");
+        public async Task<sessionData> GetSessionData() {
+            /*var stringJSON = File.ReadAllText("static/TempDraftPick.json");*/
+            var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
+            stringJSON = stringJSON.Replace("UTILITY", "SUPP");
             var data = JsonConvert.DeserializeObject<sessionData>(stringJSON);
-            var lane = (from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition).Single();
-            return lane;
+            return data;
+        }
+        public async Task<string> GetDeclaredLane() {
+            try {
+                var data = await GetSessionData();
+                var laneArray = from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition;
+                if (laneArray.Count() <= 0) return "NA";
+                var lane = laneArray.Single();
+                if (lane == "") return "NA";
+                if (lane == "") return "UTILITY";
+                return lane;
+            } catch(Exception error) {
+                throw error;
+            }
             throw new WarningException("Using a static file to get draft pick information");
         }
 
