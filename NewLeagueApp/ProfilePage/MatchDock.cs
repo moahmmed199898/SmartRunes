@@ -114,9 +114,7 @@ namespace NewLeagueApp.ProfilePage
             await AddDPM();
             await AddCSM();
         }
-#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         private async Task AddKda(ProfileApiCalls.GameStatsStructure_participants player)
-#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             Label kdalbl = new Label();
             kdalbl.Content = player.stats.kills + "/" + player.stats.deaths + "/" + player.stats.assists + " (" + player.stats.kda+")";
