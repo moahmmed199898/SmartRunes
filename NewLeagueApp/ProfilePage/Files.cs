@@ -13,7 +13,9 @@ namespace NewLeagueApp.ProfilePage
         public List<ProfileApiCalls.GameStatsStructure> stats;
         private List<bool> exists;
         private ProfileApiCalls.HistoryClass hist;
+#pragma warning disable CS0169 // The field 'Files.matchids' is never used
         private List<int> matchids;
+#pragma warning restore CS0169 // The field 'Files.matchids' is never used
         private ProfileApiCalls calls;
         private string summonerName;
        // public List<int> playerindex;
@@ -96,7 +98,9 @@ namespace NewLeagueApp.ProfilePage
             }
             return summ;
         }
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         public async Task<List<ProfileApiCalls.GameStatsStructure>> GetMatchHistory(List<int> matchindexes)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             List<ProfileApiCalls.GameStatsStructure> temp = new List<ProfileApiCalls.GameStatsStructure>();
             foreach(int i in matchindexes)

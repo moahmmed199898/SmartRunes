@@ -30,22 +30,27 @@ namespace NewLeagueApp.LCU.Runes {
         /// </summary>
         public async Task AutoRuneSetter() {
             try {
+                Console.WriteLine("init classes");
                 var champions = new Champions();
                 var lcu = new LCU();
                 await champions.Init();
                 await lcu.init();
+                Console.WriteLine("wait for the current Champ");
                 var currentChamp = await champions.GetCurrentChamp();
-                while (currentChamp.Equals("NA")) {
-                    currentChamp = await champions.GetCurrentChamp(); Thread.Sleep(2000);
-                };
+                Console.WriteLine("wait for final phase");
+                await lcu.WaitForTheFinalPhase();
+                Console.WriteLine("wait for lane");
                 var lane = await lcu.GetDeclaredLane();
+                Console.WriteLine("wait for lanner");
                 var enamyChamp = await champions.GetChampLanningAginst(lane);
+                Console.WriteLine("setting runes");
                 await SetOptimalRunes(lane, currentChamp, enamyChamp);
             } catch(HttpRequestException error) {
                 Thread.Sleep(3000);
                 await AutoRuneSetter();
             }
             catch(Exception error) {
+                Console.WriteLine(error.StackTrace);
                 throw error;
             }
 

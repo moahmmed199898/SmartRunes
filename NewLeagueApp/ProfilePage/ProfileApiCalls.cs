@@ -22,7 +22,9 @@ namespace NewLeagueApp.ProfilePage
         private List<GameStatsStructure> history;
         private SummonerClass summoner;
         private HistoryClass hist;
+#pragma warning disable CS0414 // The field 'ProfileApiCalls.firstRun' is assigned but its value is never used
         private Boolean firstRun = true;
+#pragma warning restore CS0414 // The field 'ProfileApiCalls.firstRun' is assigned but its value is never used
 
 
         private WebClient myWebClient = new WebClient();
@@ -45,7 +47,9 @@ namespace NewLeagueApp.ProfilePage
         }
 
      
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         public async Task WriteToMem(List<GameStatsStructure> list)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
           
 
@@ -60,7 +64,9 @@ namespace NewLeagueApp.ProfilePage
 
         }
 
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         public async Task< List<GameStatsStructure>> ReadFromMem()
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             try
             {
@@ -129,7 +135,9 @@ namespace NewLeagueApp.ProfilePage
 
 
 
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         async public Task<SummonerClass> SummonerInfo(string summonerName)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         //This class simply exists to get info about the summoner.
         {
             string request = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
@@ -139,7 +147,9 @@ namespace NewLeagueApp.ProfilePage
             return summoner;
         }
 
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         async public Task<HistoryClass> HistoryInfo(string accID)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         //This class simply exists to get info about the summoner.
         {
             string request = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/";
@@ -148,7 +158,9 @@ namespace NewLeagueApp.ProfilePage
             history = JsonConvert.DeserializeObject<HistoryClass>(JsonString);
             return history;
         }
+#pragma warning disable CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         async public Task<GameStatsStructure> MatchInfo(String matchIndex)
+#pragma warning restore CS1998 // This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
         {
             string request = "https://na1.api.riotgames.com/lol/match/v4/matches/";
             string JsonString = APIProcsser(request, matchIndex);
@@ -391,7 +403,9 @@ namespace NewLeagueApp.ProfilePage
             public int wardsPlaced { get; set; }
             [JsonProperty("win")]
             public bool win { get; set; }
+#pragma warning disable CS0169 // The field 'ProfileApiCalls.GameStatsStructure_participants_stats._kda' is never used
             private double _kda;
+#pragma warning restore CS0169 // The field 'ProfileApiCalls.GameStatsStructure_participants_stats._kda' is never used
              public double kda
             {
                 get

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using NewLeagueApp.LCU.Runes;
 using System;
+using System.Threading;
 
 namespace NewLeagueApp.LCU {
     class LCU:RiotConnecter {
@@ -21,7 +22,7 @@ namespace NewLeagueApp.LCU {
 
         public async Task<sessionData> GetSessionData() {
             /*var stringJSON = File.ReadAllText("static/TempDraftPick.json");*/
-            var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
+            var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
             stringJSON = stringJSON.Replace("UTILITY", "SUPP");
             var data = JsonConvert.DeserializeObject<sessionData>(stringJSON);
             return data;
@@ -41,10 +42,29 @@ namespace NewLeagueApp.LCU {
             throw new WarningException("Using a static file to get draft pick information");
         }
 
+        public async Task WaitForGameToStart() {
+            var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
+            while(stringJSON.Contains("error")) {
+                Thread.Sleep(2000);
+                stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
+            }
+            return;
+        }
+
         public async Task<long> GetCurrentSummnerID() {
             var jsonString = await SendRequestToRiot(HttpMethod.Get, " /lol-summoner/v1/current-summoner");
             var data = JsonConvert.DeserializeObject<SummonerInfo>(jsonString);
             return data.SummonerId;
+        }
+
+        public async Task<bool> WaitForTheFinalPhase() {
+            bool final = false;
+            while (!final) {
+                var session = await GetSessionData();
+                final = session.Timer.Phase == "FINALIZATION";
+                Thread.Sleep(2000);
+            }
+            return final;
         }
 
     }
