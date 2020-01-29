@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NewLeagueApp.LCU.Types {
-    class ChampMatchups {
+    public class ChampMatchups {
         public int TOP;
         public int JUNGLE;
         public int SUPP;

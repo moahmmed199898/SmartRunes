@@ -34,7 +34,7 @@ namespace NewLeagueApp.LCU.Runes {
                 var champions = new Champions();
                 var lcu = new LCU();
                 await champions.Init();
-                await lcu.init();
+                await lcu.Init();
                 Console.WriteLine("wait for the current Champ");
                 var currentChamp = await champions.GetCurrentChamp();
                 Console.WriteLine("wait for final phase");
@@ -45,7 +45,7 @@ namespace NewLeagueApp.LCU.Runes {
                 var enamyChamp = await champions.GetChampLanningAginst(lane);
                 Console.WriteLine("setting runes");
                 await SetOptimalRunes(lane, currentChamp, enamyChamp);
-            } catch(HttpRequestException error) {
+            } catch(HttpRequestException) {
                 Thread.Sleep(3000);
                 await AutoRuneSetter();
             }

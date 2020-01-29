@@ -13,10 +13,10 @@ namespace NewLeagueApp.LCU {
     class LCU:RiotConnecter {
         private long summonerID; 
         public LCU() {
-            init();
+            Init();
         }
 
-        public async Task init() {
+        public async Task Init() {
             summonerID = await GetCurrentSummnerID();
         }
 
@@ -33,8 +33,8 @@ namespace NewLeagueApp.LCU {
                 var laneArray = from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition;
                 if (laneArray.Count() <= 0) return "NA";
                 var lane = laneArray.Single();
-                if (lane == "") return "NA";
-                if (lane == "") return "UTILITY";
+                if (string.IsNullOrEmpty(lane)) return "NA";
+                if (lane == "SUPP") return "UTILITY";
                 return lane;
             } catch(Exception error) {
                 throw error;

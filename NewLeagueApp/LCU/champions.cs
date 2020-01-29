@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Threading;
 namespace NewLeagueApp.LCU {
     class Champions:RiotConnecter {
-        private LCU lcu;
+        private readonly LCU lcu;
         /// <summary>
         /// Contains info about the champions which includes their stats ( damage,armor, ...etc) info about their story, image, and more
         /// </summary>
@@ -68,7 +68,6 @@ namespace NewLeagueApp.LCU {
             return path;
         }
         public BitmapImage GetChampImageBrush(string name) {
-
             var path = GetChampImagePath(name);
             var uri = new Uri(path, UriKind.Relative);
             var bitmapImage = new BitmapImage(uri);
@@ -81,8 +80,9 @@ namespace NewLeagueApp.LCU {
         /// <param name="name">the name of the champ ( not case sensitive)</param>
         /// <returns>the image path</returns>
         public string GetChampImagePath(string name) {
-            name = name.Replace("'", "");
-            var path = $"static/img/splash/{name}_0.jpg";
+            var pathQuery = (from champ in championsInformation.Data where champ.Value.Name == name select champ.Value.Image.Full);
+            if (pathQuery.Count() == 0) return $"static/img/champion/CHEST_187.png";
+            var path = $"static/img/champion/{pathQuery.Single()}";
             return path;
         }
         async Task<string[]> GetEnamyChamps() {

@@ -21,18 +21,18 @@ namespace NewLeagueApp {
         public RunesWindow() {
             try {
                 InitializeComponent();
-                init();
-            } catch (Exception error) {
-                throw error;
+                Init();
+            } catch (Exception) {
+                throw;
             }
         }
 
-        async private void init() {
+        private async void Init() {
             var smartRunes = new SmartRunes();
             var champions = new Champions();
             var lcu = new LCU.LCU();
             await champions.Init();
-            await lcu.init();
+            await lcu.Init();
             await smartRunes.AutoRuneSetter();
             var currentChamp = await champions.GetCurrentChamp();
             var DeclaredLane = await lcu.GetDeclaredLane();
@@ -42,7 +42,7 @@ namespace NewLeagueApp {
             var runes = await smartRunes.GetCurrentRunes();
             for (int i = 0; i < runes.Length; i++) {
                 var rune = runes[i];
-                var slot = smartRunes.getRuneSlot(rune);
+                var slot = smartRunes.GetRuneSlot(rune);
                 MarkSelectedRune(ref slot, rune);
                 if (i < 4) {
                     SetupTheRunes(PrimaryRunes, i, slot);
@@ -71,33 +71,35 @@ namespace NewLeagueApp {
             for (int i = 6; i < runeIDs.Length; i++) {
                 var runeID = runeIDs[i];
                 var runeInfo = runes.GetRuneInfo(runeID);
-                var tempRune = new Rune();
-                tempRune.Id = runeInfo.id;
-                tempRune.Icon = runeInfo.IconPath;
-                tempRune.Name = runeInfo.name;
-                tempRune.selected = true;
+                var tempRune = new Rune {
+                    Id = runeInfo.id,
+                    Icon = runeInfo.IconPath,
+                    Name = runeInfo.name,
+                    selected = true
+                };
                 tempSlot.Runes.Add(tempRune);
             }
             SetupTheRunes(SecoundryRunes, rowNumber, tempSlot);
         }
         private void SetupTheRunes(Grid primaryGrid, int rowNumber, Slot runes) {
-            var Grid = setUpTheGrid(5);
+            var Grid = SetUpTheGrid(runes.Runes.Count()+1);
             primaryGrid.Children.Add(Grid);
             Grid.SetRow(Grid, rowNumber);
             var IndexCount = 0;
             foreach (var path in runes.Runes) {
                 var iconPath = path.Icon;
                 if (iconPath.Contains("/lol-game-data/assets/v1/")) iconPath = iconPath.Replace("/lol-game-data/assets/v1/", "");
-                var image = makeTheImage(iconPath, path.selected);
+                var image = MakeTheImage(iconPath, path.selected);
                 Grid.Children.Add(image);
                 Grid.SetColumn(image, IndexCount);
                 IndexCount++;
             }
         }
-        private Ellipse makeTheImage(string path, bool selected) {
-            var circle = new Ellipse();
-            circle.Margin = new Thickness(10);
-            circle.Stretch = Stretch.Uniform;
+        private Ellipse MakeTheImage(string path, bool selected) {
+            var circle = new Ellipse {
+                Margin = new Thickness(10),
+                Stretch = Stretch.Uniform
+            };
             var url = $"static/img/{path}";
             var uri = new Uri(url, UriKind.Relative);
             var bitmapImage = new BitmapImage(uri);
@@ -120,7 +122,7 @@ namespace NewLeagueApp {
 
         }
 
-        private Grid setUpTheGrid(int numberOfColumns) {
+        private Grid SetUpTheGrid(int numberOfColumns) {
             var newGrid = new Grid();
             for(int i = 0; i<numberOfColumns;i++) {
                 var column = new ColumnDefinition();

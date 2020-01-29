@@ -40,6 +40,7 @@ namespace NewLeagueApp.LCU.Runes {
                 await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch(Exception error) {
                 Console.WriteLine(error);
+                throw error;
             }
         }
 
@@ -56,6 +57,7 @@ namespace NewLeagueApp.LCU.Runes {
                 await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch (Exception error) {
                 Console.WriteLine(error);
+                throw error;
             }
         }
         /// <summary>
@@ -71,16 +73,17 @@ namespace NewLeagueApp.LCU.Runes {
                 throw error;
             }
         }
-        public Slot getRuneSlot(int runeID) {
+        public Slot GetRuneSlot(int runeID) {
             if(runeID == 5002 || runeID == 5008 || runeID == 5003 || runeID == 5005 || runeID == 5007) {
                 var dictionary = GetRuneDictionary();
                 var runeInfo = (from runeItem in dictionary where runeItem.id == runeID select runeItem).Single();
                 var slot = new Slot();
                 var runes = new List<Rune>();
-                var rune = new Rune();
-                rune.Id = runeInfo.id;
-                rune.Icon = runeInfo.IconPath;
-                rune.Name = runeInfo.name;
+                var rune = new Rune {
+                    Id = runeInfo.id,
+                    Icon = runeInfo.IconPath,
+                    Name = runeInfo.name
+                };
                 runes.Add(rune);
                 slot.Runes = runes;
                 return slot;
