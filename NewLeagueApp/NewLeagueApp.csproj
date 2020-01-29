@@ -290,9 +290,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CHEST_187.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="static\img\champion\Aatrox.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
