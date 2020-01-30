@@ -17,8 +17,8 @@ namespace NewLeagueApp {
     /// <summary>
     /// Interaction logic for RunesWindow.xaml
     /// </summary>
-    public partial class RunesWindow : Window {
-        public RunesWindow() {
+    public partial class RunesPage : Page {
+        public RunesPage() {
             try {
                 InitializeComponent();
                 Init();
@@ -33,7 +33,6 @@ namespace NewLeagueApp {
             var lcu = new LCU.LCU();
             await champions.Init();
             await lcu.Init();
-            await smartRunes.AutoRuneSetter();
             var currentChamp = await champions.GetCurrentChamp();
             var DeclaredLane = await lcu.GetDeclaredLane();
             var enamyChamp = await champions.GetChampLanningAginst(DeclaredLane);
@@ -53,6 +52,10 @@ namespace NewLeagueApp {
                 }
             }
             SetupTheStatRunes(runes,7);
+            await lcu.WaitForLeageToStart();
+            await lcu.WaitForLeageToClose();
+            NavigationService.Navigate(new StartingPage());
+            
 
         }
 

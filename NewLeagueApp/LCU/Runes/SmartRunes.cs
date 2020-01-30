@@ -36,17 +36,22 @@ namespace NewLeagueApp.LCU.Runes {
                 await champions.Init();
                 await lcu.Init();
                 Console.WriteLine("wait for the current Champ");
+                Status.currentStatus = "wait for the current Champ";
                 var currentChamp = await champions.GetCurrentChamp();
                 Console.WriteLine("wait for final phase");
+                Status.currentStatus = "wait for final phase";
                 await lcu.WaitForTheFinalPhase();
                 Console.WriteLine("wait for lane");
+                Status.currentStatus = "wait for lane";
                 var lane = await lcu.GetDeclaredLane();
                 Console.WriteLine("wait for lanner");
+                Status.currentStatus = "wait for lanner";
                 var enamyChamp = await champions.GetChampLanningAginst(lane);
                 Console.WriteLine("setting runes");
+                Status.currentStatus = "setting runes";
                 await SetOptimalRunes(lane, currentChamp, enamyChamp);
             } catch(HttpRequestException) {
-                Thread.Sleep(3000);
+                await Task.Delay(3000);
                 await AutoRuneSetter();
             }
             catch(Exception error) {
@@ -118,6 +123,10 @@ namespace NewLeagueApp.LCU.Runes {
                 runes.StatRune3
             };
             return runeIds;
+        }
+
+        public void Dispose() {
+            throw new NotImplementedException();
         }
     }
 }

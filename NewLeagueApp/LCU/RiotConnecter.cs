@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using LCUSharp;
 using System.Net.Http;
+using System.Diagnostics;
+
 namespace NewLeagueApp.LCU {
     public class RiotConnecter {
         /// <summary>
@@ -39,7 +42,25 @@ namespace NewLeagueApp.LCU {
             } catch (Exception err) {
                 throw err;
             }
-}
+        }
+
+        public async Task WaitForLeageToStart() {
+            await Task.Delay(10000);
+            while (true) {
+                Process[] pname = Process.GetProcessesByName("League of Legends");
+                if (pname.Length > 0) return;
+                else await Task.Delay(3000);
+            }
+        }
+
+        public async Task WaitForLeageToClose() {
+            await Task.Delay(10000);
+            while(true) {
+                Process[] pname = Process.GetProcessesByName("League of Legends.exe");
+                if (pname.Length == 0) return;
+                else await Task.Delay(3000);
+            }
+        }
 
     }
 }

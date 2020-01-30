@@ -96,6 +96,9 @@
     </ApplicationDefinition>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LCU\champions.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LCU\RiotConnecter.cs" />
     <Compile Include="LCU\Runes\Runes.cs" />
     <Compile Include="LCU\Runes\SmartRunes.cs" />
@@ -108,14 +111,26 @@
     <Compile Include="LCU\Types\RuneDictionary.cs" />
     <Compile Include="LCU\LCU.cs" />
     <Compile Include="LCU\Types\RunesPage.cs" />
-    <Compile Include="RunesWindow.xaml.cs">
-      <DependentUpon>RunesWindow.xaml</DependentUpon>
+    <Compile Include="StartingPage.xaml.cs">
+      <DependentUpon>StartingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RunesPage.xaml.cs">
+      <DependentUpon>RunesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RunesWindow.xaml">
+    <Compile Include="static\Status.cs" />
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RunesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

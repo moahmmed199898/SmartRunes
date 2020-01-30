@@ -67,7 +67,7 @@ namespace NewLeagueApp.LCU.Runes {
         public async Task<int[]> GetCurrentRunes() {
             try {
                 var runesString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
-                var runesIDs = JsonConvert.DeserializeObject<RunesPage>(runesString);
+                var runesIDs = JsonConvert.DeserializeObject<IRunesPage>(runesString);
                 return runesIDs.selectedPerkIds;
             } catch(Exception error) {
                 throw error;
@@ -130,8 +130,8 @@ namespace NewLeagueApp.LCU.Runes {
         /// <param name="secondaryPathID">The secondary path id</param>
         /// <param name="runeIDs">The runes id ( does not include stat runes )</param>
         /// <returns>A rune page</returns>
-        protected RunesPage MakeRunePage(int primaryPathID, int secondaryPathID, int[] runeIDs) {
-            var runes = new RunesPage(PageName, primaryPathID, secondaryPathID, runeIDs);
+        protected IRunesPage MakeRunePage(int primaryPathID, int secondaryPathID, int[] runeIDs) {
+            var runes = new IRunesPage(PageName, primaryPathID, secondaryPathID, runeIDs);
             return runes;
         }
         /// <summary>

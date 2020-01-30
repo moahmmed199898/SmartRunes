@@ -39,9 +39,9 @@ namespace NewLeagueApp.LCU {
         public async Task<string> GetCurrentChamp() {
             try {
                 var currentChampIDString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "lol-champ-select/v1/current-champion");
-                if (currentChampIDString.Contains("\"httpStatus\":404,\"")) { Thread.Sleep(2000); return await GetCurrentChamp(); };
+                if (currentChampIDString.Contains("\"httpStatus\":404,\"")) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampID = int.Parse(currentChampIDString);
-                if (currentChampID == 0) { Thread.Sleep(2000); return await GetCurrentChamp(); };
+                if (currentChampID == 0) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampName = (from champ in championsInformation.Data where champ.Value.Key == currentChampID select champ.Value.Name).Single();
                 return currentChampName;
             } catch(Exception error) {

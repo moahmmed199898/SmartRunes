@@ -45,7 +45,7 @@ namespace NewLeagueApp.LCU {
         public async Task WaitForGameToStart() {
             var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
             while(stringJSON.Contains("error")) {
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
                 stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");
             }
             return;
@@ -62,7 +62,7 @@ namespace NewLeagueApp.LCU {
             while (!final) {
                 var session = await GetSessionData();
                 final = session.Timer.Phase == "FINALIZATION";
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
             }
             return final;
         }
