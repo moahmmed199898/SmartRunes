@@ -8,6 +8,6 @@
       Title="RunesWindow" Height="500" Width="1000" Background="#FF000421">
 
     <Grid>
-        <Label x:Name="statusLabel" Content="Loading" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFB2B2B2" FontSize="72"/>
+        <Label x:Name="statusLabel" Content="Loading" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" FontSize="72"/>
     </Grid>
 </Page>
