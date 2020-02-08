@@ -24,7 +24,13 @@ namespace NewLeagueApp {
         }
 
         public void Init() {
+                Main.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
                 Main.Content = new StartingPage();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using LCUSharp;
 using NewLeagueApp.LCU.Types;
 using System.Net.Http;
+using System.Windows.Media.Imaging;
+
 namespace NewLeagueApp.LCU.Runes {
     class Runes:RiotConnecter {
         /// <summary>
@@ -95,6 +97,18 @@ namespace NewLeagueApp.LCU.Runes {
                             where rune.Id == runeID
                             select slot).Single();
             return runesSlot;
+        }
+
+        public BitmapImage GetRuneBitmap(int runeID) {
+            var path = $"pack://application:,,/static/img/{GetRuneInfo(runeID).IconPath}";
+            if (path.Contains("/lol-game-data/assets/v1/")) path = path.Replace("/lol-game-data/assets/v1/", "");
+            var uri = new Uri(path);
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = uri;
+            bitmapImage.EndInit();
+            return bitmapImage;
+
         }
 
         /// <summary>

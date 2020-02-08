@@ -39,23 +39,17 @@ namespace NewLeagueApp {
             currentChampPic.ImageSource = champions.GetChampImageBrush(currentChamp);
             if (enamyChamp != "NA") enamyChampPic.ImageSource = champions.GetChampImageBrush(enamyChamp);
             var runes = await smartRunes.GetCurrentRunes();
-            for (int i = 0; i < runes.Length; i++) {
-                var rune = runes[i];
-                var slot = smartRunes.GetRuneSlot(rune);
-                MarkSelectedRune(ref slot, rune);
-                if (i < 4) {
-                    SetupTheRunes(PrimaryRunes, i, slot);
-                } else if (i < 6) {
-                    SetupTheRunes(SecoundryRunes, i - 4, slot);
-                } else {
-                    break;
-                }
-            }
-            SetupTheStatRunes(runes,7);
-            await lcu.WaitForLeageToStart();
-            await lcu.WaitForLeageToClose();
-            NavigationService.Navigate(new StartingPage());
-            
+            backgroundImage.Source = champions.GetChampBackgroundImageBrush(currentChamp);
+            keyStoneImage.Source = smartRunes.GetRuneBitmap(runes[0]);
+            primaryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[1]);
+            primaryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[2]);
+            primaryPerk3.ImageSource = smartRunes.GetRuneBitmap(runes[3]);
+            secoundryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[4]);
+            secoundryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[5]);
+            stat1.Source = smartRunes.GetRuneBitmap(runes[6]);
+            stat2.Source = smartRunes.GetRuneBitmap(runes[7]);
+            stat3.Source = smartRunes.GetRuneBitmap(runes[8]);
+
 
         }
 
@@ -82,7 +76,7 @@ namespace NewLeagueApp {
                 };
                 tempSlot.Runes.Add(tempRune);
             }
-            SetupTheRunes(SecoundryRunes, rowNumber, tempSlot);
+            //SetupTheRunes(SecoundryRunes, rowNumber, tempSlot);
         }
         private void SetupTheRunes(Grid primaryGrid, int rowNumber, Slot runes) {
             var Grid = SetUpTheGrid(runes.Runes.Count()+1);

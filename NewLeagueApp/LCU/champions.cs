@@ -69,8 +69,23 @@ namespace NewLeagueApp.LCU {
         }
         public BitmapImage GetChampImageBrush(string name) {
             var path = GetChampImagePath(name);
-            var uri = new Uri(path, UriKind.Relative);
-            var bitmapImage = new BitmapImage(uri);
+            var uri = new Uri(path);
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = uri;
+            bitmapImage.EndInit();
+            
+            return bitmapImage;
+
+        }
+
+        public BitmapImage GetChampBackgroundImageBrush(string name) {
+            var path = $"pack://application:,,/static/img/splash/{name}_0.jpg";
+            var uri = new Uri(path);
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = uri;
+            bitmapImage.EndInit();
             return bitmapImage;
 
         }
@@ -81,8 +96,8 @@ namespace NewLeagueApp.LCU {
         /// <returns>the image path</returns>
         public string GetChampImagePath(string name) {
             var pathQuery = (from champ in championsInformation.Data where champ.Value.Name == name select champ.Value.Image.Full);
-            if (pathQuery.Count() == 0) return $"static/img/champion/CHEST_187.png";
-            var path = $"static/img/champion/{pathQuery.Single()}";
+            if (pathQuery.Count() == 0) return $"pack://application:,,/static/img/champion/CHEST_187.png";
+            var path = $"pack://application:,,/static/img/champion/{pathQuery.Single()}";
             return path;
         }
         async Task<string[]> GetEnamyChamps() {

@@ -5,40 +5,170 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:NewLeagueApp"
       mc:Ignorable="d"
-      Title="RunesWindow" Height="500" Width="1000" Background="#FF000421">
-    
-    <Grid Margin="0,10,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"></ColumnDefinition>
-            <ColumnDefinition Width="30*"></ColumnDefinition>
-            <ColumnDefinition Width="30*"></ColumnDefinition>
-            <ColumnDefinition Width="20*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Ellipse Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" MinHeight="100" Stroke="Blue">
-            <Ellipse.Fill>
-                <ImageBrush x:Name="currentChampPic" ImageSource="static/img/CHEST_187.png"></ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
-        <Grid x:Name="PrimaryRunes" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+      Title="RunesWindow" Height="500" Width="1000" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="63*"></RowDefinition>
+            <RowDefinition Height="187*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image x:Name="backgroundImage" Source="static/img/splash/Aatrox_0.jpg" Stretch="UniformToFill" Grid.Row="0" Grid.RowSpan="2">
+            <Image.Effect>
+                <BlurEffect KernelType="Gaussian" Radius="10" />
+            </Image.Effect>
+        </Image>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.Column="0" HorizontalAlignment="Center"  MinWidth="100" VerticalAlignment="Center" MinHeight="100" Stroke="Blue">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="currentChampPic" ImageSource="static/img/champion/Aatrox.png" ></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Grid.Column="4" HorizontalAlignment="Center"  MinWidth="100" VerticalAlignment="Center" MinHeight="100" Stroke="Blue">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="enamyChampPic" ImageSource="static/img/champion/Garen.png" ></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Image Grid.Column="2" Margin="10" Source="static/img/lane/MID.png"></Image>
         </Grid>
-        <Grid x:Name="SecoundryRunes" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="304*"></ColumnDefinition>
+                <ColumnDefinition Width="192*"></ColumnDefinition>
+                <ColumnDefinition Width="304*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="keyStoneImage" Source="static/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png" Grid.Column="1" Margin="0,0,0,150"></Image>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="103*"></RowDefinition>
+                    <RowDefinition Height="306*"></RowDefinition>
+                    <RowDefinition Height="130*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border  Grid.Row="1" CornerRadius="55"  Background="#CC545454" Margin="10 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0 7 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush  Stretch="Uniform" x:Name="primaryPerk1" ImageSource="static/img/perk-images/Styles/Domination/CheapShot/CheapShot.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="1" Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush  Stretch="Uniform" x:Name="primaryPerk2" ImageSource="static/img/perk-images/Styles/Domination/CheapShot/CheapShot.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="2" Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush  Stretch="Uniform" x:Name="primaryPerk3" ImageSource="static/img/perk-images/Styles/Domination/CheapShot/CheapShot.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" Margin="75 5 5 5">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="secoundryPerk1" ImageSource="static/img/perk-images/Styles/Domination/CheapShot/CheapShot.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="1" Margin="5 5 75 5">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="secoundryPerk2" ImageSource="static/img/perk-images/Styles/Domination/CheapShot/CheapShot.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="stat1" Source="static/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" Grid.Column="0" Margin="5"/>
+                            <Image x:Name="stat2" Source="static/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" Grid.Column="1" Margin="5"/>
+                            <Image x:Name="stat3" Source="static/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png" Grid.Column="2" Margin="5"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="135*"></RowDefinition>
+                    <RowDefinition Height="302*"></RowDefinition>
+                    <RowDefinition Height="102*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="1" CornerRadius="55" Background="#CC545454" Margin="10 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item1" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="1">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item2" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="2">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item3" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item4" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="1">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item5" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="2">
+                                <Ellipse.Fill>
+                                    <ImageBrush Stretch="Uniform" x:Name="item6" ImageSource="static/img/item/1001.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
-        <Ellipse Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="100" MinHeight="100" Stroke="Red">
-            <Ellipse.Fill>
-                <ImageBrush x:Name="enamyChampPic" ImageSource="static/img/CHEST_187.png"></ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+
     </Grid>
+
 </Page>

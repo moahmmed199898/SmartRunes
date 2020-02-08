@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewLeagueApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1000" Background="#FF000421">
+        Title="MainWindow" Height="500" Width="1000" Background="#FF000421"
+        WindowStyle="None" MouseDown="Window_MouseDown"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+        </Style>
+        <Style TargetType="Ellipse">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Frame x:Name="Main" />
     </Grid>

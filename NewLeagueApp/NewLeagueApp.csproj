@@ -59,17 +59,11 @@
       <HintPath>..\packages\LCUSharp.1.0.1\lib\netstandard2.0\LCUSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
-      <HintPath>..\packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
-    </Reference>
-    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
-      <HintPath>..\packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
-    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.10.2-alpha.0.8\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -121,7 +115,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="static\Status.cs" />
+    <Compile Include="Status.cs" />
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,9 +164,6 @@
     <None Include="static\runes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="static\TempDraftPick.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -193,21 +184,434 @@
     <Compile Include="LCU\Types\ChampionsData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="static\img\perk-images\Styles\7200_Domination.png">
+    <None Include="static\img\CHEST_187.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\BOT.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="static\img\perk-images\Styles\7201_Precision.png">
+    <Resource Include="static\img\lane\Jungle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="static\img\perk-images\Styles\7202_Sorcery.png">
+    <Resource Include="static\img\lane\MID.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="static\img\perk-images\Styles\7203_Whimsy.png">
+    <Resource Include="static\img\lane\SUPP.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="static\img\perk-images\Styles\7204_Resolve.png">
+    <Resource Include="static\img\lane\Top.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Aatrox.png" />
+    <Resource Include="static\img\champion\Ahri.png" />
+    <Resource Include="static\img\champion\Akali.png" />
+    <Resource Include="static\img\champion\Alistar.png" />
+    <Resource Include="static\img\champion\Amumu.png" />
+    <Resource Include="static\img\champion\Anivia.png" />
+    <Resource Include="static\img\champion\Annie.png" />
+    <Resource Include="static\img\champion\Aphelios.png" />
+    <Resource Include="static\img\champion\Ashe.png" />
+    <Resource Include="static\img\champion\AurelionSol.png" />
+    <Resource Include="static\img\champion\Azir.png" />
+    <Resource Include="static\img\champion\Bard.png" />
+    <Resource Include="static\img\champion\Blitzcrank.png" />
+    <Resource Include="static\img\champion\Brand.png" />
+    <Resource Include="static\img\champion\Braum.png" />
+    <Resource Include="static\img\champion\Caitlyn.png" />
+    <Resource Include="static\img\champion\Camille.png" />
+    <Resource Include="static\img\champion\Cassiopeia.png" />
+    <Resource Include="static\img\champion\Chogath.png" />
+    <Resource Include="static\img\champion\Corki.png" />
+    <Resource Include="static\img\champion\Darius.png" />
+    <Resource Include="static\img\champion\Diana.png" />
+    <Resource Include="static\img\champion\Draven.png" />
+    <Resource Include="static\img\champion\DrMundo.png" />
+    <Resource Include="static\img\champion\Ekko.png" />
+    <Resource Include="static\img\champion\Elise.png" />
+    <Resource Include="static\img\champion\Evelynn.png" />
+    <Resource Include="static\img\champion\Ezreal.png" />
+    <Resource Include="static\img\champion\Fiddlesticks.png" />
+    <Resource Include="static\img\champion\Fiora.png" />
+    <Resource Include="static\img\champion\Fizz.png" />
+    <Resource Include="static\img\champion\Galio.png" />
+    <Resource Include="static\img\champion\Gangplank.png" />
+    <Resource Include="static\img\champion\Garen.png" />
+    <Resource Include="static\img\champion\Gnar.png" />
+    <Resource Include="static\img\champion\Gragas.png" />
+    <Resource Include="static\img\champion\Graves.png" />
+    <Resource Include="static\img\champion\Hecarim.png" />
+    <Resource Include="static\img\champion\Heimerdinger.png" />
+    <Resource Include="static\img\champion\Illaoi.png" />
+    <Resource Include="static\img\champion\Irelia.png" />
+    <Resource Include="static\img\champion\Ivern.png" />
+    <Resource Include="static\img\champion\Janna.png" />
+    <Resource Include="static\img\champion\JarvanIV.png" />
+    <Resource Include="static\img\champion\Jax.png" />
+    <Resource Include="static\img\champion\Jayce.png" />
+    <Resource Include="static\img\champion\Jhin.png" />
+    <Resource Include="static\img\champion\Jinx.png" />
+    <Resource Include="static\img\champion\Kaisa.png" />
+    <Resource Include="static\img\champion\Kalista.png" />
+    <Resource Include="static\img\champion\Karma.png" />
+    <Resource Include="static\img\champion\Karthus.png" />
+    <Resource Include="static\img\champion\Kassadin.png" />
+    <Resource Include="static\img\champion\Katarina.png" />
+    <Resource Include="static\img\champion\Kayle.png" />
+    <Resource Include="static\img\champion\Kayn.png" />
+    <Resource Include="static\img\champion\Kennen.png" />
+    <Resource Include="static\img\champion\Khazix.png" />
+    <Resource Include="static\img\champion\Kindred.png" />
+    <Resource Include="static\img\champion\Kled.png" />
+    <Resource Include="static\img\champion\KogMaw.png" />
+    <Resource Include="static\img\champion\Leblanc.png" />
+    <Resource Include="static\img\champion\LeeSin.png" />
+    <Resource Include="static\img\champion\Leona.png" />
+    <Resource Include="static\img\champion\Lissandra.png" />
+    <Resource Include="static\img\champion\Lucian.png" />
+    <Resource Include="static\img\champion\Lulu.png" />
+    <Resource Include="static\img\champion\Lux.png" />
+    <Resource Include="static\img\champion\Malphite.png" />
+    <Resource Include="static\img\champion\Malzahar.png" />
+    <Resource Include="static\img\champion\Maokai.png" />
+    <Resource Include="static\img\champion\MasterYi.png" />
+    <Resource Include="static\img\champion\MissFortune.png" />
+    <Resource Include="static\img\champion\MonkeyKing.png" />
+    <Resource Include="static\img\champion\Mordekaiser.png" />
+    <Resource Include="static\img\champion\Morgana.png" />
+    <Resource Include="static\img\champion\Nami.png" />
+    <Resource Include="static\img\champion\Nasus.png" />
+    <Resource Include="static\img\champion\Nautilus.png" />
+    <Resource Include="static\img\champion\Neeko.png" />
+    <Resource Include="static\img\champion\Nidalee.png" />
+    <Resource Include="static\img\champion\Nocturne.png" />
+    <Resource Include="static\img\champion\Nunu.png" />
+    <Resource Include="static\img\champion\Olaf.png" />
+    <Resource Include="static\img\champion\Orianna.png" />
+    <Resource Include="static\img\champion\Ornn.png" />
+    <Resource Include="static\img\champion\Pantheon.png" />
+    <Resource Include="static\img\champion\Poppy.png" />
+    <Resource Include="static\img\champion\Pyke.png" />
+    <Resource Include="static\img\champion\Qiyana.png" />
+    <Resource Include="static\img\champion\Quinn.png" />
+    <Resource Include="static\img\champion\Rakan.png" />
+    <Resource Include="static\img\champion\Rammus.png" />
+    <Resource Include="static\img\champion\RekSai.png" />
+    <Resource Include="static\img\champion\Renekton.png" />
+    <Resource Include="static\img\champion\Rengar.png" />
+    <Resource Include="static\img\champion\Riven.png" />
+    <Resource Include="static\img\champion\Rumble.png" />
+    <Resource Include="static\img\champion\Ryze.png" />
+    <Resource Include="static\img\champion\Sejuani.png" />
+    <Resource Include="static\img\champion\Senna.png" />
+    <Resource Include="static\img\champion\Sett.png" />
+    <Resource Include="static\img\champion\Shaco.png" />
+    <Resource Include="static\img\champion\Shen.png" />
+    <Resource Include="static\img\champion\Shyvana.png" />
+    <Resource Include="static\img\champion\Singed.png" />
+    <Resource Include="static\img\champion\Sion.png" />
+    <Resource Include="static\img\champion\Sivir.png" />
+    <Resource Include="static\img\champion\Skarner.png" />
+    <Resource Include="static\img\champion\Sona.png" />
+    <Resource Include="static\img\champion\Soraka.png" />
+    <Resource Include="static\img\champion\Swain.png" />
+    <Resource Include="static\img\champion\Sylas.png" />
+    <Resource Include="static\img\champion\Syndra.png" />
+    <Resource Include="static\img\champion\TahmKench.png" />
+    <Resource Include="static\img\champion\Taliyah.png" />
+    <Resource Include="static\img\champion\Talon.png" />
+    <Resource Include="static\img\champion\Taric.png" />
+    <Resource Include="static\img\champion\Teemo.png" />
+    <Resource Include="static\img\champion\Thresh.png" />
+    <Resource Include="static\img\champion\Tristana.png" />
+    <Resource Include="static\img\champion\Trundle.png" />
+    <Resource Include="static\img\champion\Tryndamere.png" />
+    <Resource Include="static\img\champion\TwistedFate.png" />
+    <Resource Include="static\img\champion\Twitch.png" />
+    <Resource Include="static\img\champion\Udyr.png" />
+    <Resource Include="static\img\champion\Urgot.png" />
+    <Resource Include="static\img\champion\Varus.png" />
+    <Resource Include="static\img\champion\Vayne.png" />
+    <Resource Include="static\img\champion\Veigar.png" />
+    <Resource Include="static\img\champion\Velkoz.png" />
+    <Resource Include="static\img\champion\Vi.png" />
+    <Resource Include="static\img\champion\Viktor.png" />
+    <Resource Include="static\img\champion\Vladimir.png" />
+    <Resource Include="static\img\champion\Volibear.png" />
+    <Resource Include="static\img\champion\Warwick.png" />
+    <Resource Include="static\img\champion\Xayah.png" />
+    <Resource Include="static\img\champion\Xerath.png" />
+    <Resource Include="static\img\champion\XinZhao.png" />
+    <Resource Include="static\img\champion\Yasuo.png" />
+    <Resource Include="static\img\champion\Yorick.png" />
+    <Resource Include="static\img\champion\Yuumi.png" />
+    <Resource Include="static\img\champion\Zac.png" />
+    <Resource Include="static\img\champion\Zed.png" />
+    <Resource Include="static\img\champion\Ziggs.png" />
+    <Resource Include="static\img\champion\Zilean.png" />
+    <Resource Include="static\img\champion\Zoe.png" />
+    <Resource Include="static\img\champion\Zyra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1001.png" />
+    <Resource Include="static\img\item\1004.png" />
+    <Resource Include="static\img\item\1006.png" />
+    <Resource Include="static\img\item\1011.png" />
+    <Resource Include="static\img\item\1018.png" />
+    <Resource Include="static\img\item\1026.png" />
+    <Resource Include="static\img\item\1027.png" />
+    <Resource Include="static\img\item\1028.png" />
+    <Resource Include="static\img\item\1029.png" />
+    <Resource Include="static\img\item\1031.png" />
+    <Resource Include="static\img\item\1033.png" />
+    <Resource Include="static\img\item\1036.png" />
+    <Resource Include="static\img\item\1037.png" />
+    <Resource Include="static\img\item\1038.png" />
+    <Resource Include="static\img\item\1039.png" />
+    <Resource Include="static\img\item\1041.png" />
+    <Resource Include="static\img\item\1042.png" />
+    <Resource Include="static\img\item\1043.png" />
+    <Resource Include="static\img\item\1052.png" />
+    <Resource Include="static\img\item\1053.png" />
+    <Resource Include="static\img\item\1054.png" />
+    <Resource Include="static\img\item\1055.png" />
+    <Resource Include="static\img\item\1056.png" />
+    <Resource Include="static\img\item\1057.png" />
+    <Resource Include="static\img\item\1058.png" />
+    <Resource Include="static\img\item\1082.png" />
+    <Resource Include="static\img\item\1083.png" />
+    <Resource Include="static\img\item\1400.png" />
+    <Resource Include="static\img\item\1401.png" />
+    <Resource Include="static\img\item\1402.png" />
+    <Resource Include="static\img\item\1412.png" />
+    <Resource Include="static\img\item\1413.png" />
+    <Resource Include="static\img\item\1414.png" />
+    <Resource Include="static\img\item\1416.png" />
+    <Resource Include="static\img\item\1419.png" />
+    <Resource Include="static\img\item\2003.png" />
+    <Resource Include="static\img\item\2006.png" />
+    <Resource Include="static\img\item\2009.png" />
+    <Resource Include="static\img\item\2010.png" />
+    <Resource Include="static\img\item\2015.png" />
+    <Resource Include="static\img\item\2031.png" />
+    <Resource Include="static\img\item\2033.png" />
+    <Resource Include="static\img\item\2047.png" />
+    <Resource Include="static\img\item\2051.png" />
+    <Resource Include="static\img\item\2052.png" />
+    <Resource Include="static\img\item\2054.png" />
+    <Resource Include="static\img\item\2055.png" />
+    <Resource Include="static\img\item\2065.png" />
+    <Resource Include="static\img\item\2138.png" />
+    <Resource Include="static\img\item\2139.png" />
+    <Resource Include="static\img\item\2140.png" />
+    <Resource Include="static\img\item\2403.png" />
+    <Resource Include="static\img\item\2419.png" />
+    <Resource Include="static\img\item\2420.png" />
+    <Resource Include="static\img\item\2421.png" />
+    <Resource Include="static\img\item\2422.png" />
+    <Resource Include="static\img\item\2423.png" />
+    <Resource Include="static\img\item\2424.png" />
+    <Resource Include="static\img\item\3001.png" />
+    <Resource Include="static\img\item\3003.png" />
+    <Resource Include="static\img\item\3004.png" />
+    <Resource Include="static\img\item\3006.png" />
+    <Resource Include="static\img\item\3007.png" />
+    <Resource Include="static\img\item\3008.png" />
+    <Resource Include="static\img\item\3009.png" />
+    <Resource Include="static\img\item\3010.png" />
+    <Resource Include="static\img\item\3020.png" />
+    <Resource Include="static\img\item\3022.png" />
+    <Resource Include="static\img\item\3024.png" />
+    <Resource Include="static\img\item\3025.png" />
+    <Resource Include="static\img\item\3026.png" />
+    <Resource Include="static\img\item\3027.png" />
+    <Resource Include="static\img\item\3028.png" />
+    <Resource Include="static\img\item\3029.png" />
+    <Resource Include="static\img\item\3030.png" />
+    <Resource Include="static\img\item\3031.png" />
+    <Resource Include="static\img\item\3033.png" />
+    <Resource Include="static\img\item\3035.png" />
+    <Resource Include="static\img\item\3036.png" />
+    <Resource Include="static\img\item\3040.png" />
+    <Resource Include="static\img\item\3041.png" />
+    <Resource Include="static\img\item\3042.png" />
+    <Resource Include="static\img\item\3043.png" />
+    <Resource Include="static\img\item\3044.png" />
+    <Resource Include="static\img\item\3046.png" />
+    <Resource Include="static\img\item\3047.png" />
+    <Resource Include="static\img\item\3048.png" />
+    <Resource Include="static\img\item\3050.png" />
+    <Resource Include="static\img\item\3052.png" />
+    <Resource Include="static\img\item\3053.png" />
+    <Resource Include="static\img\item\3057.png" />
+    <Resource Include="static\img\item\3065.png" />
+    <Resource Include="static\img\item\3067.png" />
+    <Resource Include="static\img\item\3068.png" />
+    <Resource Include="static\img\item\3070.png" />
+    <Resource Include="static\img\item\3071.png" />
+    <Resource Include="static\img\item\3072.png" />
+    <Resource Include="static\img\item\3073.png" />
+    <Resource Include="static\img\item\3074.png" />
+    <Resource Include="static\img\item\3075.png" />
+    <Resource Include="static\img\item\3076.png" />
+    <Resource Include="static\img\item\3077.png" />
+    <Resource Include="static\img\item\3078.png" />
+    <Resource Include="static\img\item\3082.png" />
+    <Resource Include="static\img\item\3083.png" />
+    <Resource Include="static\img\item\3084.png" />
+    <Resource Include="static\img\item\3085.png" />
+    <Resource Include="static\img\item\3086.png" />
+    <Resource Include="static\img\item\3087.png" />
+    <Resource Include="static\img\item\3089.png" />
+    <Resource Include="static\img\item\3091.png" />
+    <Resource Include="static\img\item\3094.png" />
+    <Resource Include="static\img\item\3095.png" />
+    <Resource Include="static\img\item\3100.png" />
+    <Resource Include="static\img\item\3101.png" />
+    <Resource Include="static\img\item\3102.png" />
+    <Resource Include="static\img\item\3105.png" />
+    <Resource Include="static\img\item\3107.png" />
+    <Resource Include="static\img\item\3108.png" />
+    <Resource Include="static\img\item\3109.png" />
+    <Resource Include="static\img\item\3110.png" />
+    <Resource Include="static\img\item\3111.png" />
+    <Resource Include="static\img\item\3112.png" />
+    <Resource Include="static\img\item\3113.png" />
+    <Resource Include="static\img\item\3114.png" />
+    <Resource Include="static\img\item\3115.png" />
+    <Resource Include="static\img\item\3116.png" />
+    <Resource Include="static\img\item\3117.png" />
+    <Resource Include="static\img\item\3123.png" />
+    <Resource Include="static\img\item\3124.png" />
+    <Resource Include="static\img\item\3133.png" />
+    <Resource Include="static\img\item\3134.png" />
+    <Resource Include="static\img\item\3135.png" />
+    <Resource Include="static\img\item\3136.png" />
+    <Resource Include="static\img\item\3137.png" />
+    <Resource Include="static\img\item\3139.png" />
+    <Resource Include="static\img\item\3140.png" />
+    <Resource Include="static\img\item\3142.png" />
+    <Resource Include="static\img\item\3143.png" />
+    <Resource Include="static\img\item\3144.png" />
+    <Resource Include="static\img\item\3145.png" />
+    <Resource Include="static\img\item\3146.png" />
+    <Resource Include="static\img\item\3147.png" />
+    <Resource Include="static\img\item\3151.png" />
+    <Resource Include="static\img\item\3152.png" />
+    <Resource Include="static\img\item\3153.png" />
+    <Resource Include="static\img\item\3155.png" />
+    <Resource Include="static\img\item\3156.png" />
+    <Resource Include="static\img\item\3157.png" />
+    <Resource Include="static\img\item\3158.png" />
+    <Resource Include="static\img\item\3161.png" />
+    <Resource Include="static\img\item\3165.png" />
+    <Resource Include="static\img\item\3174.png" />
+    <Resource Include="static\img\item\3175.png" />
+    <Resource Include="static\img\item\3179.png" />
+    <Resource Include="static\img\item\3181.png" />
+    <Resource Include="static\img\item\3184.png" />
+    <Resource Include="static\img\item\3190.png" />
+    <Resource Include="static\img\item\3191.png" />
+    <Resource Include="static\img\item\3193.png" />
+    <Resource Include="static\img\item\3194.png" />
+    <Resource Include="static\img\item\3196.png" />
+    <Resource Include="static\img\item\3197.png" />
+    <Resource Include="static\img\item\3198.png" />
+    <Resource Include="static\img\item\3200.png" />
+    <Resource Include="static\img\item\3211.png" />
+    <Resource Include="static\img\item\3222.png" />
+    <Resource Include="static\img\item\3285.png" />
+    <Resource Include="static\img\item\3340.png" />
+    <Resource Include="static\img\item\3348.png" />
+    <Resource Include="static\img\item\3361.png" />
+    <Resource Include="static\img\item\3362.png" />
+    <Resource Include="static\img\item\3363.png" />
+    <Resource Include="static\img\item\3364.png" />
+    <Resource Include="static\img\item\3371.png" />
+    <Resource Include="static\img\item\3373.png" />
+    <Resource Include="static\img\item\3374.png" />
+    <Resource Include="static\img\item\3379.png" />
+    <Resource Include="static\img\item\3380.png" />
+    <Resource Include="static\img\item\3382.png" />
+    <Resource Include="static\img\item\3383.png" />
+    <Resource Include="static\img\item\3384.png" />
+    <Resource Include="static\img\item\3386.png" />
+    <Resource Include="static\img\item\3387.png" />
+    <Resource Include="static\img\item\3388.png" />
+    <Resource Include="static\img\item\3389.png" />
+    <Resource Include="static\img\item\3390.png" />
+    <Resource Include="static\img\item\3400.png" />
+    <Resource Include="static\img\item\3410.png" />
+    <Resource Include="static\img\item\3416.png" />
+    <Resource Include="static\img\item\3422.png" />
+    <Resource Include="static\img\item\3455.png" />
+    <Resource Include="static\img\item\3504.png" />
+    <Resource Include="static\img\item\3508.png" />
+    <Resource Include="static\img\item\3513.png" />
+    <Resource Include="static\img\item\3514.png" />
+    <Resource Include="static\img\item\3520.png" />
+    <Resource Include="static\img\item\3599.png" />
+    <Resource Include="static\img\item\3600.png" />
+    <Resource Include="static\img\item\3671.png" />
+    <Resource Include="static\img\item\3672.png" />
+    <Resource Include="static\img\item\3673.png" />
+    <Resource Include="static\img\item\3675.png" />
+    <Resource Include="static\img\item\3680.png" />
+    <Resource Include="static\img\item\3681.png" />
+    <Resource Include="static\img\item\3682.png" />
+    <Resource Include="static\img\item\3683.png" />
+    <Resource Include="static\img\item\3684.png" />
+    <Resource Include="static\img\item\3685.png" />
+    <Resource Include="static\img\item\3690.png" />
+    <Resource Include="static\img\item\3691.png" />
+    <Resource Include="static\img\item\3692.png" />
+    <Resource Include="static\img\item\3693.png" />
+    <Resource Include="static\img\item\3694.png" />
+    <Resource Include="static\img\item\3695.png" />
+    <Resource Include="static\img\item\3706.png" />
+    <Resource Include="static\img\item\3715.png" />
+    <Resource Include="static\img\item\3742.png" />
+    <Resource Include="static\img\item\3748.png" />
+    <Resource Include="static\img\item\3751.png" />
+    <Resource Include="static\img\item\3800.png" />
+    <Resource Include="static\img\item\3801.png" />
+    <Resource Include="static\img\item\3802.png" />
+    <Resource Include="static\img\item\3812.png" />
+    <Resource Include="static\img\item\3814.png" />
+    <Resource Include="static\img\item\3850.png" />
+    <Resource Include="static\img\item\3851.png" />
+    <Resource Include="static\img\item\3853.png" />
+    <Resource Include="static\img\item\3854.png" />
+    <Resource Include="static\img\item\3855.png" />
+    <Resource Include="static\img\item\3857.png" />
+    <Resource Include="static\img\item\3858.png" />
+    <Resource Include="static\img\item\3859.png" />
+    <Resource Include="static\img\item\3860.png" />
+    <Resource Include="static\img\item\3862.png" />
+    <Resource Include="static\img\item\3863.png" />
+    <Resource Include="static\img\item\3864.png" />
+    <Resource Include="static\img\item\3901.png" />
+    <Resource Include="static\img\item\3902.png" />
+    <Resource Include="static\img\item\3903.png" />
+    <Resource Include="static\img\item\3905.png" />
+    <Resource Include="static\img\item\3907.png" />
+    <Resource Include="static\img\item\3916.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsAdaptiveForceIcon.png" />
+    <Resource Include="static\img\perk-images\StatMods\StatModsArmorIcon.png" />
+    <Resource Include="static\img\perk-images\StatMods\StatModsAttackSpeedIcon.png" />
+    <Resource Include="static\img\perk-images\StatMods\StatModsCDRScalingIcon.png" />
+    <Resource Include="static\img\perk-images\StatMods\StatModsHealthScalingIcon.png" />
+    <Resource Include="static\img\perk-images\StatMods\StatModsMagicResIcon.png" />
+    <Resource Include="static\img\perk-images\Styles\7200_Domination.png" />
+    <Resource Include="static\img\perk-images\Styles\7201_Precision.png" />
+    <Resource Include="static\img\perk-images\Styles\7202_Sorcery.png" />
+    <Resource Include="static\img\perk-images\Styles\7203_Whimsy.png" />
+    <Resource Include="static\img\perk-images\Styles\7204_Resolve.png" />
     <Resource Include="static\img\perk-images\Styles\Domination\CheapShot\CheapShot.png" />
     <Resource Include="static\img\perk-images\Styles\Domination\DarkHarvest\DarkHarvest.png" />
     <Resource Include="static\img\perk-images\Styles\Domination\Electrocute\Electrocute.png" />
@@ -261,9 +665,7 @@
     <Resource Include="static\img\perk-images\Styles\Resolve\Revitalize\Revitalize.png" />
     <Resource Include="static\img\perk-images\Styles\Resolve\SecondWind\SecondWind.png" />
     <Resource Include="static\img\perk-images\Styles\Resolve\VeteranAftershock\VeteranAftershock.png" />
-    <Resource Include="static\img\perk-images\Styles\RunesIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="static\img\perk-images\Styles\RunesIcon.png" />
     <Resource Include="static\img\perk-images\Styles\Sorcery\AbsoluteFocus\AbsoluteFocus.png" />
     <Resource Include="static\img\perk-images\Styles\Sorcery\ArcaneComet\ArcaneComet.png" />
     <Resource Include="static\img\perk-images\Styles\Sorcery\Celerity\CelerityTemp.png" />
@@ -281,472 +683,1180 @@
     <Resource Include="static\img\perk-images\Styles\Sorcery\Waterwalking\Waterwalking.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="static\img\perk-images\StatMods\StatModsAdaptiveForceIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\perk-images\StatMods\StatModsArmorIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\perk-images\StatMods\StatModsAttackSpeedIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\perk-images\StatMods\StatModsCDRScalingIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\perk-images\StatMods\StatModsHealthScalingIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\perk-images\StatMods\StatModsMagicResIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="static\img\CHEST_187.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="static\img\champion\Aatrox.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ahri.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Akali.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Alistar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Amumu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Anivia.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Annie.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Aphelios.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ashe.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\AurelionSol.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Azir.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Bard.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Blitzcrank.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Brand.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Braum.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Caitlyn.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Camille.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Cassiopeia.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Chogath.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Corki.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Darius.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Diana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Draven.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\DrMundo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ekko.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Elise.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Evelynn.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ezreal.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Fiddlesticks.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Fiora.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Fizz.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Galio.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Gangplank.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Garen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Gnar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Gragas.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Graves.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Hecarim.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Heimerdinger.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Illaoi.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Irelia.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ivern.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Janna.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\JarvanIV.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Jax.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Jayce.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Jhin.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Jinx.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kaisa.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kalista.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Karma.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Karthus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kassadin.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Katarina.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kayle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kayn.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kennen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Khazix.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kindred.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Kled.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\KogMaw.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Leblanc.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\LeeSin.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Leona.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Lissandra.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Lucian.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Lulu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Lux.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Malphite.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Malzahar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Maokai.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\MasterYi.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\MissFortune.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\MonkeyKing.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Mordekaiser.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Morgana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nami.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nasus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nautilus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Neeko.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nidalee.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nocturne.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Nunu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Olaf.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Orianna.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ornn.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Pantheon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Poppy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Pyke.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Qiyana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Quinn.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Rakan.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Rammus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\RekSai.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Renekton.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Rengar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Riven.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Rumble.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ryze.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Sejuani.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Senna.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Shaco.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Shen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Shyvana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Singed.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Sion.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Sivir.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Skarner.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Sona.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Soraka.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Swain.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Sylas.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Syndra.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\TahmKench.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Taliyah.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Talon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Taric.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Teemo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Thresh.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Tristana.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Trundle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Tryndamere.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\TwistedFate.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Twitch.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Udyr.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Urgot.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Varus.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Vayne.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Veigar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Velkoz.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Vi.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Viktor.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Vladimir.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Volibear.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Warwick.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Xayah.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Xerath.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\XinZhao.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Yasuo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Yorick.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Yuumi.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Zac.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Zed.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Ziggs.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Zilean.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Zoe.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="static\img\champion\Zyra.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="static\img\splash\Aatrox_0.jpg" />
+    <Resource Include="static\img\splash\Aatrox_1.jpg" />
+    <Resource Include="static\img\splash\Aatrox_2.jpg" />
+    <Resource Include="static\img\splash\Aatrox_3.jpg" />
+    <Resource Include="static\img\splash\Aatrox_7.jpg" />
+    <Resource Include="static\img\splash\Aatrox_8.jpg" />
+    <Resource Include="static\img\splash\Aatrox_9.jpg" />
+    <Resource Include="static\img\splash\Ahri_0.jpg" />
+    <Resource Include="static\img\splash\Ahri_1.jpg" />
+    <Resource Include="static\img\splash\Ahri_14.jpg" />
+    <Resource Include="static\img\splash\Ahri_15.jpg" />
+    <Resource Include="static\img\splash\Ahri_16.jpg" />
+    <Resource Include="static\img\splash\Ahri_17.jpg" />
+    <Resource Include="static\img\splash\Ahri_2.jpg" />
+    <Resource Include="static\img\splash\Ahri_3.jpg" />
+    <Resource Include="static\img\splash\Ahri_4.jpg" />
+    <Resource Include="static\img\splash\Ahri_5.jpg" />
+    <Resource Include="static\img\splash\Ahri_6.jpg" />
+    <Resource Include="static\img\splash\Ahri_7.jpg" />
+    <Resource Include="static\img\splash\Akali_0.jpg" />
+    <Resource Include="static\img\splash\Akali_1.jpg" />
+    <Resource Include="static\img\splash\Akali_13.jpg" />
+    <Resource Include="static\img\splash\Akali_14.jpg" />
+    <Resource Include="static\img\splash\Akali_15.jpg" />
+    <Resource Include="static\img\splash\Akali_2.jpg" />
+    <Resource Include="static\img\splash\Akali_3.jpg" />
+    <Resource Include="static\img\splash\Akali_4.jpg" />
+    <Resource Include="static\img\splash\Akali_5.jpg" />
+    <Resource Include="static\img\splash\Akali_6.jpg" />
+    <Resource Include="static\img\splash\Akali_7.jpg" />
+    <Resource Include="static\img\splash\Akali_8.jpg" />
+    <Resource Include="static\img\splash\Akali_9.jpg" />
+    <Resource Include="static\img\splash\Alistar_0.jpg" />
+    <Resource Include="static\img\splash\Alistar_1.jpg" />
+    <Resource Include="static\img\splash\Alistar_10.jpg" />
+    <Resource Include="static\img\splash\Alistar_19.jpg" />
+    <Resource Include="static\img\splash\Alistar_2.jpg" />
+    <Resource Include="static\img\splash\Alistar_20.jpg" />
+    <Resource Include="static\img\splash\Alistar_3.jpg" />
+    <Resource Include="static\img\splash\Alistar_4.jpg" />
+    <Resource Include="static\img\splash\Alistar_5.jpg" />
+    <Resource Include="static\img\splash\Alistar_6.jpg" />
+    <Resource Include="static\img\splash\Alistar_7.jpg" />
+    <Resource Include="static\img\splash\Alistar_8.jpg" />
+    <Resource Include="static\img\splash\Alistar_9.jpg" />
+    <Resource Include="static\img\splash\Amumu_0.jpg" />
+    <Resource Include="static\img\splash\Amumu_1.jpg" />
+    <Resource Include="static\img\splash\Amumu_17.jpg" />
+    <Resource Include="static\img\splash\Amumu_2.jpg" />
+    <Resource Include="static\img\splash\Amumu_23.jpg" />
+    <Resource Include="static\img\splash\Amumu_3.jpg" />
+    <Resource Include="static\img\splash\Amumu_4.jpg" />
+    <Resource Include="static\img\splash\Amumu_5.jpg" />
+    <Resource Include="static\img\splash\Amumu_6.jpg" />
+    <Resource Include="static\img\splash\Amumu_7.jpg" />
+    <Resource Include="static\img\splash\Amumu_8.jpg" />
+    <Resource Include="static\img\splash\Anivia_0.jpg" />
+    <Resource Include="static\img\splash\Anivia_1.jpg" />
+    <Resource Include="static\img\splash\Anivia_2.jpg" />
+    <Resource Include="static\img\splash\Anivia_3.jpg" />
+    <Resource Include="static\img\splash\Anivia_4.jpg" />
+    <Resource Include="static\img\splash\Anivia_5.jpg" />
+    <Resource Include="static\img\splash\Anivia_6.jpg" />
+    <Resource Include="static\img\splash\Anivia_7.jpg" />
+    <Resource Include="static\img\splash\Anivia_8.jpg" />
+    <Resource Include="static\img\splash\Annie_0.jpg" />
+    <Resource Include="static\img\splash\Annie_1.jpg" />
+    <Resource Include="static\img\splash\Annie_10.jpg" />
+    <Resource Include="static\img\splash\Annie_11.jpg" />
+    <Resource Include="static\img\splash\Annie_12.jpg" />
+    <Resource Include="static\img\splash\Annie_2.jpg" />
+    <Resource Include="static\img\splash\Annie_3.jpg" />
+    <Resource Include="static\img\splash\Annie_4.jpg" />
+    <Resource Include="static\img\splash\Annie_5.jpg" />
+    <Resource Include="static\img\splash\Annie_6.jpg" />
+    <Resource Include="static\img\splash\Annie_7.jpg" />
+    <Resource Include="static\img\splash\Annie_8.jpg" />
+    <Resource Include="static\img\splash\Annie_9.jpg" />
+    <Resource Include="static\img\splash\Aphelios_0.jpg" />
+    <Resource Include="static\img\splash\Aphelios_1.jpg" />
+    <Resource Include="static\img\splash\Ashe_0.jpg" />
+    <Resource Include="static\img\splash\Ashe_1.jpg" />
+    <Resource Include="static\img\splash\Ashe_11.jpg" />
+    <Resource Include="static\img\splash\Ashe_17.jpg" />
+    <Resource Include="static\img\splash\Ashe_2.jpg" />
+    <Resource Include="static\img\splash\Ashe_3.jpg" />
+    <Resource Include="static\img\splash\Ashe_4.jpg" />
+    <Resource Include="static\img\splash\Ashe_5.jpg" />
+    <Resource Include="static\img\splash\Ashe_6.jpg" />
+    <Resource Include="static\img\splash\Ashe_7.jpg" />
+    <Resource Include="static\img\splash\Ashe_8.jpg" />
+    <Resource Include="static\img\splash\Ashe_9.jpg" />
+    <Resource Include="static\img\splash\AurelionSol_0.jpg" />
+    <Resource Include="static\img\splash\AurelionSol_1.jpg" />
+    <Resource Include="static\img\splash\AurelionSol_2.jpg" />
+    <Resource Include="static\img\splash\Azir_0.jpg" />
+    <Resource Include="static\img\splash\Azir_1.jpg" />
+    <Resource Include="static\img\splash\Azir_2.jpg" />
+    <Resource Include="static\img\splash\Azir_3.jpg" />
+    <Resource Include="static\img\splash\Azir_4.jpg" />
+    <Resource Include="static\img\splash\Bard_0.jpg" />
+    <Resource Include="static\img\splash\Bard_1.jpg" />
+    <Resource Include="static\img\splash\Bard_5.jpg" />
+    <Resource Include="static\img\splash\Bard_6.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_0.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_1.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_11.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_2.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_20.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_21.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_22.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_3.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_4.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_5.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_6.jpg" />
+    <Resource Include="static\img\splash\Blitzcrank_7.jpg" />
+    <Resource Include="static\img\splash\Brand_0.jpg" />
+    <Resource Include="static\img\splash\Brand_1.jpg" />
+    <Resource Include="static\img\splash\Brand_2.jpg" />
+    <Resource Include="static\img\splash\Brand_3.jpg" />
+    <Resource Include="static\img\splash\Brand_4.jpg" />
+    <Resource Include="static\img\splash\Brand_5.jpg" />
+    <Resource Include="static\img\splash\Brand_6.jpg" />
+    <Resource Include="static\img\splash\Brand_7.jpg" />
+    <Resource Include="static\img\splash\Braum_0.jpg" />
+    <Resource Include="static\img\splash\Braum_1.jpg" />
+    <Resource Include="static\img\splash\Braum_10.jpg" />
+    <Resource Include="static\img\splash\Braum_11.jpg" />
+    <Resource Include="static\img\splash\Braum_2.jpg" />
+    <Resource Include="static\img\splash\Braum_24.jpg" />
+    <Resource Include="static\img\splash\Braum_3.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_0.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_1.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_10.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_11.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_13.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_19.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_2.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_20.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_3.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_4.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_5.jpg" />
+    <Resource Include="static\img\splash\Caitlyn_6.jpg" />
+    <Resource Include="static\img\splash\Camille_0.jpg" />
+    <Resource Include="static\img\splash\Camille_1.jpg" />
+    <Resource Include="static\img\splash\Camille_10.jpg" />
+    <Resource Include="static\img\splash\Camille_2.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_0.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_1.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_2.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_3.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_4.jpg" />
+    <Resource Include="static\img\splash\Cassiopeia_8.jpg" />
+    <Resource Include="static\img\splash\Chogath_0.jpg" />
+    <Resource Include="static\img\splash\Chogath_1.jpg" />
+    <Resource Include="static\img\splash\Chogath_2.jpg" />
+    <Resource Include="static\img\splash\Chogath_3.jpg" />
+    <Resource Include="static\img\splash\Chogath_4.jpg" />
+    <Resource Include="static\img\splash\Chogath_5.jpg" />
+    <Resource Include="static\img\splash\Chogath_6.jpg" />
+    <Resource Include="static\img\splash\Chogath_7.jpg" />
+    <Resource Include="static\img\splash\Corki_0.jpg" />
+    <Resource Include="static\img\splash\Corki_1.jpg" />
+    <Resource Include="static\img\splash\Corki_18.jpg" />
+    <Resource Include="static\img\splash\Corki_2.jpg" />
+    <Resource Include="static\img\splash\Corki_3.jpg" />
+    <Resource Include="static\img\splash\Corki_4.jpg" />
+    <Resource Include="static\img\splash\Corki_5.jpg" />
+    <Resource Include="static\img\splash\Corki_6.jpg" />
+    <Resource Include="static\img\splash\Corki_7.jpg" />
+    <Resource Include="static\img\splash\Corki_8.jpg" />
+    <Resource Include="static\img\splash\Darius_0.jpg" />
+    <Resource Include="static\img\splash\Darius_1.jpg" />
+    <Resource Include="static\img\splash\Darius_14.jpg" />
+    <Resource Include="static\img\splash\Darius_15.jpg" />
+    <Resource Include="static\img\splash\Darius_16.jpg" />
+    <Resource Include="static\img\splash\Darius_2.jpg" />
+    <Resource Include="static\img\splash\Darius_3.jpg" />
+    <Resource Include="static\img\splash\Darius_4.jpg" />
+    <Resource Include="static\img\splash\Darius_8.jpg" />
+    <Resource Include="static\img\splash\Diana_0.jpg" />
+    <Resource Include="static\img\splash\Diana_1.jpg" />
+    <Resource Include="static\img\splash\Diana_11.jpg" />
+    <Resource Include="static\img\splash\Diana_12.jpg" />
+    <Resource Include="static\img\splash\Diana_18.jpg" />
+    <Resource Include="static\img\splash\Diana_2.jpg" />
+    <Resource Include="static\img\splash\Diana_3.jpg" />
+    <Resource Include="static\img\splash\Draven_0.jpg" />
+    <Resource Include="static\img\splash\Draven_1.jpg" />
+    <Resource Include="static\img\splash\Draven_12.jpg" />
+    <Resource Include="static\img\splash\Draven_13.jpg" />
+    <Resource Include="static\img\splash\Draven_2.jpg" />
+    <Resource Include="static\img\splash\Draven_3.jpg" />
+    <Resource Include="static\img\splash\Draven_4.jpg" />
+    <Resource Include="static\img\splash\Draven_5.jpg" />
+    <Resource Include="static\img\splash\Draven_6.jpg" />
+    <Resource Include="static\img\splash\DrMundo_0.jpg" />
+    <Resource Include="static\img\splash\DrMundo_1.jpg" />
+    <Resource Include="static\img\splash\DrMundo_10.jpg" />
+    <Resource Include="static\img\splash\DrMundo_2.jpg" />
+    <Resource Include="static\img\splash\DrMundo_3.jpg" />
+    <Resource Include="static\img\splash\DrMundo_4.jpg" />
+    <Resource Include="static\img\splash\DrMundo_5.jpg" />
+    <Resource Include="static\img\splash\DrMundo_6.jpg" />
+    <Resource Include="static\img\splash\DrMundo_7.jpg" />
+    <Resource Include="static\img\splash\DrMundo_8.jpg" />
+    <Resource Include="static\img\splash\DrMundo_9.jpg" />
+    <Resource Include="static\img\splash\Ekko_0.jpg" />
+    <Resource Include="static\img\splash\Ekko_1.jpg" />
+    <Resource Include="static\img\splash\Ekko_11.jpg" />
+    <Resource Include="static\img\splash\Ekko_12.jpg" />
+    <Resource Include="static\img\splash\Ekko_19.jpg" />
+    <Resource Include="static\img\splash\Ekko_2.jpg" />
+    <Resource Include="static\img\splash\Ekko_3.jpg" />
+    <Resource Include="static\img\splash\Elise_0.jpg" />
+    <Resource Include="static\img\splash\Elise_1.jpg" />
+    <Resource Include="static\img\splash\Elise_2.jpg" />
+    <Resource Include="static\img\splash\Elise_3.jpg" />
+    <Resource Include="static\img\splash\Elise_4.jpg" />
+    <Resource Include="static\img\splash\Elise_5.jpg" />
+    <Resource Include="static\img\splash\Evelynn_0.jpg" />
+    <Resource Include="static\img\splash\Evelynn_1.jpg" />
+    <Resource Include="static\img\splash\Evelynn_2.jpg" />
+    <Resource Include="static\img\splash\Evelynn_3.jpg" />
+    <Resource Include="static\img\splash\Evelynn_4.jpg" />
+    <Resource Include="static\img\splash\Evelynn_5.jpg" />
+    <Resource Include="static\img\splash\Evelynn_6.jpg" />
+    <Resource Include="static\img\splash\Evelynn_7.jpg" />
+    <Resource Include="static\img\splash\Evelynn_8.jpg" />
+    <Resource Include="static\img\splash\Ezreal_0.jpg" />
+    <Resource Include="static\img\splash\Ezreal_1.jpg" />
+    <Resource Include="static\img\splash\Ezreal_18.jpg" />
+    <Resource Include="static\img\splash\Ezreal_19.jpg" />
+    <Resource Include="static\img\splash\Ezreal_2.jpg" />
+    <Resource Include="static\img\splash\Ezreal_20.jpg" />
+    <Resource Include="static\img\splash\Ezreal_21.jpg" />
+    <Resource Include="static\img\splash\Ezreal_3.jpg" />
+    <Resource Include="static\img\splash\Ezreal_4.jpg" />
+    <Resource Include="static\img\splash\Ezreal_5.jpg" />
+    <Resource Include="static\img\splash\Ezreal_6.jpg" />
+    <Resource Include="static\img\splash\Ezreal_7.jpg" />
+    <Resource Include="static\img\splash\Ezreal_8.jpg" />
+    <Resource Include="static\img\splash\Ezreal_9.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_0.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_1.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_2.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_3.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_4.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_5.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_6.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_7.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_8.jpg" />
+    <Resource Include="static\img\splash\FiddleSticks_9.jpg" />
+    <Resource Include="static\img\splash\Fiora_0.jpg" />
+    <Resource Include="static\img\splash\Fiora_1.jpg" />
+    <Resource Include="static\img\splash\Fiora_2.jpg" />
+    <Resource Include="static\img\splash\Fiora_22.jpg" />
+    <Resource Include="static\img\splash\Fiora_23.jpg" />
+    <Resource Include="static\img\splash\Fiora_3.jpg" />
+    <Resource Include="static\img\splash\Fiora_31.jpg" />
+    <Resource Include="static\img\splash\Fiora_4.jpg" />
+    <Resource Include="static\img\splash\Fiora_5.jpg" />
+    <Resource Include="static\img\splash\Fizz_0.jpg" />
+    <Resource Include="static\img\splash\Fizz_1.jpg" />
+    <Resource Include="static\img\splash\Fizz_10.jpg" />
+    <Resource Include="static\img\splash\Fizz_14.jpg" />
+    <Resource Include="static\img\splash\Fizz_15.jpg" />
+    <Resource Include="static\img\splash\Fizz_2.jpg" />
+    <Resource Include="static\img\splash\Fizz_3.jpg" />
+    <Resource Include="static\img\splash\Fizz_4.jpg" />
+    <Resource Include="static\img\splash\Fizz_8.jpg" />
+    <Resource Include="static\img\splash\Fizz_9.jpg" />
+    <Resource Include="static\img\splash\Galio_0.jpg" />
+    <Resource Include="static\img\splash\Galio_1.jpg" />
+    <Resource Include="static\img\splash\Galio_13.jpg" />
+    <Resource Include="static\img\splash\Galio_2.jpg" />
+    <Resource Include="static\img\splash\Galio_3.jpg" />
+    <Resource Include="static\img\splash\Galio_4.jpg" />
+    <Resource Include="static\img\splash\Galio_5.jpg" />
+    <Resource Include="static\img\splash\Galio_6.jpg" />
+    <Resource Include="static\img\splash\Gangplank_0.jpg" />
+    <Resource Include="static\img\splash\Gangplank_1.jpg" />
+    <Resource Include="static\img\splash\Gangplank_14.jpg" />
+    <Resource Include="static\img\splash\Gangplank_2.jpg" />
+    <Resource Include="static\img\splash\Gangplank_3.jpg" />
+    <Resource Include="static\img\splash\Gangplank_4.jpg" />
+    <Resource Include="static\img\splash\Gangplank_5.jpg" />
+    <Resource Include="static\img\splash\Gangplank_6.jpg" />
+    <Resource Include="static\img\splash\Gangplank_7.jpg" />
+    <Resource Include="static\img\splash\Gangplank_8.jpg" />
+    <Resource Include="static\img\splash\Garen_0.jpg" />
+    <Resource Include="static\img\splash\Garen_1.jpg" />
+    <Resource Include="static\img\splash\Garen_10.jpg" />
+    <Resource Include="static\img\splash\Garen_11.jpg" />
+    <Resource Include="static\img\splash\Garen_13.jpg" />
+    <Resource Include="static\img\splash\Garen_14.jpg" />
+    <Resource Include="static\img\splash\Garen_2.jpg" />
+    <Resource Include="static\img\splash\Garen_22.jpg" />
+    <Resource Include="static\img\splash\Garen_23.jpg" />
+    <Resource Include="static\img\splash\Garen_3.jpg" />
+    <Resource Include="static\img\splash\Garen_4.jpg" />
+    <Resource Include="static\img\splash\Garen_5.jpg" />
+    <Resource Include="static\img\splash\Garen_6.jpg" />
+    <Resource Include="static\img\splash\Gnar_0.jpg" />
+    <Resource Include="static\img\splash\Gnar_1.jpg" />
+    <Resource Include="static\img\splash\Gnar_13.jpg" />
+    <Resource Include="static\img\splash\Gnar_14.jpg" />
+    <Resource Include="static\img\splash\Gnar_2.jpg" />
+    <Resource Include="static\img\splash\Gnar_3.jpg" />
+    <Resource Include="static\img\splash\Gnar_4.jpg" />
+    <Resource Include="static\img\splash\Gragas_0.jpg" />
+    <Resource Include="static\img\splash\Gragas_1.jpg" />
+    <Resource Include="static\img\splash\Gragas_10.jpg" />
+    <Resource Include="static\img\splash\Gragas_2.jpg" />
+    <Resource Include="static\img\splash\Gragas_3.jpg" />
+    <Resource Include="static\img\splash\Gragas_4.jpg" />
+    <Resource Include="static\img\splash\Gragas_5.jpg" />
+    <Resource Include="static\img\splash\Gragas_6.jpg" />
+    <Resource Include="static\img\splash\Gragas_7.jpg" />
+    <Resource Include="static\img\splash\Gragas_8.jpg" />
+    <Resource Include="static\img\splash\Gragas_9.jpg" />
+    <Resource Include="static\img\splash\Graves_0.jpg" />
+    <Resource Include="static\img\splash\Graves_1.jpg" />
+    <Resource Include="static\img\splash\Graves_14.jpg" />
+    <Resource Include="static\img\splash\Graves_18.jpg" />
+    <Resource Include="static\img\splash\Graves_2.jpg" />
+    <Resource Include="static\img\splash\Graves_25.jpg" />
+    <Resource Include="static\img\splash\Graves_3.jpg" />
+    <Resource Include="static\img\splash\Graves_4.jpg" />
+    <Resource Include="static\img\splash\Graves_5.jpg" />
+    <Resource Include="static\img\splash\Graves_6.jpg" />
+    <Resource Include="static\img\splash\Graves_7.jpg" />
+    <Resource Include="static\img\splash\Hecarim_0.jpg" />
+    <Resource Include="static\img\splash\Hecarim_1.jpg" />
+    <Resource Include="static\img\splash\Hecarim_2.jpg" />
+    <Resource Include="static\img\splash\Hecarim_3.jpg" />
+    <Resource Include="static\img\splash\Hecarim_4.jpg" />
+    <Resource Include="static\img\splash\Hecarim_5.jpg" />
+    <Resource Include="static\img\splash\Hecarim_6.jpg" />
+    <Resource Include="static\img\splash\Hecarim_7.jpg" />
+    <Resource Include="static\img\splash\Hecarim_8.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_0.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_1.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_2.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_3.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_4.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_5.jpg" />
+    <Resource Include="static\img\splash\Heimerdinger_6.jpg" />
+    <Resource Include="static\img\splash\Illaoi_0.jpg" />
+    <Resource Include="static\img\splash\Illaoi_1.jpg" />
+    <Resource Include="static\img\splash\Illaoi_2.jpg" />
+    <Resource Include="static\img\splash\Irelia_0.jpg" />
+    <Resource Include="static\img\splash\Irelia_1.jpg" />
+    <Resource Include="static\img\splash\Irelia_15.jpg" />
+    <Resource Include="static\img\splash\Irelia_16.jpg" />
+    <Resource Include="static\img\splash\Irelia_17.jpg" />
+    <Resource Include="static\img\splash\Irelia_2.jpg" />
+    <Resource Include="static\img\splash\Irelia_3.jpg" />
+    <Resource Include="static\img\splash\Irelia_4.jpg" />
+    <Resource Include="static\img\splash\Irelia_5.jpg" />
+    <Resource Include="static\img\splash\Irelia_6.jpg" />
+    <Resource Include="static\img\splash\Ivern_0.jpg" />
+    <Resource Include="static\img\splash\Ivern_1.jpg" />
+    <Resource Include="static\img\splash\Ivern_2.jpg" />
+    <Resource Include="static\img\splash\Janna_0.jpg" />
+    <Resource Include="static\img\splash\Janna_1.jpg" />
+    <Resource Include="static\img\splash\Janna_13.jpg" />
+    <Resource Include="static\img\splash\Janna_2.jpg" />
+    <Resource Include="static\img\splash\Janna_20.jpg" />
+    <Resource Include="static\img\splash\Janna_3.jpg" />
+    <Resource Include="static\img\splash\Janna_4.jpg" />
+    <Resource Include="static\img\splash\Janna_5.jpg" />
+    <Resource Include="static\img\splash\Janna_6.jpg" />
+    <Resource Include="static\img\splash\Janna_7.jpg" />
+    <Resource Include="static\img\splash\Janna_8.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_0.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_1.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_2.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_3.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_4.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_5.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_6.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_7.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_8.jpg" />
+    <Resource Include="static\img\splash\JarvanIV_9.jpg" />
+    <Resource Include="static\img\splash\Jax_0.jpg" />
+    <Resource Include="static\img\splash\Jax_1.jpg" />
+    <Resource Include="static\img\splash\Jax_12.jpg" />
+    <Resource Include="static\img\splash\Jax_13.jpg" />
+    <Resource Include="static\img\splash\Jax_14.jpg" />
+    <Resource Include="static\img\splash\Jax_2.jpg" />
+    <Resource Include="static\img\splash\Jax_3.jpg" />
+    <Resource Include="static\img\splash\Jax_4.jpg" />
+    <Resource Include="static\img\splash\Jax_5.jpg" />
+    <Resource Include="static\img\splash\Jax_6.jpg" />
+    <Resource Include="static\img\splash\Jax_7.jpg" />
+    <Resource Include="static\img\splash\Jax_8.jpg" />
+    <Resource Include="static\img\splash\Jayce_0.jpg" />
+    <Resource Include="static\img\splash\Jayce_1.jpg" />
+    <Resource Include="static\img\splash\Jayce_2.jpg" />
+    <Resource Include="static\img\splash\Jayce_3.jpg" />
+    <Resource Include="static\img\splash\Jayce_4.jpg" />
+    <Resource Include="static\img\splash\Jayce_5.jpg" />
+    <Resource Include="static\img\splash\Jhin_0.jpg" />
+    <Resource Include="static\img\splash\Jhin_1.jpg" />
+    <Resource Include="static\img\splash\Jhin_2.jpg" />
+    <Resource Include="static\img\splash\Jhin_3.jpg" />
+    <Resource Include="static\img\splash\Jhin_4.jpg" />
+    <Resource Include="static\img\splash\Jhin_5.jpg" />
+    <Resource Include="static\img\splash\Jinx_0.jpg" />
+    <Resource Include="static\img\splash\Jinx_1.jpg" />
+    <Resource Include="static\img\splash\Jinx_12.jpg" />
+    <Resource Include="static\img\splash\Jinx_13.jpg" />
+    <Resource Include="static\img\splash\Jinx_2.jpg" />
+    <Resource Include="static\img\splash\Jinx_20.jpg" />
+    <Resource Include="static\img\splash\Jinx_29.jpg" />
+    <Resource Include="static\img\splash\Jinx_3.jpg" />
+    <Resource Include="static\img\splash\Jinx_4.jpg" />
+    <Resource Include="static\img\splash\Kaisa_0.jpg" />
+    <Resource Include="static\img\splash\Kaisa_1.jpg" />
+    <Resource Include="static\img\splash\Kaisa_14.jpg" />
+    <Resource Include="static\img\splash\Kaisa_15.jpg" />
+    <Resource Include="static\img\splash\Kaisa_16.jpg" />
+    <Resource Include="static\img\splash\Kaisa_17.jpg" />
+    <Resource Include="static\img\splash\Kalista_0.jpg" />
+    <Resource Include="static\img\splash\Kalista_1.jpg" />
+    <Resource Include="static\img\splash\Kalista_2.jpg" />
+    <Resource Include="static\img\splash\Kalista_3.jpg" />
+    <Resource Include="static\img\splash\Karma_0.jpg" />
+    <Resource Include="static\img\splash\Karma_1.jpg" />
+    <Resource Include="static\img\splash\Karma_19.jpg" />
+    <Resource Include="static\img\splash\Karma_2.jpg" />
+    <Resource Include="static\img\splash\Karma_3.jpg" />
+    <Resource Include="static\img\splash\Karma_4.jpg" />
+    <Resource Include="static\img\splash\Karma_5.jpg" />
+    <Resource Include="static\img\splash\Karma_6.jpg" />
+    <Resource Include="static\img\splash\Karma_7.jpg" />
+    <Resource Include="static\img\splash\Karma_8.jpg" />
+    <Resource Include="static\img\splash\Karthus_0.jpg" />
+    <Resource Include="static\img\splash\Karthus_1.jpg" />
+    <Resource Include="static\img\splash\Karthus_2.jpg" />
+    <Resource Include="static\img\splash\Karthus_3.jpg" />
+    <Resource Include="static\img\splash\Karthus_4.jpg" />
+    <Resource Include="static\img\splash\Karthus_5.jpg" />
+    <Resource Include="static\img\splash\Karthus_9.jpg" />
+    <Resource Include="static\img\splash\Kassadin_0.jpg" />
+    <Resource Include="static\img\splash\Kassadin_1.jpg" />
+    <Resource Include="static\img\splash\Kassadin_2.jpg" />
+    <Resource Include="static\img\splash\Kassadin_3.jpg" />
+    <Resource Include="static\img\splash\Kassadin_4.jpg" />
+    <Resource Include="static\img\splash\Kassadin_5.jpg" />
+    <Resource Include="static\img\splash\Kassadin_6.jpg" />
+    <Resource Include="static\img\splash\Katarina_0.jpg" />
+    <Resource Include="static\img\splash\Katarina_1.jpg" />
+    <Resource Include="static\img\splash\Katarina_10.jpg" />
+    <Resource Include="static\img\splash\Katarina_12.jpg" />
+    <Resource Include="static\img\splash\Katarina_2.jpg" />
+    <Resource Include="static\img\splash\Katarina_3.jpg" />
+    <Resource Include="static\img\splash\Katarina_4.jpg" />
+    <Resource Include="static\img\splash\Katarina_5.jpg" />
+    <Resource Include="static\img\splash\Katarina_6.jpg" />
+    <Resource Include="static\img\splash\Katarina_7.jpg" />
+    <Resource Include="static\img\splash\Katarina_8.jpg" />
+    <Resource Include="static\img\splash\Katarina_9.jpg" />
+    <Resource Include="static\img\splash\Kayle_0.jpg" />
+    <Resource Include="static\img\splash\Kayle_1.jpg" />
+    <Resource Include="static\img\splash\Kayle_2.jpg" />
+    <Resource Include="static\img\splash\Kayle_3.jpg" />
+    <Resource Include="static\img\splash\Kayle_4.jpg" />
+    <Resource Include="static\img\splash\Kayle_5.jpg" />
+    <Resource Include="static\img\splash\Kayle_6.jpg" />
+    <Resource Include="static\img\splash\Kayle_7.jpg" />
+    <Resource Include="static\img\splash\Kayle_8.jpg" />
+    <Resource Include="static\img\splash\Kayle_9.jpg" />
+    <Resource Include="static\img\splash\Kayn_0.jpg" />
+    <Resource Include="static\img\splash\Kayn_1.jpg" />
+    <Resource Include="static\img\splash\Kayn_2.jpg" />
+    <Resource Include="static\img\splash\Kennen_0.jpg" />
+    <Resource Include="static\img\splash\Kennen_1.jpg" />
+    <Resource Include="static\img\splash\Kennen_2.jpg" />
+    <Resource Include="static\img\splash\Kennen_3.jpg" />
+    <Resource Include="static\img\splash\Kennen_4.jpg" />
+    <Resource Include="static\img\splash\Kennen_5.jpg" />
+    <Resource Include="static\img\splash\Kennen_6.jpg" />
+    <Resource Include="static\img\splash\Kennen_7.jpg" />
+    <Resource Include="static\img\splash\Khazix_0.jpg" />
+    <Resource Include="static\img\splash\Khazix_1.jpg" />
+    <Resource Include="static\img\splash\Khazix_11.jpg" />
+    <Resource Include="static\img\splash\Khazix_2.jpg" />
+    <Resource Include="static\img\splash\Khazix_3.jpg" />
+    <Resource Include="static\img\splash\Khazix_4.jpg" />
+    <Resource Include="static\img\splash\Kindred_0.jpg" />
+    <Resource Include="static\img\splash\Kindred_1.jpg" />
+    <Resource Include="static\img\splash\Kindred_2.jpg" />
+    <Resource Include="static\img\splash\Kled_0.jpg" />
+    <Resource Include="static\img\splash\Kled_1.jpg" />
+    <Resource Include="static\img\splash\Kled_2.jpg" />
+    <Resource Include="static\img\splash\KogMaw_0.jpg" />
+    <Resource Include="static\img\splash\KogMaw_1.jpg" />
+    <Resource Include="static\img\splash\KogMaw_10.jpg" />
+    <Resource Include="static\img\splash\KogMaw_2.jpg" />
+    <Resource Include="static\img\splash\KogMaw_3.jpg" />
+    <Resource Include="static\img\splash\KogMaw_4.jpg" />
+    <Resource Include="static\img\splash\KogMaw_5.jpg" />
+    <Resource Include="static\img\splash\KogMaw_6.jpg" />
+    <Resource Include="static\img\splash\KogMaw_7.jpg" />
+    <Resource Include="static\img\splash\KogMaw_8.jpg" />
+    <Resource Include="static\img\splash\KogMaw_9.jpg" />
+    <Resource Include="static\img\splash\Leblanc_0.jpg" />
+    <Resource Include="static\img\splash\Leblanc_1.jpg" />
+    <Resource Include="static\img\splash\Leblanc_12.jpg" />
+    <Resource Include="static\img\splash\Leblanc_19.jpg" />
+    <Resource Include="static\img\splash\Leblanc_2.jpg" />
+    <Resource Include="static\img\splash\Leblanc_3.jpg" />
+    <Resource Include="static\img\splash\Leblanc_4.jpg" />
+    <Resource Include="static\img\splash\Leblanc_5.jpg" />
+    <Resource Include="static\img\splash\LeeSin_0.jpg" />
+    <Resource Include="static\img\splash\LeeSin_1.jpg" />
+    <Resource Include="static\img\splash\LeeSin_10.jpg" />
+    <Resource Include="static\img\splash\LeeSin_11.jpg" />
+    <Resource Include="static\img\splash\LeeSin_12.jpg" />
+    <Resource Include="static\img\splash\LeeSin_2.jpg" />
+    <Resource Include="static\img\splash\LeeSin_27.jpg" />
+    <Resource Include="static\img\splash\LeeSin_28.jpg" />
+    <Resource Include="static\img\splash\LeeSin_3.jpg" />
+    <Resource Include="static\img\splash\LeeSin_4.jpg" />
+    <Resource Include="static\img\splash\LeeSin_5.jpg" />
+    <Resource Include="static\img\splash\LeeSin_6.jpg" />
+    <Resource Include="static\img\splash\Leona_0.jpg" />
+    <Resource Include="static\img\splash\Leona_1.jpg" />
+    <Resource Include="static\img\splash\Leona_10.jpg" />
+    <Resource Include="static\img\splash\Leona_11.jpg" />
+    <Resource Include="static\img\splash\Leona_12.jpg" />
+    <Resource Include="static\img\splash\Leona_2.jpg" />
+    <Resource Include="static\img\splash\Leona_3.jpg" />
+    <Resource Include="static\img\splash\Leona_4.jpg" />
+    <Resource Include="static\img\splash\Leona_8.jpg" />
+    <Resource Include="static\img\splash\Leona_9.jpg" />
+    <Resource Include="static\img\splash\Lissandra_0.jpg" />
+    <Resource Include="static\img\splash\Lissandra_1.jpg" />
+    <Resource Include="static\img\splash\Lissandra_2.jpg" />
+    <Resource Include="static\img\splash\Lissandra_3.jpg" />
+    <Resource Include="static\img\splash\Lissandra_4.jpg" />
+    <Resource Include="static\img\splash\Lucian_0.jpg" />
+    <Resource Include="static\img\splash\Lucian_1.jpg" />
+    <Resource Include="static\img\splash\Lucian_2.jpg" />
+    <Resource Include="static\img\splash\Lucian_6.jpg" />
+    <Resource Include="static\img\splash\Lucian_7.jpg" />
+    <Resource Include="static\img\splash\Lucian_8.jpg" />
+    <Resource Include="static\img\splash\Lucian_9.jpg" />
+    <Resource Include="static\img\splash\Lulu_0.jpg" />
+    <Resource Include="static\img\splash\Lulu_1.jpg" />
+    <Resource Include="static\img\splash\Lulu_14.jpg" />
+    <Resource Include="static\img\splash\Lulu_15.jpg" />
+    <Resource Include="static\img\splash\Lulu_2.jpg" />
+    <Resource Include="static\img\splash\Lulu_3.jpg" />
+    <Resource Include="static\img\splash\Lulu_4.jpg" />
+    <Resource Include="static\img\splash\Lulu_5.jpg" />
+    <Resource Include="static\img\splash\Lulu_6.jpg" />
+    <Resource Include="static\img\splash\Lux_0.jpg" />
+    <Resource Include="static\img\splash\Lux_1.jpg" />
+    <Resource Include="static\img\splash\Lux_14.jpg" />
+    <Resource Include="static\img\splash\Lux_15.jpg" />
+    <Resource Include="static\img\splash\Lux_16.jpg" />
+    <Resource Include="static\img\splash\Lux_2.jpg" />
+    <Resource Include="static\img\splash\Lux_3.jpg" />
+    <Resource Include="static\img\splash\Lux_4.jpg" />
+    <Resource Include="static\img\splash\Lux_5.jpg" />
+    <Resource Include="static\img\splash\Lux_6.jpg" />
+    <Resource Include="static\img\splash\Lux_7.jpg" />
+    <Resource Include="static\img\splash\Lux_8.jpg" />
+    <Resource Include="static\img\splash\Malphite_0.jpg" />
+    <Resource Include="static\img\splash\Malphite_1.jpg" />
+    <Resource Include="static\img\splash\Malphite_16.jpg" />
+    <Resource Include="static\img\splash\Malphite_2.jpg" />
+    <Resource Include="static\img\splash\Malphite_3.jpg" />
+    <Resource Include="static\img\splash\Malphite_4.jpg" />
+    <Resource Include="static\img\splash\Malphite_5.jpg" />
+    <Resource Include="static\img\splash\Malphite_6.jpg" />
+    <Resource Include="static\img\splash\Malphite_7.jpg" />
+    <Resource Include="static\img\splash\Malzahar_0.jpg" />
+    <Resource Include="static\img\splash\Malzahar_1.jpg" />
+    <Resource Include="static\img\splash\Malzahar_2.jpg" />
+    <Resource Include="static\img\splash\Malzahar_3.jpg" />
+    <Resource Include="static\img\splash\Malzahar_4.jpg" />
+    <Resource Include="static\img\splash\Malzahar_5.jpg" />
+    <Resource Include="static\img\splash\Malzahar_6.jpg" />
+    <Resource Include="static\img\splash\Malzahar_7.jpg" />
+    <Resource Include="static\img\splash\Maokai_0.jpg" />
+    <Resource Include="static\img\splash\Maokai_1.jpg" />
+    <Resource Include="static\img\splash\Maokai_2.jpg" />
+    <Resource Include="static\img\splash\Maokai_3.jpg" />
+    <Resource Include="static\img\splash\Maokai_4.jpg" />
+    <Resource Include="static\img\splash\Maokai_5.jpg" />
+    <Resource Include="static\img\splash\Maokai_6.jpg" />
+    <Resource Include="static\img\splash\Maokai_7.jpg" />
+    <Resource Include="static\img\splash\MasterYi_0.jpg" />
+    <Resource Include="static\img\splash\MasterYi_1.jpg" />
+    <Resource Include="static\img\splash\MasterYi_10.jpg" />
+    <Resource Include="static\img\splash\MasterYi_11.jpg" />
+    <Resource Include="static\img\splash\MasterYi_17.jpg" />
+    <Resource Include="static\img\splash\MasterYi_2.jpg" />
+    <Resource Include="static\img\splash\MasterYi_3.jpg" />
+    <Resource Include="static\img\splash\MasterYi_4.jpg" />
+    <Resource Include="static\img\splash\MasterYi_5.jpg" />
+    <Resource Include="static\img\splash\MasterYi_9.jpg" />
+    <Resource Include="static\img\splash\MissFortune_0.jpg" />
+    <Resource Include="static\img\splash\MissFortune_1.jpg" />
+    <Resource Include="static\img\splash\MissFortune_15.jpg" />
+    <Resource Include="static\img\splash\MissFortune_16.jpg" />
+    <Resource Include="static\img\splash\MissFortune_17.jpg" />
+    <Resource Include="static\img\splash\MissFortune_18.jpg" />
+    <Resource Include="static\img\splash\MissFortune_2.jpg" />
+    <Resource Include="static\img\splash\MissFortune_20.jpg" />
+    <Resource Include="static\img\splash\MissFortune_3.jpg" />
+    <Resource Include="static\img\splash\MissFortune_4.jpg" />
+    <Resource Include="static\img\splash\MissFortune_5.jpg" />
+    <Resource Include="static\img\splash\MissFortune_6.jpg" />
+    <Resource Include="static\img\splash\MissFortune_7.jpg" />
+    <Resource Include="static\img\splash\MissFortune_8.jpg" />
+    <Resource Include="static\img\splash\MissFortune_9.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_0.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_1.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_2.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_3.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_4.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_5.jpg" />
+    <Resource Include="static\img\splash\MonkeyKing_6.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_0.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_1.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_2.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_3.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_4.jpg" />
+    <Resource Include="static\img\splash\Mordekaiser_5.jpg" />
+    <Resource Include="static\img\splash\Morgana_0.jpg" />
+    <Resource Include="static\img\splash\Morgana_1.jpg" />
+    <Resource Include="static\img\splash\Morgana_10.jpg" />
+    <Resource Include="static\img\splash\Morgana_11.jpg" />
+    <Resource Include="static\img\splash\Morgana_17.jpg" />
+    <Resource Include="static\img\splash\Morgana_2.jpg" />
+    <Resource Include="static\img\splash\Morgana_3.jpg" />
+    <Resource Include="static\img\splash\Morgana_4.jpg" />
+    <Resource Include="static\img\splash\Morgana_5.jpg" />
+    <Resource Include="static\img\splash\Morgana_6.jpg" />
+    <Resource Include="static\img\splash\Nami_0.jpg" />
+    <Resource Include="static\img\splash\Nami_1.jpg" />
+    <Resource Include="static\img\splash\Nami_15.jpg" />
+    <Resource Include="static\img\splash\Nami_2.jpg" />
+    <Resource Include="static\img\splash\Nami_3.jpg" />
+    <Resource Include="static\img\splash\Nami_7.jpg" />
+    <Resource Include="static\img\splash\Nami_8.jpg" />
+    <Resource Include="static\img\splash\Nami_9.jpg" />
+    <Resource Include="static\img\splash\Nasus_0.jpg" />
+    <Resource Include="static\img\splash\Nasus_1.jpg" />
+    <Resource Include="static\img\splash\Nasus_10.jpg" />
+    <Resource Include="static\img\splash\Nasus_11.jpg" />
+    <Resource Include="static\img\splash\Nasus_2.jpg" />
+    <Resource Include="static\img\splash\Nasus_3.jpg" />
+    <Resource Include="static\img\splash\Nasus_4.jpg" />
+    <Resource Include="static\img\splash\Nasus_5.jpg" />
+    <Resource Include="static\img\splash\Nasus_6.jpg" />
+    <Resource Include="static\img\splash\Nautilus_0.jpg" />
+    <Resource Include="static\img\splash\Nautilus_1.jpg" />
+    <Resource Include="static\img\splash\Nautilus_2.jpg" />
+    <Resource Include="static\img\splash\Nautilus_3.jpg" />
+    <Resource Include="static\img\splash\Nautilus_4.jpg" />
+    <Resource Include="static\img\splash\Nautilus_5.jpg" />
+    <Resource Include="static\img\splash\Neeko_0.jpg" />
+    <Resource Include="static\img\splash\Neeko_1.jpg" />
+    <Resource Include="static\img\splash\Neeko_10.jpg" />
+    <Resource Include="static\img\splash\Neeko_11.jpg" />
+    <Resource Include="static\img\splash\Nidalee_0.jpg" />
+    <Resource Include="static\img\splash\Nidalee_1.jpg" />
+    <Resource Include="static\img\splash\Nidalee_11.jpg" />
+    <Resource Include="static\img\splash\Nidalee_2.jpg" />
+    <Resource Include="static\img\splash\Nidalee_3.jpg" />
+    <Resource Include="static\img\splash\Nidalee_4.jpg" />
+    <Resource Include="static\img\splash\Nidalee_5.jpg" />
+    <Resource Include="static\img\splash\Nidalee_6.jpg" />
+    <Resource Include="static\img\splash\Nidalee_7.jpg" />
+    <Resource Include="static\img\splash\Nidalee_8.jpg" />
+    <Resource Include="static\img\splash\Nidalee_9.jpg" />
+    <Resource Include="static\img\splash\Nocturne_0.jpg" />
+    <Resource Include="static\img\splash\Nocturne_1.jpg" />
+    <Resource Include="static\img\splash\Nocturne_2.jpg" />
+    <Resource Include="static\img\splash\Nocturne_3.jpg" />
+    <Resource Include="static\img\splash\Nocturne_4.jpg" />
+    <Resource Include="static\img\splash\Nocturne_5.jpg" />
+    <Resource Include="static\img\splash\Nocturne_6.jpg" />
+    <Resource Include="static\img\splash\Nocturne_7.jpg" />
+    <Resource Include="static\img\splash\Nunu_0.jpg" />
+    <Resource Include="static\img\splash\Nunu_1.jpg" />
+    <Resource Include="static\img\splash\Nunu_2.jpg" />
+    <Resource Include="static\img\splash\Nunu_3.jpg" />
+    <Resource Include="static\img\splash\Nunu_4.jpg" />
+    <Resource Include="static\img\splash\Nunu_5.jpg" />
+    <Resource Include="static\img\splash\Nunu_6.jpg" />
+    <Resource Include="static\img\splash\Nunu_7.jpg" />
+    <Resource Include="static\img\splash\Nunu_8.jpg" />
+    <Resource Include="static\img\splash\Olaf_0.jpg" />
+    <Resource Include="static\img\splash\Olaf_1.jpg" />
+    <Resource Include="static\img\splash\Olaf_15.jpg" />
+    <Resource Include="static\img\splash\Olaf_16.jpg" />
+    <Resource Include="static\img\splash\Olaf_2.jpg" />
+    <Resource Include="static\img\splash\Olaf_3.jpg" />
+    <Resource Include="static\img\splash\Olaf_4.jpg" />
+    <Resource Include="static\img\splash\Olaf_5.jpg" />
+    <Resource Include="static\img\splash\Olaf_6.jpg" />
+    <Resource Include="static\img\splash\Orianna_0.jpg" />
+    <Resource Include="static\img\splash\Orianna_1.jpg" />
+    <Resource Include="static\img\splash\Orianna_2.jpg" />
+    <Resource Include="static\img\splash\Orianna_3.jpg" />
+    <Resource Include="static\img\splash\Orianna_4.jpg" />
+    <Resource Include="static\img\splash\Orianna_5.jpg" />
+    <Resource Include="static\img\splash\Orianna_6.jpg" />
+    <Resource Include="static\img\splash\Orianna_7.jpg" />
+    <Resource Include="static\img\splash\Orianna_8.jpg" />
+    <Resource Include="static\img\splash\Ornn_0.jpg" />
+    <Resource Include="static\img\splash\Ornn_1.jpg" />
+    <Resource Include="static\img\splash\Pantheon_0.jpg" />
+    <Resource Include="static\img\splash\Pantheon_1.jpg" />
+    <Resource Include="static\img\splash\Pantheon_2.jpg" />
+    <Resource Include="static\img\splash\Pantheon_3.jpg" />
+    <Resource Include="static\img\splash\Pantheon_4.jpg" />
+    <Resource Include="static\img\splash\Pantheon_5.jpg" />
+    <Resource Include="static\img\splash\Pantheon_6.jpg" />
+    <Resource Include="static\img\splash\Pantheon_7.jpg" />
+    <Resource Include="static\img\splash\Pantheon_8.jpg" />
+    <Resource Include="static\img\splash\Poppy_0.jpg" />
+    <Resource Include="static\img\splash\Poppy_1.jpg" />
+    <Resource Include="static\img\splash\Poppy_14.jpg" />
+    <Resource Include="static\img\splash\Poppy_15.jpg" />
+    <Resource Include="static\img\splash\Poppy_2.jpg" />
+    <Resource Include="static\img\splash\Poppy_3.jpg" />
+    <Resource Include="static\img\splash\Poppy_4.jpg" />
+    <Resource Include="static\img\splash\Poppy_5.jpg" />
+    <Resource Include="static\img\splash\Poppy_6.jpg" />
+    <Resource Include="static\img\splash\Poppy_7.jpg" />
+    <Resource Include="static\img\splash\Pyke_0.jpg" />
+    <Resource Include="static\img\splash\Pyke_1.jpg" />
+    <Resource Include="static\img\splash\Pyke_16.jpg" />
+    <Resource Include="static\img\splash\Pyke_9.jpg" />
+    <Resource Include="static\img\splash\Qiyana_0.jpg" />
+    <Resource Include="static\img\splash\Qiyana_1.jpg" />
+    <Resource Include="static\img\splash\Qiyana_10.jpg" />
+    <Resource Include="static\img\splash\Qiyana_2.jpg" />
+    <Resource Include="static\img\splash\Quinn_0.jpg" />
+    <Resource Include="static\img\splash\Quinn_1.jpg" />
+    <Resource Include="static\img\splash\Quinn_2.jpg" />
+    <Resource Include="static\img\splash\Quinn_3.jpg" />
+    <Resource Include="static\img\splash\Quinn_4.jpg" />
+    <Resource Include="static\img\splash\Rakan_0.jpg" />
+    <Resource Include="static\img\splash\Rakan_1.jpg" />
+    <Resource Include="static\img\splash\Rakan_2.jpg" />
+    <Resource Include="static\img\splash\Rakan_3.jpg" />
+    <Resource Include="static\img\splash\Rakan_4.jpg" />
+    <Resource Include="static\img\splash\Rakan_5.jpg" />
+    <Resource Include="static\img\splash\Rammus_0.jpg" />
+    <Resource Include="static\img\splash\Rammus_1.jpg" />
+    <Resource Include="static\img\splash\Rammus_16.jpg" />
+    <Resource Include="static\img\splash\Rammus_2.jpg" />
+    <Resource Include="static\img\splash\Rammus_3.jpg" />
+    <Resource Include="static\img\splash\Rammus_4.jpg" />
+    <Resource Include="static\img\splash\Rammus_5.jpg" />
+    <Resource Include="static\img\splash\Rammus_6.jpg" />
+    <Resource Include="static\img\splash\Rammus_7.jpg" />
+    <Resource Include="static\img\splash\Rammus_8.jpg" />
+    <Resource Include="static\img\splash\RekSai_0.jpg" />
+    <Resource Include="static\img\splash\RekSai_1.jpg" />
+    <Resource Include="static\img\splash\RekSai_2.jpg" />
+    <Resource Include="static\img\splash\Renekton_0.jpg" />
+    <Resource Include="static\img\splash\Renekton_1.jpg" />
+    <Resource Include="static\img\splash\Renekton_17.jpg" />
+    <Resource Include="static\img\splash\Renekton_2.jpg" />
+    <Resource Include="static\img\splash\Renekton_3.jpg" />
+    <Resource Include="static\img\splash\Renekton_4.jpg" />
+    <Resource Include="static\img\splash\Renekton_5.jpg" />
+    <Resource Include="static\img\splash\Renekton_6.jpg" />
+    <Resource Include="static\img\splash\Renekton_7.jpg" />
+    <Resource Include="static\img\splash\Renekton_8.jpg" />
+    <Resource Include="static\img\splash\Renekton_9.jpg" />
+    <Resource Include="static\img\splash\Rengar_0.jpg" />
+    <Resource Include="static\img\splash\Rengar_1.jpg" />
+    <Resource Include="static\img\splash\Rengar_15.jpg" />
+    <Resource Include="static\img\splash\Rengar_2.jpg" />
+    <Resource Include="static\img\splash\Rengar_23.jpg" />
+    <Resource Include="static\img\splash\Rengar_3.jpg" />
+    <Resource Include="static\img\splash\Rengar_8.jpg" />
+    <Resource Include="static\img\splash\Riven_0.jpg" />
+    <Resource Include="static\img\splash\Riven_1.jpg" />
+    <Resource Include="static\img\splash\Riven_16.jpg" />
+    <Resource Include="static\img\splash\Riven_18.jpg" />
+    <Resource Include="static\img\splash\Riven_2.jpg" />
+    <Resource Include="static\img\splash\Riven_20.jpg" />
+    <Resource Include="static\img\splash\Riven_22.jpg" />
+    <Resource Include="static\img\splash\Riven_3.jpg" />
+    <Resource Include="static\img\splash\Riven_4.jpg" />
+    <Resource Include="static\img\splash\Riven_5.jpg" />
+    <Resource Include="static\img\splash\Riven_6.jpg" />
+    <Resource Include="static\img\splash\Riven_7.jpg" />
+    <Resource Include="static\img\splash\Rumble_0.jpg" />
+    <Resource Include="static\img\splash\Rumble_1.jpg" />
+    <Resource Include="static\img\splash\Rumble_2.jpg" />
+    <Resource Include="static\img\splash\Rumble_3.jpg" />
+    <Resource Include="static\img\splash\Rumble_4.jpg" />
+    <Resource Include="static\img\splash\Ryze_0.jpg" />
+    <Resource Include="static\img\splash\Ryze_1.jpg" />
+    <Resource Include="static\img\splash\Ryze_10.jpg" />
+    <Resource Include="static\img\splash\Ryze_11.jpg" />
+    <Resource Include="static\img\splash\Ryze_13.jpg" />
+    <Resource Include="static\img\splash\Ryze_2.jpg" />
+    <Resource Include="static\img\splash\Ryze_3.jpg" />
+    <Resource Include="static\img\splash\Ryze_4.jpg" />
+    <Resource Include="static\img\splash\Ryze_5.jpg" />
+    <Resource Include="static\img\splash\Ryze_6.jpg" />
+    <Resource Include="static\img\splash\Ryze_7.jpg" />
+    <Resource Include="static\img\splash\Ryze_8.jpg" />
+    <Resource Include="static\img\splash\Ryze_9.jpg" />
+    <Resource Include="static\img\splash\Sejuani_0.jpg" />
+    <Resource Include="static\img\splash\Sejuani_1.jpg" />
+    <Resource Include="static\img\splash\Sejuani_2.jpg" />
+    <Resource Include="static\img\splash\Sejuani_3.jpg" />
+    <Resource Include="static\img\splash\Sejuani_4.jpg" />
+    <Resource Include="static\img\splash\Sejuani_5.jpg" />
+    <Resource Include="static\img\splash\Sejuani_6.jpg" />
+    <Resource Include="static\img\splash\Sejuani_7.jpg" />
+    <Resource Include="static\img\splash\Sejuani_8.jpg" />
+    <Resource Include="static\img\splash\Senna_0.jpg" />
+    <Resource Include="static\img\splash\Senna_1.jpg" />
+    <Resource Include="static\img\splash\Senna_9.jpg" />
+    <Resource Include="static\img\splash\Sett_0.jpg" />
+    <Resource Include="static\img\splash\Sett_1.jpg" />
+    <Resource Include="static\img\splash\Shaco_0.jpg" />
+    <Resource Include="static\img\splash\Shaco_1.jpg" />
+    <Resource Include="static\img\splash\Shaco_2.jpg" />
+    <Resource Include="static\img\splash\Shaco_3.jpg" />
+    <Resource Include="static\img\splash\Shaco_4.jpg" />
+    <Resource Include="static\img\splash\Shaco_5.jpg" />
+    <Resource Include="static\img\splash\Shaco_6.jpg" />
+    <Resource Include="static\img\splash\Shaco_7.jpg" />
+    <Resource Include="static\img\splash\Shaco_8.jpg" />
+    <Resource Include="static\img\splash\Shen_0.jpg" />
+    <Resource Include="static\img\splash\Shen_1.jpg" />
+    <Resource Include="static\img\splash\Shen_15.jpg" />
+    <Resource Include="static\img\splash\Shen_16.jpg" />
+    <Resource Include="static\img\splash\Shen_2.jpg" />
+    <Resource Include="static\img\splash\Shen_3.jpg" />
+    <Resource Include="static\img\splash\Shen_4.jpg" />
+    <Resource Include="static\img\splash\Shen_5.jpg" />
+    <Resource Include="static\img\splash\Shen_6.jpg" />
+    <Resource Include="static\img\splash\Shyvana_0.jpg" />
+    <Resource Include="static\img\splash\Shyvana_1.jpg" />
+    <Resource Include="static\img\splash\Shyvana_2.jpg" />
+    <Resource Include="static\img\splash\Shyvana_3.jpg" />
+    <Resource Include="static\img\splash\Shyvana_4.jpg" />
+    <Resource Include="static\img\splash\Shyvana_5.jpg" />
+    <Resource Include="static\img\splash\Shyvana_6.jpg" />
+    <Resource Include="static\img\splash\Singed_0.jpg" />
+    <Resource Include="static\img\splash\Singed_1.jpg" />
+    <Resource Include="static\img\splash\Singed_2.jpg" />
+    <Resource Include="static\img\splash\Singed_3.jpg" />
+    <Resource Include="static\img\splash\Singed_4.jpg" />
+    <Resource Include="static\img\splash\Singed_5.jpg" />
+    <Resource Include="static\img\splash\Singed_6.jpg" />
+    <Resource Include="static\img\splash\Singed_7.jpg" />
+    <Resource Include="static\img\splash\Singed_8.jpg" />
+    <Resource Include="static\img\splash\Singed_9.jpg" />
+    <Resource Include="static\img\splash\Sion_0.jpg" />
+    <Resource Include="static\img\splash\Sion_1.jpg" />
+    <Resource Include="static\img\splash\Sion_2.jpg" />
+    <Resource Include="static\img\splash\Sion_3.jpg" />
+    <Resource Include="static\img\splash\Sion_4.jpg" />
+    <Resource Include="static\img\splash\Sion_5.jpg" />
+    <Resource Include="static\img\splash\Sivir_0.jpg" />
+    <Resource Include="static\img\splash\Sivir_1.jpg" />
+    <Resource Include="static\img\splash\Sivir_10.jpg" />
+    <Resource Include="static\img\splash\Sivir_16.jpg" />
+    <Resource Include="static\img\splash\Sivir_2.jpg" />
+    <Resource Include="static\img\splash\Sivir_3.jpg" />
+    <Resource Include="static\img\splash\Sivir_4.jpg" />
+    <Resource Include="static\img\splash\Sivir_5.jpg" />
+    <Resource Include="static\img\splash\Sivir_6.jpg" />
+    <Resource Include="static\img\splash\Sivir_7.jpg" />
+    <Resource Include="static\img\splash\Sivir_8.jpg" />
+    <Resource Include="static\img\splash\Sivir_9.jpg" />
+    <Resource Include="static\img\splash\Skarner_0.jpg" />
+    <Resource Include="static\img\splash\Skarner_1.jpg" />
+    <Resource Include="static\img\splash\Skarner_2.jpg" />
+    <Resource Include="static\img\splash\Skarner_3.jpg" />
+    <Resource Include="static\img\splash\Skarner_4.jpg" />
+    <Resource Include="static\img\splash\Sona_0.jpg" />
+    <Resource Include="static\img\splash\Sona_1.jpg" />
+    <Resource Include="static\img\splash\Sona_2.jpg" />
+    <Resource Include="static\img\splash\Sona_3.jpg" />
+    <Resource Include="static\img\splash\Sona_4.jpg" />
+    <Resource Include="static\img\splash\Sona_5.jpg" />
+    <Resource Include="static\img\splash\Sona_6.jpg" />
+    <Resource Include="static\img\splash\Sona_7.jpg" />
+    <Resource Include="static\img\splash\Sona_9.jpg" />
+    <Resource Include="static\img\splash\Soraka_0.jpg" />
+    <Resource Include="static\img\splash\Soraka_1.jpg" />
+    <Resource Include="static\img\splash\Soraka_15.jpg" />
+    <Resource Include="static\img\splash\Soraka_16.jpg" />
+    <Resource Include="static\img\splash\Soraka_2.jpg" />
+    <Resource Include="static\img\splash\Soraka_3.jpg" />
+    <Resource Include="static\img\splash\Soraka_4.jpg" />
+    <Resource Include="static\img\splash\Soraka_5.jpg" />
+    <Resource Include="static\img\splash\Soraka_6.jpg" />
+    <Resource Include="static\img\splash\Soraka_7.jpg" />
+    <Resource Include="static\img\splash\Soraka_8.jpg" />
+    <Resource Include="static\img\splash\Soraka_9.jpg" />
+    <Resource Include="static\img\splash\Swain_0.jpg" />
+    <Resource Include="static\img\splash\Swain_1.jpg" />
+    <Resource Include="static\img\splash\Swain_11.jpg" />
+    <Resource Include="static\img\splash\Swain_2.jpg" />
+    <Resource Include="static\img\splash\Swain_3.jpg" />
+    <Resource Include="static\img\splash\Swain_4.jpg" />
+    <Resource Include="static\img\splash\Sylas_0.jpg" />
+    <Resource Include="static\img\splash\Sylas_1.jpg" />
+    <Resource Include="static\img\splash\Sylas_8.jpg" />
+    <Resource Include="static\img\splash\Syndra_0.jpg" />
+    <Resource Include="static\img\splash\Syndra_1.jpg" />
+    <Resource Include="static\img\splash\Syndra_2.jpg" />
+    <Resource Include="static\img\splash\Syndra_3.jpg" />
+    <Resource Include="static\img\splash\Syndra_4.jpg" />
+    <Resource Include="static\img\splash\Syndra_5.jpg" />
+    <Resource Include="static\img\splash\Syndra_6.jpg" />
+    <Resource Include="static\img\splash\TahmKench_0.jpg" />
+    <Resource Include="static\img\splash\TahmKench_1.jpg" />
+    <Resource Include="static\img\splash\TahmKench_2.jpg" />
+    <Resource Include="static\img\splash\TahmKench_3.jpg" />
+    <Resource Include="static\img\splash\Taliyah_0.jpg" />
+    <Resource Include="static\img\splash\Taliyah_1.jpg" />
+    <Resource Include="static\img\splash\Taliyah_2.jpg" />
+    <Resource Include="static\img\splash\Talon_0.jpg" />
+    <Resource Include="static\img\splash\Talon_1.jpg" />
+    <Resource Include="static\img\splash\Talon_12.jpg" />
+    <Resource Include="static\img\splash\Talon_2.jpg" />
+    <Resource Include="static\img\splash\Talon_3.jpg" />
+    <Resource Include="static\img\splash\Talon_4.jpg" />
+    <Resource Include="static\img\splash\Talon_5.jpg" />
+    <Resource Include="static\img\splash\Taric_0.jpg" />
+    <Resource Include="static\img\splash\Taric_1.jpg" />
+    <Resource Include="static\img\splash\Taric_2.jpg" />
+    <Resource Include="static\img\splash\Taric_3.jpg" />
+    <Resource Include="static\img\splash\Taric_4.jpg" />
+    <Resource Include="static\img\splash\Teemo_0.jpg" />
+    <Resource Include="static\img\splash\Teemo_1.jpg" />
+    <Resource Include="static\img\splash\Teemo_14.jpg" />
+    <Resource Include="static\img\splash\Teemo_18.jpg" />
+    <Resource Include="static\img\splash\Teemo_2.jpg" />
+    <Resource Include="static\img\splash\Teemo_3.jpg" />
+    <Resource Include="static\img\splash\Teemo_4.jpg" />
+    <Resource Include="static\img\splash\Teemo_5.jpg" />
+    <Resource Include="static\img\splash\Teemo_6.jpg" />
+    <Resource Include="static\img\splash\Teemo_7.jpg" />
+    <Resource Include="static\img\splash\Teemo_8.jpg" />
+    <Resource Include="static\img\splash\Thresh_0.jpg" />
+    <Resource Include="static\img\splash\Thresh_1.jpg" />
+    <Resource Include="static\img\splash\Thresh_13.jpg" />
+    <Resource Include="static\img\splash\Thresh_14.jpg" />
+    <Resource Include="static\img\splash\Thresh_2.jpg" />
+    <Resource Include="static\img\splash\Thresh_3.jpg" />
+    <Resource Include="static\img\splash\Thresh_4.jpg" />
+    <Resource Include="static\img\splash\Thresh_5.jpg" />
+    <Resource Include="static\img\splash\Thresh_6.jpg" />
+    <Resource Include="static\img\splash\Tristana_0.jpg" />
+    <Resource Include="static\img\splash\Tristana_1.jpg" />
+    <Resource Include="static\img\splash\Tristana_10.jpg" />
+    <Resource Include="static\img\splash\Tristana_11.jpg" />
+    <Resource Include="static\img\splash\Tristana_12.jpg" />
+    <Resource Include="static\img\splash\Tristana_2.jpg" />
+    <Resource Include="static\img\splash\Tristana_24.jpg" />
+    <Resource Include="static\img\splash\Tristana_3.jpg" />
+    <Resource Include="static\img\splash\Tristana_4.jpg" />
+    <Resource Include="static\img\splash\Tristana_5.jpg" />
+    <Resource Include="static\img\splash\Tristana_6.jpg" />
+    <Resource Include="static\img\splash\Trundle_0.jpg" />
+    <Resource Include="static\img\splash\Trundle_1.jpg" />
+    <Resource Include="static\img\splash\Trundle_2.jpg" />
+    <Resource Include="static\img\splash\Trundle_3.jpg" />
+    <Resource Include="static\img\splash\Trundle_4.jpg" />
+    <Resource Include="static\img\splash\Trundle_5.jpg" />
+    <Resource Include="static\img\splash\Trundle_6.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_0.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_1.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_2.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_3.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_4.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_5.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_6.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_7.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_8.jpg" />
+    <Resource Include="static\img\splash\Tryndamere_9.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_0.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_1.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_10.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_11.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_2.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_3.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_4.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_5.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_6.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_7.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_8.jpg" />
+    <Resource Include="static\img\splash\TwistedFate_9.jpg" />
+    <Resource Include="static\img\splash\Twitch_0.jpg" />
+    <Resource Include="static\img\splash\Twitch_1.jpg" />
+    <Resource Include="static\img\splash\Twitch_12.jpg" />
+    <Resource Include="static\img\splash\Twitch_2.jpg" />
+    <Resource Include="static\img\splash\Twitch_3.jpg" />
+    <Resource Include="static\img\splash\Twitch_4.jpg" />
+    <Resource Include="static\img\splash\Twitch_5.jpg" />
+    <Resource Include="static\img\splash\Twitch_6.jpg" />
+    <Resource Include="static\img\splash\Twitch_7.jpg" />
+    <Resource Include="static\img\splash\Twitch_8.jpg" />
+    <Resource Include="static\img\splash\Udyr_0.jpg" />
+    <Resource Include="static\img\splash\Udyr_1.jpg" />
+    <Resource Include="static\img\splash\Udyr_2.jpg" />
+    <Resource Include="static\img\splash\Udyr_3.jpg" />
+    <Resource Include="static\img\splash\Udyr_4.jpg" />
+    <Resource Include="static\img\splash\Udyr_5.jpg" />
+    <Resource Include="static\img\splash\Urgot_0.jpg" />
+    <Resource Include="static\img\splash\Urgot_1.jpg" />
+    <Resource Include="static\img\splash\Urgot_2.jpg" />
+    <Resource Include="static\img\splash\Urgot_3.jpg" />
+    <Resource Include="static\img\splash\Urgot_9.jpg" />
+    <Resource Include="static\img\splash\Varus_0.jpg" />
+    <Resource Include="static\img\splash\Varus_1.jpg" />
+    <Resource Include="static\img\splash\Varus_2.jpg" />
+    <Resource Include="static\img\splash\Varus_3.jpg" />
+    <Resource Include="static\img\splash\Varus_4.jpg" />
+    <Resource Include="static\img\splash\Varus_5.jpg" />
+    <Resource Include="static\img\splash\Varus_6.jpg" />
+    <Resource Include="static\img\splash\Varus_7.jpg" />
+    <Resource Include="static\img\splash\Varus_9.jpg" />
+    <Resource Include="static\img\splash\Vayne_0.jpg" />
+    <Resource Include="static\img\splash\Vayne_1.jpg" />
+    <Resource Include="static\img\splash\Vayne_10.jpg" />
+    <Resource Include="static\img\splash\Vayne_11.jpg" />
+    <Resource Include="static\img\splash\Vayne_12.jpg" />
+    <Resource Include="static\img\splash\Vayne_13.jpg" />
+    <Resource Include="static\img\splash\Vayne_2.jpg" />
+    <Resource Include="static\img\splash\Vayne_3.jpg" />
+    <Resource Include="static\img\splash\Vayne_4.jpg" />
+    <Resource Include="static\img\splash\Vayne_5.jpg" />
+    <Resource Include="static\img\splash\Vayne_6.jpg" />
+    <Resource Include="static\img\splash\Veigar_0.jpg" />
+    <Resource Include="static\img\splash\Veigar_1.jpg" />
+    <Resource Include="static\img\splash\Veigar_13.jpg" />
+    <Resource Include="static\img\splash\Veigar_2.jpg" />
+    <Resource Include="static\img\splash\Veigar_3.jpg" />
+    <Resource Include="static\img\splash\Veigar_4.jpg" />
+    <Resource Include="static\img\splash\Veigar_5.jpg" />
+    <Resource Include="static\img\splash\Veigar_6.jpg" />
+    <Resource Include="static\img\splash\Veigar_7.jpg" />
+    <Resource Include="static\img\splash\Veigar_8.jpg" />
+    <Resource Include="static\img\splash\Veigar_9.jpg" />
+    <Resource Include="static\img\splash\Velkoz_0.jpg" />
+    <Resource Include="static\img\splash\Velkoz_1.jpg" />
+    <Resource Include="static\img\splash\Velkoz_2.jpg" />
+    <Resource Include="static\img\splash\Velkoz_3.jpg" />
+    <Resource Include="static\img\splash\Viktor_0.jpg" />
+    <Resource Include="static\img\splash\Viktor_1.jpg" />
+    <Resource Include="static\img\splash\Viktor_2.jpg" />
+    <Resource Include="static\img\splash\Viktor_3.jpg" />
+    <Resource Include="static\img\splash\Viktor_4.jpg" />
+    <Resource Include="static\img\splash\Vi_0.jpg" />
+    <Resource Include="static\img\splash\Vi_1.jpg" />
+    <Resource Include="static\img\splash\Vi_11.jpg" />
+    <Resource Include="static\img\splash\Vi_12.jpg" />
+    <Resource Include="static\img\splash\Vi_2.jpg" />
+    <Resource Include="static\img\splash\Vi_3.jpg" />
+    <Resource Include="static\img\splash\Vi_4.jpg" />
+    <Resource Include="static\img\splash\Vi_5.jpg" />
+    <Resource Include="static\img\splash\Vladimir_0.jpg" />
+    <Resource Include="static\img\splash\Vladimir_1.jpg" />
+    <Resource Include="static\img\splash\Vladimir_14.jpg" />
+    <Resource Include="static\img\splash\Vladimir_2.jpg" />
+    <Resource Include="static\img\splash\Vladimir_3.jpg" />
+    <Resource Include="static\img\splash\Vladimir_4.jpg" />
+    <Resource Include="static\img\splash\Vladimir_5.jpg" />
+    <Resource Include="static\img\splash\Vladimir_6.jpg" />
+    <Resource Include="static\img\splash\Vladimir_7.jpg" />
+    <Resource Include="static\img\splash\Vladimir_8.jpg" />
+    <Resource Include="static\img\splash\Volibear_0.jpg" />
+    <Resource Include="static\img\splash\Volibear_1.jpg" />
+    <Resource Include="static\img\splash\Volibear_2.jpg" />
+    <Resource Include="static\img\splash\Volibear_3.jpg" />
+    <Resource Include="static\img\splash\Volibear_4.jpg" />
+    <Resource Include="static\img\splash\Volibear_5.jpg" />
+    <Resource Include="static\img\splash\Warwick_0.jpg" />
+    <Resource Include="static\img\splash\Warwick_1.jpg" />
+    <Resource Include="static\img\splash\Warwick_10.jpg" />
+    <Resource Include="static\img\splash\Warwick_16.jpg" />
+    <Resource Include="static\img\splash\Warwick_2.jpg" />
+    <Resource Include="static\img\splash\Warwick_3.jpg" />
+    <Resource Include="static\img\splash\Warwick_4.jpg" />
+    <Resource Include="static\img\splash\Warwick_5.jpg" />
+    <Resource Include="static\img\splash\Warwick_6.jpg" />
+    <Resource Include="static\img\splash\Warwick_7.jpg" />
+    <Resource Include="static\img\splash\Warwick_8.jpg" />
+    <Resource Include="static\img\splash\Warwick_9.jpg" />
+    <Resource Include="static\img\splash\Xayah_0.jpg" />
+    <Resource Include="static\img\splash\Xayah_1.jpg" />
+    <Resource Include="static\img\splash\Xayah_2.jpg" />
+    <Resource Include="static\img\splash\Xayah_3.jpg" />
+    <Resource Include="static\img\splash\Xayah_4.jpg" />
+    <Resource Include="static\img\splash\Xerath_0.jpg" />
+    <Resource Include="static\img\splash\Xerath_1.jpg" />
+    <Resource Include="static\img\splash\Xerath_2.jpg" />
+    <Resource Include="static\img\splash\Xerath_3.jpg" />
+    <Resource Include="static\img\splash\Xerath_4.jpg" />
+    <Resource Include="static\img\splash\XinZhao_0.jpg" />
+    <Resource Include="static\img\splash\XinZhao_1.jpg" />
+    <Resource Include="static\img\splash\XinZhao_13.jpg" />
+    <Resource Include="static\img\splash\XinZhao_2.jpg" />
+    <Resource Include="static\img\splash\XinZhao_20.jpg" />
+    <Resource Include="static\img\splash\XinZhao_3.jpg" />
+    <Resource Include="static\img\splash\XinZhao_4.jpg" />
+    <Resource Include="static\img\splash\XinZhao_5.jpg" />
+    <Resource Include="static\img\splash\XinZhao_6.jpg" />
+    <Resource Include="static\img\splash\Yasuo_0.jpg" />
+    <Resource Include="static\img\splash\Yasuo_1.jpg" />
+    <Resource Include="static\img\splash\Yasuo_10.jpg" />
+    <Resource Include="static\img\splash\Yasuo_17.jpg" />
+    <Resource Include="static\img\splash\Yasuo_18.jpg" />
+    <Resource Include="static\img\splash\Yasuo_2.jpg" />
+    <Resource Include="static\img\splash\Yasuo_3.jpg" />
+    <Resource Include="static\img\splash\Yasuo_9.jpg" />
+    <Resource Include="static\img\splash\Yorick_0.jpg" />
+    <Resource Include="static\img\splash\Yorick_1.jpg" />
+    <Resource Include="static\img\splash\Yorick_2.jpg" />
+    <Resource Include="static\img\splash\Yorick_3.jpg" />
+    <Resource Include="static\img\splash\Yorick_4.jpg" />
+    <Resource Include="static\img\splash\Yuumi_0.jpg" />
+    <Resource Include="static\img\splash\Yuumi_1.jpg" />
+    <Resource Include="static\img\splash\Yuumi_11.jpg" />
+    <Resource Include="static\img\splash\Zac_0.jpg" />
+    <Resource Include="static\img\splash\Zac_1.jpg" />
+    <Resource Include="static\img\splash\Zac_2.jpg" />
+    <Resource Include="static\img\splash\Zac_6.jpg" />
+    <Resource Include="static\img\splash\Zed_0.jpg" />
+    <Resource Include="static\img\splash\Zed_1.jpg" />
+    <Resource Include="static\img\splash\Zed_10.jpg" />
+    <Resource Include="static\img\splash\Zed_11.jpg" />
+    <Resource Include="static\img\splash\Zed_13.jpg" />
+    <Resource Include="static\img\splash\Zed_2.jpg" />
+    <Resource Include="static\img\splash\Zed_3.jpg" />
+    <Resource Include="static\img\splash\Ziggs_0.jpg" />
+    <Resource Include="static\img\splash\Ziggs_1.jpg" />
+    <Resource Include="static\img\splash\Ziggs_14.jpg" />
+    <Resource Include="static\img\splash\Ziggs_2.jpg" />
+    <Resource Include="static\img\splash\Ziggs_3.jpg" />
+    <Resource Include="static\img\splash\Ziggs_4.jpg" />
+    <Resource Include="static\img\splash\Ziggs_5.jpg" />
+    <Resource Include="static\img\splash\Ziggs_6.jpg" />
+    <Resource Include="static\img\splash\Ziggs_7.jpg" />
+    <Resource Include="static\img\splash\Zilean_0.jpg" />
+    <Resource Include="static\img\splash\Zilean_1.jpg" />
+    <Resource Include="static\img\splash\Zilean_2.jpg" />
+    <Resource Include="static\img\splash\Zilean_3.jpg" />
+    <Resource Include="static\img\splash\Zilean_4.jpg" />
+    <Resource Include="static\img\splash\Zilean_5.jpg" />
+    <Resource Include="static\img\splash\Zilean_6.jpg" />
+    <Resource Include="static\img\splash\Zoe_0.jpg" />
+    <Resource Include="static\img\splash\Zoe_1.jpg" />
+    <Resource Include="static\img\splash\Zoe_2.jpg" />
+    <Resource Include="static\img\splash\Zoe_9.jpg" />
+    <Resource Include="static\img\splash\Zyra_0.jpg" />
+    <Resource Include="static\img\splash\Zyra_1.jpg" />
+    <Resource Include="static\img\splash\Zyra_2.jpg" />
+    <Resource Include="static\img\splash\Zyra_3.jpg" />
+    <Resource Include="static\img\splash\Zyra_4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
