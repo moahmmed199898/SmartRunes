@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace NewLeagueApp.LCU.Types {
     public class ChampMatchups {
-        public int TOP;
-        public int JUNGLE;
-        public int SUPP;
-        public int ADC;
-        public int MID;
+        public int TOP = 0;
+        public int JUNGLE = 0;
+        public int SUPP = 0;
+        public int ADC = 0;
+        public int MID = 0;
     }
 }

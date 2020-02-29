@@ -18,26 +18,27 @@ namespace NewLeagueApp {
     /// Interaction logic for RunesWindow.xaml
     /// </summary>
     public partial class RunesPage : Page {
-        public RunesPage() {
+        public RunesPage(SmartRunes smartRunes) {
             try {
                 InitializeComponent();
-                Init();
-            } catch (Exception) {
-                throw;
+                _ = Init(smartRunes);
+            } catch (Exception error) {
+                MessageBox.Show(error.Message);
+                Application.Current.Shutdown();
             }
         }
 
-        private async void Init() {
-            var smartRunes = new SmartRunes();
+        private async Task Init(SmartRunes smartRunes) {
             var champions = new Champions();
             var lcu = new LCU.LCU();
             await champions.Init();
             await lcu.Init();
-            var currentChamp = await champions.GetCurrentChamp();
-            var DeclaredLane = await lcu.GetDeclaredLane();
-            var enamyChamp = await champions.GetChampLanningAginst(DeclaredLane);
+            var currentChamp = smartRunes.GetCurrentChamp();
+            var enamyChamp = smartRunes.GetEnamyChamp();
+            var lane = smartRunes.GetLane();
             currentChampPic.ImageSource = champions.GetChampImageBrush(currentChamp);
             if (enamyChamp != "NA") enamyChampPic.ImageSource = champions.GetChampImageBrush(enamyChamp);
+            laneImage.Source = lcu.GetLaneBitmap(lane);
             var runes = await smartRunes.GetCurrentRunes();
             backgroundImage.Source = champions.GetChampBackgroundImageBrush(currentChamp);
             keyStoneImage.Source = smartRunes.GetRuneBitmap(runes[0]);
@@ -49,84 +50,14 @@ namespace NewLeagueApp {
             stat1.Source = smartRunes.GetRuneBitmap(runes[6]);
             stat2.Source = smartRunes.GetRuneBitmap(runes[7]);
             stat3.Source = smartRunes.GetRuneBitmap(runes[8]);
-
-
-        }
-
-        private void MarkSelectedRune(ref Slot slot, int runeID) {
-            for(int i = 0; i<slot.Runes.Count();i++) {
-                if (slot.Runes[i].Id == runeID) slot.Runes[i].selected = true;
-            }
-        }
-
-        
-        private void SetupTheStatRunes(int[] runeIDs, int rowNumber) {
-            var runes = new Runes();
-            var tempSlot = new Slot();
-            var tempRunes = new List<Rune>();
-            tempSlot.Runes = tempRunes;
-            for (int i = 6; i < runeIDs.Length; i++) {
-                var runeID = runeIDs[i];
-                var runeInfo = runes.GetRuneInfo(runeID);
-                var tempRune = new Rune {
-                    Id = runeInfo.id,
-                    Icon = runeInfo.IconPath,
-                    Name = runeInfo.name,
-                    selected = true
-                };
-                tempSlot.Runes.Add(tempRune);
-            }
-            //SetupTheRunes(SecoundryRunes, rowNumber, tempSlot);
-        }
-        private void SetupTheRunes(Grid primaryGrid, int rowNumber, Slot runes) {
-            var Grid = SetUpTheGrid(runes.Runes.Count()+1);
-            primaryGrid.Children.Add(Grid);
-            Grid.SetRow(Grid, rowNumber);
-            var IndexCount = 0;
-            foreach (var path in runes.Runes) {
-                var iconPath = path.Icon;
-                if (iconPath.Contains("/lol-game-data/assets/v1/")) iconPath = iconPath.Replace("/lol-game-data/assets/v1/", "");
-                var image = MakeTheImage(iconPath, path.selected);
-                Grid.Children.Add(image);
-                Grid.SetColumn(image, IndexCount);
-                IndexCount++;
-            }
-        }
-        private Ellipse MakeTheImage(string path, bool selected) {
-            var circle = new Ellipse {
-                Margin = new Thickness(10),
-                Stretch = Stretch.Uniform
-            };
-            var url = $"static/img/{path}";
-            var uri = new Uri(url, UriKind.Relative);
-            var bitmapImage = new BitmapImage(uri);
-            ImageBrush imageBrush;
-            if (!selected) {
-                //make it gray 
-                //https://docs.microsoft.com/en-us/dotnet/framework/wpf/controls/how-to-convert-an-image-to-greyscale
-                var newFormatedBitmapSource = new FormatConvertedBitmap();
-                newFormatedBitmapSource.BeginInit();
-                newFormatedBitmapSource.Source = bitmapImage;
-                newFormatedBitmapSource.DestinationFormat = PixelFormats.Gray32Float;
-                newFormatedBitmapSource.EndInit();
-                imageBrush = new ImageBrush(newFormatedBitmapSource);
-            } else {
-                imageBrush = new ImageBrush(bitmapImage);
-            }
-            circle.Fill = imageBrush;
-            return circle;
-
-
-        }
-
-        private Grid SetUpTheGrid(int numberOfColumns) {
-            var newGrid = new Grid();
-            for(int i = 0; i<numberOfColumns;i++) {
-                var column = new ColumnDefinition();
-                newGrid.ColumnDefinitions.Add(column);
-            }
-            return newGrid;
-
+            //items
+            var items = smartRunes.GetOptimalItems();
+            item1.ImageSource = Items.GetItemBitmap(items[0]);
+            item2.ImageSource = Items.GetItemBitmap(items[1]);
+            item3.ImageSource = Items.GetItemBitmap(items[2]);
+            item4.ImageSource = Items.GetItemBitmap(items[3]);
+            item5.ImageSource = Items.GetItemBitmap(items[4]);
+            item6.ImageSource = Items.GetItemBitmap(items[5]);
         }
     }
 }

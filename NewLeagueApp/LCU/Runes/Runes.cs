@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Windows.Media.Imaging;
 
 namespace NewLeagueApp.LCU.Runes {
-    class Runes:RiotConnecter {
+    public class Runes:RiotConnecter {
         /// <summary>
         /// Rune page name
         /// </summary>

@@ -10,7 +10,7 @@ using NewLeagueApp.LCU.Types;
 using System.Net.Http;
 
 namespace NewLeagueApp.LCU.Runes {
-    class SmartRunes:Runes {
+    public class SmartRunes:Runes {
         /// <summary>
         /// Firebase endpoint for getting the runes 
         /// </summary>
@@ -19,6 +19,11 @@ namespace NewLeagueApp.LCU.Runes {
         /// web client that will be used to get optimal runes from firebase
         /// </summary>
         private readonly WebClient webClient = new WebClient();
+
+        private String currentChamp;
+        private String enamyChamp;
+        private String lane;
+        private TemperRunesRESTResponse optimalRunes;
         /// <summary>
         /// This class will get the optimal runes based on the game status and set them up in the League client 
         /// </summary>
@@ -36,15 +41,15 @@ namespace NewLeagueApp.LCU.Runes {
                 await champions.Init();
                 await lcu.Init();
                 Status.currentStatus = "waiting for the current champ";
-                var currentChamp = await champions.GetCurrentChamp();
+                this.currentChamp = await champions.GetCurrentChamp();
                 Status.currentStatus = "waiting for final phase";
                 await lcu.WaitForTheFinalPhase();
                 Status.currentStatus = "waiting for lane";
-                var lane = await lcu.GetDeclaredLane();
+                this.lane = await lcu.GetDeclaredLane();
                 Status.currentStatus = "waiting for lanner";
-                var enamyChamp = await champions.GetChampLanningAginst(lane);
+                this.enamyChamp = await champions.GetChampLanningAginst(this.lane);
                 Status.currentStatus = "setting runes";
-                await SetOptimalRunes(lane, currentChamp, enamyChamp);
+                await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);
             } catch(HttpRequestException) {
                 await Task.Delay(3000);
                 await AutoRuneSetter();
@@ -55,6 +60,23 @@ namespace NewLeagueApp.LCU.Runes {
             }
 
         }    
+
+
+        public String GetCurrentChamp() {
+            return this.currentChamp;
+        }
+        public String GetEnamyChamp() {
+            return this.enamyChamp;
+        }
+        public String GetLane() {
+            return this.lane;
+        }
+
+        public List<int> GetOptimalItems() {
+            return this.optimalRunes.Items;
+        }
+
+
         /// <summary>
         /// set the optimal runes based on the champ selected and lane
         /// </summary>
@@ -66,6 +88,7 @@ namespace NewLeagueApp.LCU.Runes {
                 var runeIds = GetRunesIDs(Runes);
                 var page = MakeRunePage(Runes.PrimaryPath, Runes.SecondaryPath, runeIds);
                 await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                this.optimalRunes = Runes;
             } catch(Exception error) {
                 Console.WriteLine(error.Message);
                 throw error;
@@ -84,6 +107,7 @@ namespace NewLeagueApp.LCU.Runes {
                 var page = MakeRunePage(Runes.PrimaryPath, Runes.SecondaryPath, runeIds);
                 await SendRequestToRiot(LCUSharp.HttpMethod.Delete, "/lol-perks/v1/pages");
                 await SendRequestToRiot(LCUSharp.HttpMethod.Post, "/lol-perks/v1/pages", page);
+                this.optimalRunes = Runes;
             } catch (Exception error) {
                 throw error;
             }
@@ -94,10 +118,15 @@ namespace NewLeagueApp.LCU.Runes {
         /// <param name="getParams">the get params for the request</param>
         /// <returns>The runes from firebase</returns>
         private async Task<TemperRunesRESTResponse> RunesGetRequest(string getParams) {
-            var jsonString = await webClient.DownloadStringTaskAsync(getParams);
-            var RunesArray = JsonConvert.DeserializeObject<TemperRunesRESTResponse[]>(jsonString);
-            var Runes = RunesArray[0];
-            return Runes;
+            try {
+                var jsonString = await webClient.DownloadStringTaskAsync(getParams);
+                var RunesArray = JsonConvert.DeserializeObject<TemperRunesRESTResponse[]>(jsonString);
+                if (RunesArray.Length == 0) throw new Exception("Unable to find a match");
+                var Runes = RunesArray[0];
+                return Runes;
+            } catch (Exception error) {
+                throw error;
+            }
         }
         /// <summary>
         /// Convert runes objects (TemperRunesRESTResponse) to an int[] resembling runes ids

@@ -21,20 +21,22 @@ namespace NewLeagueApp {
     public partial class StartingPage : Page {
         public StartingPage() {
             InitializeComponent();
-            updateTheStatus();
-            Init();
+            _ = updateTheStatus();
+            _ = Init();
         }
 
-        private async void Init() {
+        private async Task Init() {
             try {
                 var smartRunes = new SmartRunes();
                 await smartRunes.AutoRuneSetter();
-                NavigationService.Navigate(new RunesPage());
-            } catch (Exception) {
-                throw;
+                NavigationService.Navigate(new RunesPage(smartRunes));
+            } catch (Exception error) {
+                Console.WriteLine(error.StackTrace);
+                MessageBox.Show(error.Message);
+                Application.Current.Shutdown();
             }
         }
-        private async void updateTheStatus() {
+        private async Task updateTheStatus() {
             try {
                 while(true) {
                     statusLabel.Content = Status.currentStatus;

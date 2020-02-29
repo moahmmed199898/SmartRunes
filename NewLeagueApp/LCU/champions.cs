@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Threading;
 namespace NewLeagueApp.LCU {
-    class Champions:RiotConnecter {
+    public class Champions:RiotConnecter {
         private readonly LCU lcu;
         /// <summary>
         /// Contains info about the champions which includes their stats ( damage,armor, ...etc) info about their story, image, and more
@@ -54,7 +54,8 @@ namespace NewLeagueApp.LCU {
         /// <param name="id">the id of the champ</param>
         /// <returns>the champ name</returns>
         public string GetChampNameById(int id) {
-            string champName = (from champ in championsInformation.Data where champ.Value.Key == id select champ.Key).Single();
+            Console.WriteLine("GetChampNameById");
+            string champName = (from champ in championsInformation.Data where champ.Value.Key == id select champ.Value.Name).Single();
             return champName;
         }
         /// <summary>
@@ -80,6 +81,9 @@ namespace NewLeagueApp.LCU {
         }
 
         public BitmapImage GetChampBackgroundImageBrush(string name) {
+            name = name.Replace(" ", "");
+            name = name.Replace(".", "");
+            name = name.Replace("'", "");
             var path = $"pack://application:,,/static/img/splash/{name}_0.jpg";
             var uri = new Uri(path);
             var bitmapImage = new BitmapImage();
@@ -117,6 +121,7 @@ namespace NewLeagueApp.LCU {
         }
 
         public string[] GetChampNamesByIDs(int[] champIDs) {
+            Console.WriteLine("GetChampNamesByIDs");
             var champNames = new List<string>();
             foreach(var champId in champIDs) {
                 champNames.Add(GetChampNameById(champId));
@@ -128,7 +133,7 @@ namespace NewLeagueApp.LCU {
                 var lane = await GetChampLane(enamyChamp);
                 if (lane == myLane) return enamyChamp;
             }
-            return "";
+            return "NA";
         }
         async public Task<string> GetChampLanningAginst(string myLane) {
             var enamyChamps = await GetEnamyChamps();
@@ -141,20 +146,24 @@ namespace NewLeagueApp.LCU {
         }
 
         async public Task<string> GetChampLane(string champName) {
-            var jsonString = await ReadFileAsync("static/champMatchUps.json");
-            var champMatchUps = JsonConvert.DeserializeObject<Dictionary<string,ChampMatchups>>(jsonString);
-            var lanes = champMatchUps[champName];
-            //get the max value
-            string maxLane = "";
-            int maxGames = 0;
-            foreach (var lane in lanes.GetType().GetFields()) {
-                var gamesPlayed = (int)lanes.GetType().GetField(lane.Name).GetValue(lanes);
-                if(gamesPlayed > maxGames) {
-                    maxGames = gamesPlayed;
-                    maxLane = lane.Name;
+            try {
+                var jsonString = await ReadFileAsync("static/champMatchUps.json");
+                var champMatchUps = JsonConvert.DeserializeObject<Dictionary<string, ChampMatchups>>(jsonString);
+                var lanes = champMatchUps[champName];
+                //get the max value
+                string maxLane = "";
+                int maxGames = 0;
+                foreach (var lane in lanes.GetType().GetFields()) {
+                    var gamesPlayed = (int)lanes.GetType().GetField(lane.Name).GetValue(lanes);
+                    if (gamesPlayed > maxGames) {
+                        maxGames = gamesPlayed;
+                        maxLane = lane.Name;
+                    }
                 }
+                return maxLane;
+            } catch(Exception error) {
+                throw error;
             }
-            return maxLane;
         }
 
         /// <summary>
