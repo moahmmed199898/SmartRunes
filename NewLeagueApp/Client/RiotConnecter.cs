@@ -8,7 +8,7 @@ using LCUSharp;
 using System.Net.Http;
 using System.Diagnostics;
 
-namespace NewLeagueApp.LCU {
+namespace NewLeagueApp.Client {
     public class RiotConnecter {
         /// <summary>
         /// Sends a request to League client 

@@ -1,4 +1,4 @@
-﻿namespace NewLeagueApp.LCU.Types {
+﻿namespace NewLeagueApp.Client.Types {
     enum StatRunes {
         Armor = 5002,
         CDR = 5007,

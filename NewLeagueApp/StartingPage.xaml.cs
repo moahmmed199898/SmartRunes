@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using NewLeagueApp.LCU.Runes;
+using NewLeagueApp.Client.Runes;
 using System.Threading;
 namespace NewLeagueApp {
     /// <summary>
@@ -21,25 +21,30 @@ namespace NewLeagueApp {
     public partial class StartingPage : Page {
         public StartingPage() {
             InitializeComponent();
-            _ = updateTheStatus();
+            _ = UpdateTheStatus();
             _ = Init();
         }
 
         private async Task Init() {
             try {
                 var smartRunes = new SmartRunes();
+                Logger.Log("waiting for the AutoRuneSetter");
                 await smartRunes.AutoRuneSetter();
+                Logger.Log("Runes Arrived going to the RunesPage");
                 NavigationService.Navigate(new RunesPage(smartRunes));
             } catch (Exception error) {
                 Console.WriteLine(error.StackTrace);
+                Logger.Log($"Error: {error.Message}");
+                Logger.Log($"Error Location: StartingPage.xaml.cs");
+                Logger.Log($"Error Stack Trace: {error.StackTrace}");
                 MessageBox.Show(error.Message);
                 Application.Current.Shutdown();
             }
         }
-        private async Task updateTheStatus() {
+        private async Task UpdateTheStatus() {
             try {
                 while(true) {
-                    statusLabel.Content = Status.currentStatus;
+                    statusLabel.Content = Status.CurrentStatus;
                     await Task.Delay(2000);
                 }
             } catch (Exception) {

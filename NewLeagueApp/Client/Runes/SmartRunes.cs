@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
 using Newtonsoft.Json;
-using NewLeagueApp.LCU.Types;
+using NewLeagueApp.Client.Types;
 using System.Net.Http;
 
-namespace NewLeagueApp.LCU.Runes {
+namespace NewLeagueApp.Client.Runes {
     public class SmartRunes:Runes {
         /// <summary>
         /// Firebase endpoint for getting the runes 
@@ -37,18 +37,18 @@ namespace NewLeagueApp.LCU.Runes {
             try {
                 Console.WriteLine("init classes");
                 var champions = new Champions();
-                var lcu = new LCU();
+                var gameSession = new GameSession();
                 await champions.Init();
-                await lcu.Init();
-                Status.currentStatus = "waiting for the current champ";
+                await gameSession.Init();
+                Status.CurrentStatus = "waiting for the current champ";
                 this.currentChamp = await champions.GetCurrentChamp();
-                Status.currentStatus = "waiting for final phase";
-                await lcu.WaitForTheFinalPhase();
-                Status.currentStatus = "waiting for lane";
-                this.lane = await lcu.GetDeclaredLane();
-                Status.currentStatus = "waiting for lanner";
+                Status.CurrentStatus = "waiting for final phase";
+                await gameSession.WaitForTheFinalPhase();
+                Status.CurrentStatus = "waiting for lane";
+                this.lane = await gameSession.GetDeclaredLane();
+                Status.CurrentStatus = "waiting for lanner";
                 this.enamyChamp = await champions.GetChampLanningAginst(this.lane);
-                Status.currentStatus = "setting runes";
+                Status.CurrentStatus = "setting runes";
                 await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);
             } catch(HttpRequestException) {
                 await Task.Delay(3000);

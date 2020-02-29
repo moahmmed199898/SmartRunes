@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace NewLeagueApp
 {
     static class Status {
-        public static string currentStatus = "Loading...";
+        public static string CurrentStatus;
     }
 }

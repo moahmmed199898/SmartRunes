@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using LCUSharp;
-using NewLeagueApp.LCU.Types;
+using NewLeagueApp.Client.Types;
 using System.Net.Http;
 using System.Windows.Media.Imaging;
 
-namespace NewLeagueApp.LCU.Runes {
+namespace NewLeagueApp.Client.Runes {
     public class Runes:RiotConnecter {
         /// <summary>
         /// Rune page name
@@ -34,7 +34,7 @@ namespace NewLeagueApp.LCU.Runes {
         /// <param name="primaryPath">The path for the primary keystone</param>
         /// <param name="secondaryPath">The path for the secondary keystone</param>
         /// <param name="runes">An array of runes that includes the primary and secondary keystones. Example: new Runes.Tree.Domination.Row0.DarkHarvest</param>
-        /// <param name="statRunes">An array of stat runes (Offense, Defense, and Flex). Example: NewLeagueApp.LCU.Types.StatRunes.AdaptiveForce</param>
+        /// <param name="statRunes">An array of stat runes (Offense, Defense, and Flex). Example: NewLeagueApp.Client.Types.StatRunes.AdaptiveForce</param>
         public async Task Add(int primaryPathID, int secondaryPathID, int[] runes, int[] statRunesIDs) {
             try {
                 var runeIDs = (int[])runes.Concat(statRunesIDs);

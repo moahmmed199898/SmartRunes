@@ -1,4 +1,4 @@
-﻿namespace NewLeagueApp.LCU.Types {
+﻿namespace NewLeagueApp.Client.Types {
     public partial class IRunesPage {
 
         public int[] autoModifiedSelections { get; private set; } = new int[] { 0 };

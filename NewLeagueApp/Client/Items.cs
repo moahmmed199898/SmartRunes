@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace NewLeagueApp.LCU {
+namespace NewLeagueApp.Client {
     class Items {
         public static BitmapImage GetItemBitmap(int itemID) {
             var path = $"pack://application:,,/static/img/item/{itemID}.png";

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewLeagueApp.LCU.Types
+namespace NewLeagueApp.Client.Types
 {
     public partial class championData
 {

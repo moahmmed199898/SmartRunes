@@ -88,25 +88,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client\GameSession.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LCU\champions.cs" />
-    <Compile Include="LCU\Items.cs" />
-    <Compile Include="LCU\Types\SetRunesInfo.cs" />
+    <Compile Include="Client\champions.cs" />
+    <Compile Include="Client\Items.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LCU\RiotConnecter.cs" />
-    <Compile Include="LCU\Runes\Runes.cs" />
-    <Compile Include="LCU\Runes\SmartRunes.cs" />
-    <Compile Include="LCU\Types\ChampMatchups.cs" />
-    <Compile Include="LCU\Types\sessionData.cs" />
-    <Compile Include="LCU\Types\statRunes.cs" />
-    <Compile Include="LCU\Types\RunesRESTResponse.cs" />
-    <Compile Include="LCU\Types\SummonerInfo.cs" />
-    <Compile Include="LCU\Types\Tree.cs" />
-    <Compile Include="LCU\Types\RuneDictionary.cs" />
-    <Compile Include="LCU\LCU.cs" />
-    <Compile Include="LCU\Types\RunesPage.cs" />
+    <Compile Include="Client\RiotConnecter.cs" />
+    <Compile Include="Client\Runes\Runes.cs" />
+    <Compile Include="Client\Runes\SmartRunes.cs" />
+    <Compile Include="Client\Types\ChampMatchups.cs" />
+    <Compile Include="Client\Types\sessionData.cs" />
+    <Compile Include="Client\Types\statRunes.cs" />
+    <Compile Include="Client\Types\RunesRESTResponse.cs" />
+    <Compile Include="Client\Types\SummonerInfo.cs" />
+    <Compile Include="Client\Types\Tree.cs" />
+    <Compile Include="Client\Types\RuneDictionary.cs" />
+    <Compile Include="Client\LCU.cs" />
+    <Compile Include="Client\Types\RunesPage.cs" />
     <Compile Include="StartingPage.xaml.cs">
       <DependentUpon>StartingPage.xaml</DependentUpon>
     </Compile>
@@ -183,7 +184,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LCU\Types\ChampionsData.cs" />
+    <Compile Include="Client\Types\ChampionsData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="static\img\CHEST_187.png">

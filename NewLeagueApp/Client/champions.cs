@@ -4,15 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NewLeagueApp.LCU.Types;
+using NewLeagueApp.Client.Types;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Threading;
-namespace NewLeagueApp.LCU {
-    public class Champions:RiotConnecter {
-        private readonly LCU lcu;
+namespace NewLeagueApp.Client {
+    public class Champions:GameSession {
+        private readonly GameSession gameSession;
         /// <summary>
         /// Contains info about the champions which includes their stats ( damage,armor, ...etc) info about their story, image, and more
         /// </summary>
@@ -23,13 +23,15 @@ namespace NewLeagueApp.LCU {
         /// When you initialize this class make sure you call Init() or you will not be able to use championsInformation property 
         /// </para>
         /// </summary>
+        private String currentChamp;
+
         public Champions() {
-            lcu = new LCU();
+            gameSession = new GameSession();
         }
         /// <summary>
         /// initialize the class and set championsInformation property 
         /// </summary>
-        public async Task Init() {
+        public new async Task Init() {
             championsInformation = await GetChampInfo();
         }
         /// <summary>
@@ -38,11 +40,13 @@ namespace NewLeagueApp.LCU {
         /// </summary>
         public async Task<string> GetCurrentChamp() {
             try {
+                if (this.currentChamp != null) return this.currentChamp;
                 var currentChampIDString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "lol-champ-select/v1/current-champion");
                 if (currentChampIDString.Contains("\"httpStatus\":404,\"")) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampID = int.Parse(currentChampIDString);
                 if (currentChampID == 0) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampName = (from champ in championsInformation.Data where champ.Value.Key == currentChampID select champ.Value.Name).Single();
+                this.currentChamp = currentChampName;
                 return currentChampName;
             } catch(Exception error) {
                 throw error;
@@ -54,20 +58,10 @@ namespace NewLeagueApp.LCU {
         /// <param name="id">the id of the champ</param>
         /// <returns>the champ name</returns>
         public string GetChampNameById(int id) {
-            Console.WriteLine("GetChampNameById");
             string champName = (from champ in championsInformation.Data where champ.Value.Key == id select champ.Value.Name).Single();
             return champName;
         }
-        /// <summary>
-        /// get the champ image path from the id 
-        /// </summary>
-        /// <param name="id">the id of the champ</param>
-        /// <returns>the image path</returns>
-        public string GetChampImagePath(int id) {
-            string champName = GetChampNameById(id);
-            var path = $"static/img/splash/{champName}_0.jpg";
-            return path;
-        }
+
         public BitmapImage GetChampImageBrush(string name) {
             var path = GetChampImagePath(name);
             var uri = new Uri(path);
@@ -75,9 +69,7 @@ namespace NewLeagueApp.LCU {
             bitmapImage.BeginInit();
             bitmapImage.UriSource = uri;
             bitmapImage.EndInit();
-            
             return bitmapImage;
-
         }
 
         public BitmapImage GetChampBackgroundImageBrush(string name) {
@@ -91,7 +83,6 @@ namespace NewLeagueApp.LCU {
             bitmapImage.UriSource = uri;
             bitmapImage.EndInit();
             return bitmapImage;
-
         }
         /// <summary>
         /// gets the champ image path from the champ name
@@ -104,9 +95,19 @@ namespace NewLeagueApp.LCU {
             var path = $"pack://application:,,/static/img/champion/{pathQuery.Single()}";
             return path;
         }
-        async Task<string[]> GetEnamyChamps() {
+        /// <summary>
+        /// get the champ image path from the id 
+        /// </summary>
+        /// <param name="id">the id of the champ</param>
+        /// <returns>the image path</returns>
+        public string GetChampImagePath(int id) {
+            string champName = GetChampNameById(id);
+            var path = $"static/img/splash/{champName}_0.jpg";
+            return path;
+        }
+        public async Task<string[]> GetEnamyChamps() {
             try {
-                var data = await lcu.GetSessionData();
+                var data = await gameSession.GetSessionData();
                 if (data.TheirTeam == null || data.TheirTeam.Count() == 0 || data.TheirTeam[0].ChampionId == 0) {
                     string[] errorArray = { "NA" };
                     return errorArray;
@@ -128,14 +129,14 @@ namespace NewLeagueApp.LCU {
             }
             return champNames.ToArray();
         }
-        async public Task<string> GetChampLanningAginst(string[] enamyChamps, string myLane) {
+        public async Task<string> GetChampLanningAginst(string[] enamyChamps, string myLane) {
             foreach(var enamyChamp in enamyChamps) {
                 var lane = await GetChampLane(enamyChamp);
                 if (lane == myLane) return enamyChamp;
             }
             return "NA";
         }
-        async public Task<string> GetChampLanningAginst(string myLane) {
+        public async Task<string> GetChampLanningAginst(string myLane) {
             var enamyChamps = await GetEnamyChamps();
             if (enamyChamps[0] == "NA") return "NA";
             foreach (var enamyChamp in enamyChamps) {
@@ -145,7 +146,7 @@ namespace NewLeagueApp.LCU {
             return "NA";
         }
 
-        async public Task<string> GetChampLane(string champName) {
+        public async Task<string> GetChampLane(string champName) {
             try {
                 var jsonString = await ReadFileAsync("static/champMatchUps.json");
                 var champMatchUps = JsonConvert.DeserializeObject<Dictionary<string, ChampMatchups>>(jsonString);

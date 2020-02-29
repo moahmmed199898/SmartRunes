@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using NewLeagueApp.LCU.Runes;
-using NewLeagueApp.LCU;
+using NewLeagueApp.Client.Runes;
+using NewLeagueApp.Client;
 namespace NewLeagueApp {
     /// <summary>
     /// Interaction logic for RunesWindow.xaml
@@ -30,7 +30,7 @@ namespace NewLeagueApp {
 
         private async Task Init(SmartRunes smartRunes) {
             var champions = new Champions();
-            var lcu = new LCU.LCU();
+            var lcu = new LCU();
             await champions.Init();
             await lcu.Init();
             var currentChamp = smartRunes.GetCurrentChamp();
