@@ -29,35 +29,40 @@ namespace NewLeagueApp {
         }
 
         private async Task Init(SmartRunes smartRunes) {
-            var champions = new Champions();
-            var lcu = new LCU();
-            await champions.Init();
-            await lcu.Init();
-            var currentChamp = smartRunes.GetCurrentChamp();
-            var enamyChamp = smartRunes.GetEnamyChamp();
-            var lane = smartRunes.GetLane();
-            currentChampPic.ImageSource = champions.GetChampImageBrush(currentChamp);
-            if (enamyChamp != "NA") enamyChampPic.ImageSource = champions.GetChampImageBrush(enamyChamp);
-            laneImage.Source = lcu.GetLaneBitmap(lane);
-            var runes = await smartRunes.GetCurrentRunes();
-            backgroundImage.Source = champions.GetChampBackgroundImageBrush(currentChamp);
-            keyStoneImage.Source = smartRunes.GetRuneBitmap(runes[0]);
-            primaryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[1]);
-            primaryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[2]);
-            primaryPerk3.ImageSource = smartRunes.GetRuneBitmap(runes[3]);
-            secoundryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[4]);
-            secoundryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[5]);
-            stat1.Source = smartRunes.GetRuneBitmap(runes[6]);
-            stat2.Source = smartRunes.GetRuneBitmap(runes[7]);
-            stat3.Source = smartRunes.GetRuneBitmap(runes[8]);
-            //items
-            var items = smartRunes.GetOptimalItems();
-            item1.ImageSource = Items.GetItemBitmap(items[0]);
-            item2.ImageSource = Items.GetItemBitmap(items[1]);
-            item3.ImageSource = Items.GetItemBitmap(items[2]);
-            item4.ImageSource = Items.GetItemBitmap(items[3]);
-            item5.ImageSource = Items.GetItemBitmap(items[4]);
-            item6.ImageSource = Items.GetItemBitmap(items[5]);
+
+            try {
+                var champions = new Champions();
+                var lcu = new LCU();
+                await champions.Init();
+                await lcu.Init();
+                var currentChamp = smartRunes.GetCurrentChamp();
+                var enamyChamp = smartRunes.GetEnamyChamp();
+                var lane = smartRunes.GetLane();
+                currentChampPic.ImageSource = champions.GetChampImageBrush(currentChamp);
+                if (enamyChamp != "NA") enamyChampPic.ImageSource = champions.GetChampImageBrush(enamyChamp);
+                laneImage.Source = lcu.GetLaneBitmap(lane);
+                var runes = await smartRunes.GetCurrentRunes();
+                backgroundImage.Source = champions.GetChampBackgroundImageBrush(currentChamp);
+                keyStoneImage.Source = smartRunes.GetRuneBitmap(runes[0]);
+                primaryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[1]);
+                primaryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[2]);
+                primaryPerk3.ImageSource = smartRunes.GetRuneBitmap(runes[3]);
+                secoundryPerk1.ImageSource = smartRunes.GetRuneBitmap(runes[4]);
+                secoundryPerk2.ImageSource = smartRunes.GetRuneBitmap(runes[5]);
+                stat1.Source = smartRunes.GetRuneBitmap(runes[6]);
+                stat2.Source = smartRunes.GetRuneBitmap(runes[7]);
+                stat3.Source = smartRunes.GetRuneBitmap(runes[8]);
+                //items
+                var items = smartRunes.GetOptimalItems();
+                item1.ImageSource = Items.GetItemBitmap(items[0]);
+                item2.ImageSource = Items.GetItemBitmap(items[1]);
+                item3.ImageSource = Items.GetItemBitmap(items[2]);
+                item4.ImageSource = Items.GetItemBitmap(items[3]);
+                item5.ImageSource = Items.GetItemBitmap(items[4]);
+                item6.ImageSource = Items.GetItemBitmap(items[5]);
+            } catch (Exception error) {
+                MessageBox.Show(error.Message);
+            }
         }
     }
 }

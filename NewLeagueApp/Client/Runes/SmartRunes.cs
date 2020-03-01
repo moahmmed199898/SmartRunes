@@ -121,7 +121,7 @@ namespace NewLeagueApp.Client.Runes {
             try {
                 var jsonString = await webClient.DownloadStringTaskAsync(getParams);
                 var RunesArray = JsonConvert.DeserializeObject<TemperRunesRESTResponse[]>(jsonString);
-                if (RunesArray.Length == 0) throw new Exception("Unable to find a match");
+                if (RunesArray.Length == 0) throw new Exception("Unable to find a match between " + getParams);
                 var Runes = RunesArray[0];
                 return Runes;
             } catch (Exception error) {

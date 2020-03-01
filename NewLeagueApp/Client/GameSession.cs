@@ -13,17 +13,21 @@ namespace NewLeagueApp.Client {
         public async Task<sessionData> GetSessionData() {
             var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
             stringJSON = stringJSON.Replace("UTILITY", "SUPP");
+            stringJSON = stringJSON.Replace("bottom", "ADC");
+            stringJSON = stringJSON.Replace("top", "TOP");
+            stringJSON = stringJSON.Replace("middle", "MID");
+            stringJSON = stringJSON.Replace("jungle", "JUNGLE");
             var data = JsonConvert.DeserializeObject<sessionData>(stringJSON);
             return data;
         }
         public async Task<string> GetDeclaredLane() {
             try {
                 var data = await GetSessionData();
-                data.MyTeam.ForEach(team => {
+                /*data.MyTeam.ForEach(team => {
                     if (team.SummonerId == summonerID) {
                         team.AssignedPosition = "TOP";
                     }
-                });
+                });*/
                 var laneArray = from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition;
                 if (laneArray.Count() <= 0) return "NA";
                 var lane = laneArray.Single();

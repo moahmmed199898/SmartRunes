@@ -26,7 +26,7 @@ namespace NewLeagueApp.Client {
 
 
         public BitmapImage GetLaneBitmap(String lane) {
-            if (!(lane == "TOP" || lane == "BOT" || lane == "SUPP" || lane == "JUNGLE" || lane == "MID")) throw new Exception($"lane named {lane} does not exist");
+            if (!(lane == "TOP" || lane == "ADC" || lane == "SUPP" || lane == "JUNGLE" || lane == "MID")) throw new Exception($"lane named {lane} does not exist");
             var path = $"pack://application:,,/static/img/lane/{lane}.png";
             var uri = new Uri(path);
             var bitmapImage = new BitmapImage();

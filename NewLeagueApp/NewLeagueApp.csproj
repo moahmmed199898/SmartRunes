@@ -192,7 +192,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="static\img\lane\BOT.png">
+    <Resource Include="static\img\lane\ADC.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="static\img\lane\Jungle.png">
