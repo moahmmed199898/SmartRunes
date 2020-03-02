@@ -13,6 +13,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: restore
+      run: dotnet restore 
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: And then we test it
