@@ -12,7 +12,7 @@ namespace NewLeagueApp.Client {
     public class GameSession: LCU{
         public async Task<sessionData> GetSessionData() {
             var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
-            stringJSON = stringJSON.Replace("UTILITY", "SUPP");
+            stringJSON = stringJSON.Replace("utility", "SUPP");
             stringJSON = stringJSON.Replace("bottom", "ADC");
             stringJSON = stringJSON.Replace("top", "TOP");
             stringJSON = stringJSON.Replace("middle", "MID");
