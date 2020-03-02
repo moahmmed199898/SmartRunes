@@ -1,4 +1,4 @@
-name: Example2.NetFramework.CI
+name: SmartRunes
 
 on: [push]
 
