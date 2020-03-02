@@ -8,14 +8,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+#     - uses: actions/checkout@v1
+#     - name: Setup .NET Core
+#       uses: actions/setup-dotnet@v1
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: restore
       run: nuget restore NewLeagueApp.sln
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    - name: Build with msbuild
+      run: msbuild YourProject.csproj /p:Configuration=Release
     - name: And then we test it
       run: dotnet test --verbosity normal
