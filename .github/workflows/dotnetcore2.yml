@@ -19,6 +19,6 @@ jobs:
     - name: restore
       run: nuget restore NewLeagueApp.sln
     - name: Build with msbuild
-      run: msbuild NewLeagueApp.csproj /p:Configuration=Release
+      run: msbuild .\NewLeagueApp\NewLeagueApp.csproj /p:Configuration=Release
     - name: And then we test it
       run: dotnet test --verbosity normal
