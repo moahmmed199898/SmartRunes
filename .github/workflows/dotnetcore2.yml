@@ -8,15 +8,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v1
-#      - name: Setup .NET Core
-#        uses: actions/setup-dotnet@v1
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
-    - name: restore
+    - name: Restore with nuget
       run: nuget restore NewLeagueApp.sln
     - name: Build with msbuild
       run: msbuild .\NewLeagueApp\NewLeagueApp.csproj /p:Configuration=Release
