@@ -1,0 +1,22 @@
+name: SmartRunes
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Restore with nuget
+      run: nuget restore NewLeagueApp.sln
+    - name: Build with msbuild
+      run: msbuild .\NewLeagueApp\NewLeagueApp.csproj /p:Configuration=Release
+    - name: And then we test it
+      run: dotnet test --verbosity normal
