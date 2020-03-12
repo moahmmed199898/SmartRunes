@@ -17,7 +17,7 @@ namespace NewLeagueApp {
     /// <summary>
     /// Interaction logic for RunesWindow.xaml
     /// </summary>
-    public partial class RunesPage : Page {
+    public partial class RunesPage : Page, IDisposable {
         public RunesPage(SmartRunes smartRunes) {
             try {
                 InitializeComponent();
@@ -28,6 +28,9 @@ namespace NewLeagueApp {
             }
         }
 
+        public void Dispose() {
+            GC.SuppressFinalize(this);   
+        }
         private async Task Init(SmartRunes smartRunes) {
 
             try {
@@ -63,6 +66,15 @@ namespace NewLeagueApp {
             } catch (Exception error) {
                 MessageBox.Show(error.Message);
             }
+        }
+
+        private void Reset(object sender, RoutedEventArgs e) {
+            this.Dispose();
+            NavigationService.Navigate(new StartingPage());
+        }
+        private void Reset() {
+            this.Dispose();
+            NavigationService.Navigate(new StartingPage());
         }
     }
 }

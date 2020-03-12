@@ -18,11 +18,15 @@ namespace NewLeagueApp {
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class StartingPage : Page {
+    public partial class StartingPage : Page, IDisposable {
         public StartingPage() {
             InitializeComponent();
             _ = UpdateTheStatus();
             _ = Init();
+        }
+
+        public void Dispose() {
+            GC.SuppressFinalize(this);
         }
 
         private async Task Init() {
@@ -32,6 +36,7 @@ namespace NewLeagueApp {
                 await smartRunes.AutoRuneSetter();
                 Logger.Log("Runes Arrived going to the RunesPage");
                 NavigationService.Navigate(new RunesPage(smartRunes));
+                Dispose();
             } catch (Exception error) {
                 Console.WriteLine(error.StackTrace);
                 Logger.Log($"Error: {error.Message}");

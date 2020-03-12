@@ -112,6 +112,16 @@
                         </Grid>
                     </Grid>
                 </Border>
+                <Border  Grid.Row="2" CornerRadius="0 10 10 0"  Margin="0 70 250 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Opacity="0.5" Click="Reset">New Game</Button>
+                        <Button Grid.Column="1"  Opacity="0.5">About</Button>
+                    </Grid>
+                </Border>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>

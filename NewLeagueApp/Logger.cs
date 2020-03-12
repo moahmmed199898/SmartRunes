@@ -7,10 +7,11 @@ using System.IO;
 
 namespace NewLeagueApp {
     class Logger {
-        private static readonly StreamWriter file = File.AppendText("SmartRunes.log");
         public static void Log(string message) {
-            String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            StreamWriter file = File.AppendText("SmartRunes.log");
+        String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             file.WriteLine($"{dateTime} : {message}");
+            file.Close();
         }
     }
 }
