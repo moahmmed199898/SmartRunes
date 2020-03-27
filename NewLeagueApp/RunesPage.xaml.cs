@@ -35,15 +35,13 @@ namespace NewLeagueApp {
 
             try {
                 var champions = new Champions();
-                var lcu = new LCU();
                 await champions.Init();
-                await lcu.Init();
                 var currentChamp = smartRunes.GetCurrentChamp();
                 var enamyChamp = smartRunes.GetEnamyChamp();
                 var lane = smartRunes.GetLane();
                 currentChampPic.ImageSource = champions.GetChampImageBrush(currentChamp);
                 if (enamyChamp != "NA") enamyChampPic.ImageSource = champions.GetChampImageBrush(enamyChamp);
-                laneImage.Source = lcu.GetLaneBitmap(lane);
+                laneImage.Source = LCU.GetLaneBitmap(lane);
                 var runes = await smartRunes.GetCurrentRunes();
                 backgroundImage.Source = champions.GetChampBackgroundImageBrush(currentChamp);
                 keyStoneImage.Source = smartRunes.GetRuneBitmap(runes[0]);
@@ -63,16 +61,15 @@ namespace NewLeagueApp {
                 item4.ImageSource = Items.GetItemBitmap(items[3]);
                 item5.ImageSource = Items.GetItemBitmap(items[4]);
                 item6.ImageSource = Items.GetItemBitmap(items[5]);
+                playerNameLink.NavigateUri = new Uri("https://na.op.gg/summoner/userName="+smartRunes.GetPlayerName(), UriKind.Absolute);
+                playerNameLink.Inlines.Clear();
+                playerNameLink.Inlines.Add(smartRunes.GetPlayerName());
             } catch (Exception error) {
                 MessageBox.Show(error.Message);
             }
         }
 
-        private void Reset(object sender, RoutedEventArgs e) {
-            this.Dispose();
-            NavigationService.Navigate(new StartingPage());
-        }
-        private void Reset() {
+        private void Reset(object sender, MouseButtonEventArgs e) {
             this.Dispose();
             NavigationService.Navigate(new StartingPage());
         }

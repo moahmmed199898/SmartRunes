@@ -90,7 +90,7 @@ namespace NewLeagueApp.Client {
         /// <param name="name">the name of the champ ( not case sensitive)</param>
         /// <returns>the image path</returns>
         public string GetChampImagePath(string name) {
-            var pathQuery = (from champ in championsInformation.Data where champ.Value.Name == name select champ.Value.Image.Full);
+            var pathQuery = (from champ in championsInformation.Data where champ.Value.Id == name select champ.Value.Image.Full);
             if (pathQuery.Count() == 0) return $"pack://application:,,/static/img/champion/CHEST_187.png";
             var path = $"pack://application:,,/static/img/champion/{pathQuery.Single()}";
             return path;

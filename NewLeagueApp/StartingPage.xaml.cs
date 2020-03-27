@@ -33,9 +33,11 @@ namespace NewLeagueApp {
             try {
                 var smartRunes = new SmartRunes();
                 Logger.Log("waiting for the AutoRuneSetter");
+                Status.CurrentStatus = "Waiting for the game to start";
                 await smartRunes.AutoRuneSetter();
                 Logger.Log("Runes Arrived going to the RunesPage");
                 NavigationService.Navigate(new RunesPage(smartRunes));
+                Status.window.Visibility = Visibility.Visible;
                 Dispose();
             } catch (Exception error) {
                 Console.WriteLine(error.StackTrace);

@@ -19,4 +19,6 @@ public partial class TemperRunesRESTResponse {
     public int PrimaryPathRune1 { get; set; }
     public int QueueId { get; set; }
     public string Lane { get; set; }
+    public string PlayerName { get; set; }
+
 }

@@ -1,0 +1,2009 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{76E9FAD9-441D-49C6-BAB7-18C662ED8711}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SmartRunesTester</RootNamespace>
+    <AssemblyName>SmartRunesTester</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="static\champion.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\champMatchUps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\runeDictionaryData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\runes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewLeagueApp\NewLeagueApp.csproj">
+      <Project>{32b035ea-6885-4a31-93a0-bf7e9a303d8d}</Project>
+      <Name>NewLeagueApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Aatrox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ahri.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Akali.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Alistar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Amumu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Anivia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Annie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Aphelios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ashe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\AurelionSol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Azir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Bard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Blitzcrank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Brand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Braum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Caitlyn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Camille.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Cassiopeia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Chogath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Corki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Darius.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Diana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Draven.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\DrMundo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ekko.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Elise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Evelynn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ezreal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Fiddlesticks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Fiora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Fizz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Galio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Gangplank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Garen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Gnar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Gragas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Graves.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Hecarim.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Heimerdinger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Illaoi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Irelia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ivern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Janna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\JarvanIV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Jax.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Jayce.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Jhin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Jinx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kaisa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kalista.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Karma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Karthus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kassadin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Katarina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kayle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kayn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kennen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Khazix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kindred.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Kled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\KogMaw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Leblanc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\LeeSin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Leona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Lissandra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Lucian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Lulu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Lux.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Malphite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Malzahar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Maokai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\MasterYi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\MissFortune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\MonkeyKing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Mordekaiser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Morgana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nami.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nasus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nautilus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Neeko.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nidalee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nocturne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Nunu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Olaf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Orianna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ornn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Pantheon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Poppy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Pyke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Qiyana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Quinn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Rakan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Rammus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\RekSai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Renekton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Rengar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Riven.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Rumble.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ryze.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sejuani.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Senna.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sett.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Shaco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Shen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Shyvana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Singed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sivir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Skarner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Soraka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Swain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Sylas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Syndra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\TahmKench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Taliyah.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Talon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Taric.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Teemo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Thresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Tristana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Trundle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Tryndamere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\TwistedFate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Twitch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Udyr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Urgot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Varus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Vayne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Veigar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Velkoz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Vi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Viktor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Vladimir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Volibear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Warwick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Xayah.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Xerath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\XinZhao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Yasuo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Yorick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Yuumi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Zac.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Zed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Ziggs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Zilean.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Zoe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\champion\Zyra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\CHEST_187.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\icons\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\icons\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1027.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1028.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1029.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1036.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1037.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1038.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1039.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1041.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1042.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1053.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1054.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1055.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1056.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1057.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1058.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1082.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1083.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1401.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1402.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1412.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1413.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1414.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1416.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\1419.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2047.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2054.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2055.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2065.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2138.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2403.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2419.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2420.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2421.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2422.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2423.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\2424.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3020.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3022.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3025.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3027.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3028.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3029.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3030.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3035.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3036.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3040.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3041.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3042.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3044.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3046.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3047.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3050.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3053.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3057.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3065.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3067.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3068.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3070.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3071.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3073.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3074.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3076.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3077.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3078.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3082.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3083.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3084.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3085.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3086.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3087.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3089.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3091.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3094.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3095.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3105.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3107.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3108.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3109.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3110.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3113.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3115.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3116.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3124.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3133.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3134.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3135.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3137.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3143.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3145.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3146.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3147.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3151.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3152.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3153.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3156.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3157.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3158.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3174.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3175.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3179.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3181.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3184.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3190.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3191.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3193.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3194.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3196.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3197.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3198.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3211.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3222.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3285.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3340.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3348.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3361.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3362.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3363.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3364.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3371.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3373.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3374.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3379.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3380.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3382.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3383.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3384.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3386.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3387.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3388.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3389.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3390.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3410.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3416.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3422.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3455.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3504.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3508.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3513.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3514.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3520.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3599.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3600.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3671.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3672.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3673.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3675.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3680.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3681.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3682.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3683.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3684.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3685.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3690.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3691.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3692.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3693.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3694.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3695.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3706.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3715.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3742.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3748.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3751.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3800.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3801.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3802.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3812.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3814.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3850.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3851.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3853.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3854.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3855.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3857.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3858.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3859.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3860.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3862.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3863.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3864.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3901.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3902.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3903.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3905.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3907.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\item\3916.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\ADC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\Jungle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\MID.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\SUPP.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\lane\Top.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsAdaptiveForceIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsArmorIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsAttackSpeedIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsCDRScalingIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsHealthScalingIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\StatMods\StatModsMagicResIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7200_Domination.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7201_Precision.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7202_Sorcery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7203_Whimsy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\7204_Resolve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\CheapShot\CheapShot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\DarkHarvest\DarkHarvest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\Electrocute\Electrocute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\EyeballCollection\EyeballCollection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\GhostPoro\GhostPoro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\HailOfBlades\HailOfBlades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\IngeniousHunter\IngeniousHunter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\Predator\Predator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\RavenousHunter\RavenousHunter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\RelentlessHunter\RelentlessHunter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\SuddenImpact\SuddenImpact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\TasteOfBlood\GreenTerror_TasteOfBlood.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\UltimateHunter\UltimateHunter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Domination\ZombieWard\ZombieWard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\BiscuitDelivery\BiscuitDelivery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\CelestialBody\CelestialBody.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\CosmicInsight\CosmicInsight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\FuturesMarket\FuturesMarket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\GlacialAugment\GlacialAugment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\HextechFlashtraption\HextechFlashtraption.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\Kleptomancy\Kleptomancy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MagicalFootwear\MagicalFootwear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MasterKey\MasterKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\MinionDematerializer\MinionDematerializer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\PerfectTiming\PerfectTiming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\TimeWarpTonic\TimeWarpTonic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Inspiration\UnsealedSpellbook\UnsealedSpellbook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\Conqueror\Conqueror.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\CoupDeGrace\CoupDeGrace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\CutDown\CutDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\FleetFootwork\FleetFootwork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendAlacrity\LegendAlacrity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendBloodline\LegendBloodline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\LegendTenacity\LegendTenacity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\LethalTempo\LethalTempoTemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\Overheal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\PresenceOfMind\PresenceOfMind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\PressTheAttack\PressTheAttack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Precision\Triumph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\ApproachVelocity\ApproachVelocity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\BonePlating\BonePlating.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Chrysalis\Chrysalis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Conditioning\Conditioning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Demolish\Demolish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\FontOfLife\FontOfLife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\GraspOfTheUndying\GraspOfTheUndying.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Guardian\Guardian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\IronSkin\IronSkin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\MirrorShell\MirrorShell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Overgrowth\Overgrowth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\Revitalize\Revitalize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\SecondWind\SecondWind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Resolve\VeteranAftershock\VeteranAftershock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\RunesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\AbsoluteFocus\AbsoluteFocus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\ArcaneComet\ArcaneComet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Celerity\CelerityTemp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\GatheringStorm\GatheringStorm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\LastStand\LastStand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\ManaflowBand\ManaflowBand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\NimbusCloak\6361.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\NullifyingOrb\Pokeshield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\PhaseRush\PhaseRush.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Scorch\Scorch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\SummonAery\SummonAery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\TheUltimateHat\TheUltimateHat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Transcendence\Transcendence.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Unflinching\Unflinching.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\perk-images\Styles\Sorcery\Waterwalking\Waterwalking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Aatrox_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ahri_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Akali_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Alistar_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Amumu_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Anivia_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Annie_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Aphelios_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ashe_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\AurelionSol_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Azir_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Bard_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Blitzcrank_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Brand_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Braum_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Caitlyn_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Camille_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Cassiopeia_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Chogath_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Corki_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Darius_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Diana_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Draven_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\DrMundo_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ekko_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Elise_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Evelynn_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ezreal_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\FiddleSticks_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Fiora_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Fizz_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Galio_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Gangplank_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Garen_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Gnar_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Gragas_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Graves_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Hecarim_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Heimerdinger_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Illaoi_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Irelia_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ivern_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Janna_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\JarvanIV_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Jax_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Jayce_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Jhin_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Jinx_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kaisa_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kalista_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Karma_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Karthus_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kassadin_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Katarina_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kayle_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kayn_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kennen_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Khazix_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kindred_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Kled_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\KogMaw_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Leblanc_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\LeeSin_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Leona_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Lissandra_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Lucian_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Lulu_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Lux_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Malphite_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Malzahar_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Maokai_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\MasterYi_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\MissFortune_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\MonkeyKing_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Mordekaiser_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Morgana_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nami_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nasus_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nautilus_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Neeko_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nidalee_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nocturne_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Nunu_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Olaf_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Orianna_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ornn_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Pantheon_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Poppy_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Pyke_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Qiyana_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Quinn_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Rakan_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Rammus_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\RekSai_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Renekton_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Rengar_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Riven_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Rumble_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ryze_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sejuani_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Senna_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sett_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Shaco_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Shen_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Shyvana_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Singed_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sion_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sivir_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Skarner_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sona_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Soraka_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Swain_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Sylas_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Syndra_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\TahmKench_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Taliyah_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Talon_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Taric_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Teemo_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Thresh_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Tristana_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Trundle_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Tryndamere_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\TwistedFate_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Twitch_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Udyr_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Urgot_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Varus_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Vayne_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Veigar_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Velkoz_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Vi_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Viktor_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Vladimir_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Volibear_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Warwick_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Xayah_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Xerath_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\XinZhao_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Yasuo_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Yorick_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Yuumi_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Zac_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Zed_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Ziggs_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Zilean_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Zoe_0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="static\img\splash\Zyra_0.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

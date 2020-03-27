@@ -9,8 +9,15 @@ namespace NewLeagueApp {
     class Logger {
         public static void Log(string message) {
             StreamWriter file = File.AppendText("SmartRunes.log");
-        String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             file.WriteLine($"{dateTime} : {message}");
+            file.Close();
+        }
+
+        public static void LogSessionData(string sessionString) {
+            StreamWriter file = File.AppendText("SessionData");
+            String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            file.WriteLine($"{dateTime} : \n=========================\n {sessionString}");
             file.Close();
         }
     }

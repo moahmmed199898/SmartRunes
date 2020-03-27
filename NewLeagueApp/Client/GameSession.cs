@@ -12,6 +12,8 @@ namespace NewLeagueApp.Client {
     public class GameSession: LCU{
         public async Task<sessionData> GetSessionData() {
             var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
+            //var stringJSON = System.IO.File.ReadAllText("static/tempDraftPick.json");
+            Logger.LogSessionData(stringJSON);
             stringJSON = stringJSON.Replace("utility", "SUPP");
             stringJSON = stringJSON.Replace("bottom", "ADC");
             stringJSON = stringJSON.Replace("top", "TOP");
@@ -25,7 +27,7 @@ namespace NewLeagueApp.Client {
                 var data = await GetSessionData();
                 /*data.MyTeam.ForEach(team => {
                     if (team.SummonerId == summonerID) {
-                        team.AssignedPosition = "TOP";
+                        team.AssignedPosition = "ADC";
                     }
                 });*/
                 var laneArray = from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition;

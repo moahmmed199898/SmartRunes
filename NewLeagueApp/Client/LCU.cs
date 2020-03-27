@@ -25,8 +25,8 @@ namespace NewLeagueApp.Client {
 
 
 
-        public BitmapImage GetLaneBitmap(String lane) {
-            if (!(lane == "TOP" || lane == "ADC" || lane == "SUPP" || lane == "JUNGLE" || lane == "MID")) throw new Exception($"lane named {lane} does not exist");
+        public static BitmapImage GetLaneBitmap(String lane) {
+            if (!(lane == "TOP" || lane == "ADC" || lane == "SUPP" || lane == "JUNGLE" || lane == "MID")) throw new Exception($"Couldn't find the lane");
             var path = $"pack://application:,,/static/img/lane/{lane}.png";
             var uri = new Uri(path);
             var bitmapImage = new BitmapImage();
@@ -34,7 +34,6 @@ namespace NewLeagueApp.Client {
             bitmapImage.UriSource = uri;
             bitmapImage.EndInit();
             return bitmapImage;
-
         }
         public async Task WaitForGameToStart() {
             var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select-legacy/v1/session");

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewLeagueApp", "NewLeagueApp\NewLeagueApp.csproj", "{32B035EA-6885-4A31-93A0-BF7E9A303D8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRunesTester", "SmartRunesTester\SmartRunesTester.csproj", "{76E9FAD9-441D-49C6-BAB7-18C662ED8711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{32B035EA-6885-4A31-93A0-BF7E9A303D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32B035EA-6885-4A31-93A0-BF7E9A303D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32B035EA-6885-4A31-93A0-BF7E9A303D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E9FAD9-441D-49C6-BAB7-18C662ED8711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76E9FAD9-441D-49C6-BAB7-18C662ED8711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76E9FAD9-441D-49C6-BAB7-18C662ED8711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76E9FAD9-441D-49C6-BAB7-18C662ED8711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
