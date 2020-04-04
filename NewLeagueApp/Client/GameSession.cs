@@ -25,21 +25,14 @@ namespace NewLeagueApp.Client {
         public async Task<string> GetDeclaredLane() {
             try {
                 var data = await GetSessionData();
-                /*data.MyTeam.ForEach(team => {
-                    if (team.SummonerId == summonerID) {
-                        team.AssignedPosition = "ADC";
-                    }
-                });*/
                 var laneArray = from player in data.MyTeam where player.SummonerId == summonerID select player.AssignedPosition;
                 if (laneArray.Count() <= 0) return "NA";
                 var lane = laneArray.Single();
                 if (string.IsNullOrEmpty(lane)) return "NA";
-                if (lane == "SUPP") return "UTILITY";
                 return lane;
             } catch (Exception error) {
                 throw error;
             }
-            throw new WarningException("Using a static file to get draft pick information");
         }
 
 

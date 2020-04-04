@@ -182,7 +182,7 @@
                     <ColumnDefinition Width="51*"></ColumnDefinition>
                     <ColumnDefinition Width="55*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Margin="15 5" Grid.Column="0" FontWeight="Bold" Foreground="#FF15AABF">Runes from <Hyperlink x:Name="playerNameLink" Foreground="#FF15AABF" NavigateUri="https://na.op.gg/summoner/userName=ItsMeMoh"></Hyperlink></TextBlock>
+                <TextBlock Margin="15 5" Grid.Column="0" FontWeight="Bold" Foreground="#FF15AABF">Runes from <Hyperlink x:Name="playerNameLink" Foreground="#FF15AABF" NavigateUri="https://na.op.gg/summoner/userName=ItsMeMoh" RequestNavigate="openHyperLinkInExternalURL"></Hyperlink></TextBlock>
                 <Image RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Grid.Column="2" Margin="0 3" Cursor="Hand" Source="static/img/icons/reload.png" MouseDown="Reset"></Image>
                 <Image RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Grid.Column="3" Margin="0 3" Cursor="Hand" Source="static/img/icons/info.png"></Image>
             </Grid>

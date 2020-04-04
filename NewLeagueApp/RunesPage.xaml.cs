@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using NewLeagueApp.Client.Runes;
 using NewLeagueApp.Client;
+using System.Windows.Navigation;
+using System.Diagnostics;
 namespace NewLeagueApp {
     /// <summary>
     /// Interaction logic for RunesWindow.xaml
@@ -72,6 +74,13 @@ namespace NewLeagueApp {
         private void Reset(object sender, MouseButtonEventArgs e) {
             this.Dispose();
             NavigationService.Navigate(new StartingPage());
+        }
+
+        private void openHyperLinkInExternalURL(object sender, RequestNavigateEventArgs e) {            
+            var senderHyperLink = (Hyperlink)sender;
+            var url = senderHyperLink.NavigateUri;
+            Process.Start(url.AbsoluteUri);
+            e.Handled = true;
         }
     }
 }
