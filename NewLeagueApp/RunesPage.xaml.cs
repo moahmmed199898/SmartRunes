@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using NewLeagueApp.Client.ChampionInfo;
 using NewLeagueApp.Client.Runes;
 using NewLeagueApp.Client;
 using System.Windows.Navigation;

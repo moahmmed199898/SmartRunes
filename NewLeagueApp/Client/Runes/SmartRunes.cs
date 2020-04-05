@@ -8,7 +8,7 @@ using System.Net;
 using Newtonsoft.Json;
 using NewLeagueApp.Client.Types;
 using System.Net.Http;
-
+using NewLeagueApp.Client.ChampionInfo;
 namespace NewLeagueApp.Client.Runes {
     public class SmartRunes:Runes {
         /// <summary>
@@ -38,8 +38,10 @@ namespace NewLeagueApp.Client.Runes {
                 Console.WriteLine("init classes");
                 var champions = new Champions();
                 var gameSession = new GameSession();
+                var enamyChampFinder = new EnamyChampFinder();
                 await champions.Init();
                 await gameSession.Init();
+                await enamyChampFinder.Init();
                 Status.CurrentStatus = "waiting for you to pick a champion";
                 this.currentChamp = await champions.GetCurrentChamp();
                 Status.CurrentStatus = "waiting for final phase";
@@ -47,7 +49,7 @@ namespace NewLeagueApp.Client.Runes {
                 Status.CurrentStatus = "getting the lane";
                 this.lane = await gameSession.GetDeclaredLane();
                 Status.CurrentStatus = "getting enamy lanner";
-                this.enamyChamp = await champions.GetChampLanningAginst(this.lane);
+                this.enamyChamp = await enamyChampFinder.GetChampLanningAginst(this.lane);
                 Status.CurrentStatus = "setting runes";
                 await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);
                 /*

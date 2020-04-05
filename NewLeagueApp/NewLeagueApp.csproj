@@ -91,9 +91,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client\ChampionInfo\Champion.cs" />
+    <Compile Include="Client\ChampionInfo\EnamyChampFinder.cs" />
     <Compile Include="Client\GameSession.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Client\champions.cs" />
+    <Compile Include="Client\ChampionInfo\Champions.cs" />
     <Compile Include="Client\Items.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MainWindow.xaml.cs">
