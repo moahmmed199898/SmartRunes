@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NewLeagueApp.Client.Types;
+using NewLeagueApp.Tools;
 using Newtonsoft.Json;
 
 namespace NewLeagueApp.Client.ChampionInfo {
     class EnamyChampFinder: Champion {
-        public async Task<string[]> GetEnamyChamps() {
+        public string[] GetEnamyChamps() {
             try {
                 if (this.gameSession.TheirTeam == null || this.gameSession.TheirTeam.Count() == 0 || this.gameSession.TheirTeam[0].ChampionId == 0) {
                     string[] errorArray = { "NA" };
@@ -32,7 +33,7 @@ namespace NewLeagueApp.Client.ChampionInfo {
 
 
         public async Task<string> GetChampLanningAginst(string myLane) {
-            var enamyChamps = await GetEnamyChamps();
+            var enamyChamps = GetEnamyChamps();
             if (enamyChamps[0] == "NA") return "NA";
             //guess enamy champion from the champion's most common role
             foreach (var enamyChamp in enamyChamps) {
@@ -52,7 +53,7 @@ namespace NewLeagueApp.Client.ChampionInfo {
 
         public async Task<string> GetChampLane(string champName) {
             try {
-                var jsonString = await ReadFileAsync("static/champMatchUps.json");
+                var jsonString = await AsyncIO.ReadFileAsync("cache/champMatchUps.json");
                 var champMatchUps = JsonConvert.DeserializeObject<Dictionary<string, ChampMatchups>>(jsonString);
                 var lanes = champMatchUps[champName];
                 //get the max value
@@ -74,7 +75,7 @@ namespace NewLeagueApp.Client.ChampionInfo {
 
         public async Task<string> GetChamp2ndLane(string champName) {
             try {
-                var jsonString = await ReadFileAsync("static/champMatchUps.json");
+                var jsonString = await AsyncIO.ReadFileAsync("cache/champMatchUps.json");
                 var champMatchUps = JsonConvert.DeserializeObject<Dictionary<string, ChampMatchups>>(jsonString);
                 var lanes = champMatchUps[champName];
                 //get the max value

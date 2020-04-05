@@ -52,22 +52,6 @@ namespace NewLeagueApp.Client.Runes {
                 this.enamyChamp = await enamyChampFinder.GetChampLanningAginst(this.lane);
                 Status.CurrentStatus = "setting runes";
                 await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);
-                /*
-                                Console.WriteLine("init classes");
-                                var champions = new Champions();
-                                var gameSession = new GameSession();
-                                await champions.Init();
-                                await gameSession.Init();
-                                Status.CurrentStatus = "waiting for the current champ";
-                                this.currentChamp = "Varus";
-                                Status.CurrentStatus = "waiting for final phase";
-                                await gameSession.WaitForTheFinalPhase();
-                                Status.CurrentStatus = "waiting for lane";
-                                this.lane = "ADC";
-                                Status.CurrentStatus = "waiting for lanner";
-                                this.enamyChamp = await champions.GetChampLanningAginst(this.lane);
-                                Status.CurrentStatus = "setting runes";
-                                await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);*/
             } catch(HttpRequestException) {
                 await Task.Delay(3000);
                 await AutoRuneSetter();

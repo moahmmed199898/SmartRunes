@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
+using NewLeagueApp.Updater;
 namespace NewLeagueApp
 {
     /// <summary>
@@ -13,5 +13,12 @@ namespace NewLeagueApp
     /// </summary>
      partial class App : Application
     {
+        public App() {
+            _ = this.Init();
+        }
+        public async Task Init() {
+            await MatchupsUpdater.CheckForUpdates();
+        }
+    
     }
 }

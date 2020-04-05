@@ -30,14 +30,20 @@ namespace NewLeagueApp.Client.ChampionInfo {
         public async Task<string> GetCurrentChamp() {
             try {
                 if (this.currentChamp != null) return this.currentChamp;
-                //var currentChampIDString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "lol-champ-select/v1/current-champion");
-                var IcurrentChampID = from player in this.gameSession.MyTeam where player.SummonerId == summonerID select player.ChampionId;
+                var currentChampIDString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "lol-champ-select/v1/current-champion");
+                if (currentChampIDString.Contains("\"httpStatus\":404,\"")) { await Task.Delay(2000); return await GetCurrentChamp(); };
+                var currentChampID = int.Parse(currentChampIDString);
+                if (currentChampID == 0) { await Task.Delay(2000); return await GetCurrentChamp(); };
+                var currentChampName = (from champ in championsInformation.Data where champ.Value.Key == currentChampID select champ.Value.Name).Single();
+                this.currentChamp = currentChampName;
+                return currentChampName;
+                /*var IcurrentChampID = from player in this.gameSession.MyTeam where player.SummonerId == summonerID select player.ChampionId;
                 if (IcurrentChampID.Count()==0) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampID = IcurrentChampID.Single<int>();
                 if (currentChampID == 0) { await Task.Delay(2000); return await GetCurrentChamp(); };
                 var currentChampName = (from champ in championsInformation.Data where champ.Value.Key == currentChampID select champ.Value.Name).Single();
                 this.currentChamp = currentChampName;
-                return currentChampName;
+                return currentChampName;*/
             } catch(Exception error) {
                 throw error;
             }

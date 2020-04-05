@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using NewLeagueApp.Client.Types;
 using Newtonsoft.Json;
 using NewLeagueApp.Client;
-
+using NewLeagueApp.Tools;
 namespace NewLeagueApp.Client.ChampionInfo {
 
     public class Champion:GameSession {
@@ -31,32 +31,9 @@ namespace NewLeagueApp.Client.ChampionInfo {
         /// </summary>
         /// <returns>The champ info as championData</returns>
         private async Task<championData> GetChampInfo() {
-            var jsonstring = await ReadFileAsync("static/champion.json");
+            var jsonstring = await AsyncIO.ReadFileAsync("static/champion.json");
             return JsonConvert.DeserializeObject<championData>(jsonstring);
         }
-
-
-
-        /// <summary>
-        /// reads a file asynchronously 
-        /// </summary>
-        /// <param name="fileName">The file name to be read</param>
-        /// <returns>the file data</returns>
-        protected async Task<string> ReadFileAsync(string fileName) {
-            try {
-                Encoding enc = Encoding.GetEncoding("iso-8859-1");
-                var file = File.OpenRead(fileName);
-                var returnBuffer = new byte[file.Length];
-                await file.ReadAsync(returnBuffer, 0, (int)file.Length);
-                return enc.GetString(returnBuffer);
-            } catch (Exception error) {
-                throw error;
-            }
-
-        }
-
- 
-
 
         /// <summary>
         /// gets the champ name from the id

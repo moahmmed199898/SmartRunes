@@ -15,7 +15,7 @@ namespace NewLeagueApp {
         }
 
         public static void LogSessionData(string sessionString) {
-            StreamWriter file = File.AppendText("SessionData");
+            StreamWriter file = File.AppendText("SessionData.log");
             String dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             file.WriteLine($"{dateTime} : \n=========================\n {sessionString}");
             file.Close();

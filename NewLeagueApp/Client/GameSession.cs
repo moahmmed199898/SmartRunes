@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 namespace NewLeagueApp.Client {
     public class GameSession: LCU{
         public async Task<sessionData> GetSessionData() {
-            //var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
-            var stringJSON = System.IO.File.ReadAllText("static/tempDraftPick.json");
+            var stringJSON = await SendRequestToRiot(HttpMethod.Get, "/lol-champ-select/v1/session");
+            //var stringJSON = System.IO.File.ReadAllText("static/tempDraftPick.json");
             Logger.LogSessionData(stringJSON);
             stringJSON = stringJSON.Replace("utility", "SUPP");
             stringJSON = stringJSON.Replace("bottom", "ADC");

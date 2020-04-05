@@ -124,6 +124,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Status.cs" />
+    <Compile Include="Tools\AsyncIO.cs" />
+    <Compile Include="Updater\MatchupsUpdater.cs" />
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,9 +163,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="static\champion.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="static\champMatchUps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="static\runeDictionaryData.json">
