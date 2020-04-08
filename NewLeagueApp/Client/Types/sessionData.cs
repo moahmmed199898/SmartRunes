@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace NewLeagueApp.Client.Types {
   
-    public partial class sessionData {
+    public struct sessionData {
         public Bans Bans { get; set; }
         public List<Team> MyTeam { get; set; }
         public List<Team> TheirTeam { get; set; }
         public Timer Timer { get; set; }
     }
 
-    public partial class Bans {
+    public struct Bans {
         public List<object> MyTeamBans { get; set; }
         public long NumBans { get; set; }
         public List<object> TheirTeamBans { get; set; }
     }
-    public partial class Team {
+    public struct Team {
         public string AssignedPosition { get; set; }
         public long CellId { get; set; }
         public int ChampionId { get; set; }
@@ -33,7 +33,7 @@ namespace NewLeagueApp.Client.Types {
         public long WardSkinId { get; set; }
     }
 
-    public partial class Timer {
+    public struct Timer {
         public long AdjustedTimeLeftInPhase { get; set; }
         public long AdjustedTimeLeftInPhaseInSec { get; set; }
         public long InternalNowInEpochMs { get; set; }

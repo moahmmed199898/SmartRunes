@@ -45,6 +45,7 @@ namespace NewLeagueApp.Client {
         }
 
         public async Task<long> GetCurrentSummnerID() {
+            if (summonerID != 0) return summonerID;
             var jsonString = await SendRequestToRiot(HttpMethod.Get, " /lol-summoner/v1/current-summoner");
             var data = JsonConvert.DeserializeObject<SummonerInfo>(jsonString);
             return data.SummonerId;

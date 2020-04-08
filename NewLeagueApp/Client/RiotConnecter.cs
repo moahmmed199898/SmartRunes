@@ -15,7 +15,7 @@ namespace NewLeagueApp.Client {
         /// </summary>
         /// <param name="httpMethodType">type of request</param>
         /// <param name="url">url to the request ( do not include the base url )</param>
-        protected async Task<string> SendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url) {
+         internal async Task<string> SendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url) {
             try {
                 var League = await LeagueClient.Connect();
                 HttpResponseMessage results;
@@ -33,7 +33,7 @@ namespace NewLeagueApp.Client {
         /// <param name="httpMethodType">type of request</param>
         /// <param name="url">url to the request ( do not include the base url )</param>
         /// <param name="data">the data that goes with the request ( for none get requests )</param>
-        protected async Task<HttpResponseMessage> SendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url, object data) {
+        internal async Task<HttpResponseMessage> SendRequestToRiot(LCUSharp.HttpMethod httpMethodType, string url, object data) {
             try {
                 var League = await LeagueClient.Connect();
                 HttpResponseMessage results;

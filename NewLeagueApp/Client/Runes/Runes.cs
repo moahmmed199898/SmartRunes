@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Windows.Media.Imaging;
 
 namespace NewLeagueApp.Client.Runes {
-    public class Runes:RiotConnecter {
+    public class Runes {
         /// <summary>
         /// Rune page name
         /// </summary>
@@ -19,12 +19,16 @@ namespace NewLeagueApp.Client.Runes {
         /// Rune tree which includes the name of the rune as well as the path to it's icon
         /// </summary>
         public Tree[] Tree { get; private set; }
-        
+
         /// <summary>
         /// This class can send and receive rune pages from the client and contains the Tree property which has the name and the icon path of every rune ( except stat runes )
         /// </summary>
+        /// 
+
+        protected RiotConnecter riotConnecter;
         public Runes() {
             Tree = GetRuneDetails();
+            this.riotConnecter = new RiotConnecter();
         }
 
         /// <summary>
@@ -39,7 +43,7 @@ namespace NewLeagueApp.Client.Runes {
             try {
                 var runeIDs = (int[])runes.Concat(statRunesIDs);
                 var page = MakeRunePage(primaryPathID, secondaryPathID, runeIDs);
-                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch(Exception error) {
                 Console.WriteLine(error);
                 throw error;
@@ -56,7 +60,7 @@ namespace NewLeagueApp.Client.Runes {
         public async Task Add(int primaryPathID, int secondaryPathID, int[] runes) {
             try {
                 var page = MakeRunePage(primaryPathID, secondaryPathID, runes);
-                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
             } catch (Exception error) {
                 Console.WriteLine(error);
                 throw error;
@@ -68,35 +72,12 @@ namespace NewLeagueApp.Client.Runes {
         /// <returns>A list of runes</returns>
         public async Task<int[]> GetCurrentRunes() {
             try {
-                var runesString = await SendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
-                var runesIDs = JsonConvert.DeserializeObject<IRunesPage>(runesString);
+                var runesString = await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Get, "/lol-perks/v1/currentpage");
+                var runesIDs = JsonConvert.DeserializeObject<Types.RunesPage>(runesString);
                 return runesIDs.selectedPerkIds;
             } catch(Exception error) {
                 throw error;
             }
-        }
-        public Slot GetRuneSlot(int runeID) {
-            if(runeID == 5002 || runeID == 5008 || runeID == 5003 || runeID == 5005 || runeID == 5007) {
-                var dictionary = GetRuneDictionary();
-                var runeInfo = (from runeItem in dictionary where runeItem.id == runeID select runeItem).Single();
-                var slot = new Slot();
-                var runes = new List<Rune>();
-                var rune = new Rune {
-                    Id = runeInfo.id,
-                    Icon = runeInfo.IconPath,
-                    Name = runeInfo.name
-                };
-                runes.Add(rune);
-                slot.Runes = runes;
-                return slot;
-            }
-
-            var runesSlot = (from path in Tree
-                            from slot in path.Slots
-                            from rune in slot.Runes
-                            where rune.Id == runeID
-                            select slot).Single();
-            return runesSlot;
         }
 
         public BitmapImage GetRuneBitmap(int runeID) {
@@ -124,6 +105,7 @@ namespace NewLeagueApp.Client.Runes {
             var runeName = runeNameCollection.Single();
             return runeName;
         }
+
         public RuneDictionary GetRuneInfo(int id) {
             var runeDictionary = GetRuneDictionary();
             var runeNameCollection = from rune in runeDictionary where rune.id == id select rune;
@@ -144,8 +126,8 @@ namespace NewLeagueApp.Client.Runes {
         /// <param name="secondaryPathID">The secondary path id</param>
         /// <param name="runeIDs">The runes id ( does not include stat runes )</param>
         /// <returns>A rune page</returns>
-        protected IRunesPage MakeRunePage(int primaryPathID, int secondaryPathID, int[] runeIDs) {
-            var runes = new IRunesPage(PageName, primaryPathID, secondaryPathID, runeIDs);
+        protected Types.RunesPage MakeRunePage(int primaryPathID, int secondaryPathID, int[] runeIDs) {
+            var runes = new Types.RunesPage(PageName, primaryPathID, secondaryPathID, runeIDs);
             return runes;
         }
         /// <summary>

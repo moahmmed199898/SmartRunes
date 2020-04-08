@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NewLeagueApp.Client.Types
 {
-    public partial class championData
+    public struct ChampionData
 {
     public string Type { get; set; }
     public string Format { get; set; }
     public string Version { get; set; }
-    public Dictionary<string, Datum> Data { get; set; }
+    public Dictionary<string, Champion> Data { get; set; }
 }
 
-public partial class Datum
+public struct Champion
 {
     public string Version { get; set; }
     public string Id { get; set; }
@@ -29,7 +25,7 @@ public partial class Datum
     public Dictionary<string, double> Stats { get; set; }
 }
 
-public partial class Image
+public struct Image
 {
     public string Full { get; set; }
     public string Sprite { get; set; }
@@ -40,7 +36,7 @@ public partial class Image
     public long H { get; set; }
 }
 
-public partial class Info
+public struct Info
 {
     public long Attack { get; set; }
     public long Defense { get; set; }

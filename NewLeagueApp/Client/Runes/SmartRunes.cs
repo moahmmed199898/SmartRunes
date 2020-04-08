@@ -10,7 +10,7 @@ using NewLeagueApp.Client.Types;
 using System.Net.Http;
 using NewLeagueApp.Client.ChampionInfo;
 namespace NewLeagueApp.Client.Runes {
-    public class SmartRunes:Runes {
+    public class SmartRunes:Runes, IDisposable {
         /// <summary>
         /// Firebase endpoint for getting the runes 
         /// </summary>
@@ -23,7 +23,7 @@ namespace NewLeagueApp.Client.Runes {
         private String currentChamp;
         private String enamyChamp;
         private String lane;
-        private TemperRunesRESTResponse optimalRunes;
+        private TempRunesRESTResponse optimalRunes;
         /// <summary>
         /// This class will get the optimal runes based on the game status and set them up in the League client 
         /// </summary>
@@ -33,10 +33,10 @@ namespace NewLeagueApp.Client.Runes {
         /// <summary>
         /// This will automate the rune setting process 
         /// </summary>
-        public async Task AutoRuneSetter() {
+        public async Task AutoRuneGenerator() {
             try {
                 Console.WriteLine("init classes");
-                var champions = new Champions();
+                var champions = new CurrentChampionFinder();
                 var gameSession = new GameSession();
                 var enamyChampFinder = new EnamyChampFinder();
                 await champions.Init();
@@ -54,7 +54,7 @@ namespace NewLeagueApp.Client.Runes {
                 await SetOptimalRunes(this.lane, this.currentChamp, this.enamyChamp);
             } catch(HttpRequestException) {
                 await Task.Delay(3000);
-                await AutoRuneSetter();
+                await AutoRuneGenerator();
             }
             catch(Exception error) {
                 Console.WriteLine(error.StackTrace);
@@ -79,7 +79,7 @@ namespace NewLeagueApp.Client.Runes {
         }
 
         public void SetOptimalItems(List<int> items) {
-            if (this.optimalRunes == null) this.optimalRunes = new TemperRunesRESTResponse();
+            if (EqualityComparer<TempRunesRESTResponse>.Default.Equals(this.optimalRunes, default(TempRunesRESTResponse))) this.optimalRunes = new TempRunesRESTResponse();
             this.optimalRunes.Items = items;
         }
 
@@ -107,12 +107,12 @@ namespace NewLeagueApp.Client.Runes {
         /// </summary>
         /// <param name="lane">The lane the player is playing in</param>
         /// <param name="currentChamp">The champ the player selected</param>
-        public async Task SetOptimalRunes(string lane, string currentChamp) {
+        private async Task SetOptimalRunes(string lane, string currentChamp) {
             try {
                 var Runes = await RunesGetRequest($"?currentChamp={currentChamp}&enemyChamp=NA&lane={lane}");
                 var runeIds = GetRunesIDs(Runes);
                 var page = MakeRunePage(Runes.PrimaryPath, Runes.SecondaryPath, runeIds);
-                await SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
+                await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Put, "/lol-perks/v1/pages/1701818929", page);
                 this.optimalRunes = Runes;
             } catch(Exception error) {
                 Console.WriteLine(error.Message);
@@ -125,13 +125,13 @@ namespace NewLeagueApp.Client.Runes {
         /// <param name="lane">The lane the player is playing in</param>
         /// <param name="currentChamp">The champ the player selected</param>
         /// <param name="enamyChamp">The champ the player is laning  against</param>
-        public async Task SetOptimalRunes(string lane, string currentChamp, string enamyChamp) {
+        private async Task SetOptimalRunes(string lane, string currentChamp, string enamyChamp) {
             try {
                 var Runes = await RunesGetRequest($"?currentChamp={currentChamp}&enemyChamp={enamyChamp}&lane={lane}");
                 var runeIds = GetRunesIDs(Runes);
                 var page = MakeRunePage(Runes.PrimaryPath, Runes.SecondaryPath, runeIds);
-                await SendRequestToRiot(LCUSharp.HttpMethod.Delete, "/lol-perks/v1/pages");
-                await SendRequestToRiot(LCUSharp.HttpMethod.Post, "/lol-perks/v1/pages", page);
+                await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Delete, "/lol-perks/v1/pages");
+                await this.riotConnecter.SendRequestToRiot(LCUSharp.HttpMethod.Post, "/lol-perks/v1/pages", page);
                 this.optimalRunes = Runes;
             } catch (Exception error) {
                 throw error;
@@ -142,10 +142,10 @@ namespace NewLeagueApp.Client.Runes {
         /// </summary>
         /// <param name="getParams">the get params for the request</param>
         /// <returns>The runes from firebase</returns>
-        private async Task<TemperRunesRESTResponse> RunesGetRequest(string getParams) {
+        private async Task<TempRunesRESTResponse> RunesGetRequest(string getParams) {
             try {
                 var jsonString = await webClient.DownloadStringTaskAsync(getParams);
-                var RunesArray = JsonConvert.DeserializeObject<TemperRunesRESTResponse[]>(jsonString);
+                var RunesArray = JsonConvert.DeserializeObject<TempRunesRESTResponse[]>(jsonString);
                 if (RunesArray.Length == 0) throw new Exception("Unable to find a match between " + getParams);
                 var Runes = RunesArray[0];
                 return Runes;
@@ -158,7 +158,7 @@ namespace NewLeagueApp.Client.Runes {
         /// </summary>
         /// <param name="runes">the runes object from firebase</param>
         /// <returns>an array of runes ids</returns>
-        private int[] GetRunesIDs(TemperRunesRESTResponse runes) {
+        private int[] GetRunesIDs(TempRunesRESTResponse runes) {
 
             var runeIds = new int[] {
                 runes.PrimaryPathKeystoneRune,

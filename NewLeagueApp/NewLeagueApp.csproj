@@ -95,7 +95,7 @@
     <Compile Include="Client\ChampionInfo\EnamyChampFinder.cs" />
     <Compile Include="Client\GameSession.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Client\ChampionInfo\Champions.cs" />
+    <Compile Include="Client\ChampionInfo\CurrentChampionFinder.cs" />
     <Compile Include="Client\Items.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MainWindow.xaml.cs">

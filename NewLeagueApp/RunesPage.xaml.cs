@@ -37,7 +37,7 @@ namespace NewLeagueApp {
         private async Task Init(SmartRunes smartRunes) {
 
             try {
-                var champions = new Champions();
+                var champions = new CurrentChampionFinder();
                 await champions.Init();
                 var currentChamp = smartRunes.GetCurrentChamp();
                 var enamyChamp = smartRunes.GetEnamyChamp();

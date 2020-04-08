@@ -11,11 +11,11 @@ namespace NewLeagueApp.Client.ChampionInfo {
     class EnamyChampFinder: Champion {
         public string[] GetEnamyChamps() {
             try {
-                if (this.gameSession.TheirTeam == null || this.gameSession.TheirTeam.Count() == 0 || this.gameSession.TheirTeam[0].ChampionId == 0) {
+                if (this.gameSessionData.TheirTeam == null || this.gameSessionData.TheirTeam.Count() == 0 || this.gameSessionData.TheirTeam[0].ChampionId == 0) {
                     string[] errorArray = { "NA" };
                     return errorArray;
                 };
-                var enamyChampIds = (from player in this.gameSession.TheirTeam select player.ChampionId).ToArray();
+                var enamyChampIds = (from player in this.gameSessionData.TheirTeam select player.ChampionId).ToArray();
                 var enamyChampNames = GetChampNamesByIDs(enamyChampIds);
                 return enamyChampNames;
             } catch (Exception error) {

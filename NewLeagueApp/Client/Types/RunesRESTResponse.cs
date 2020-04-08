@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public partial class TemperRunesRESTResponse {
+public struct TempRunesRESTResponse {
     public string EnemyChamp { get; set; }
     public int SecondaryPathRune2 { get; set; }
     public int PrimaryPath { get; set; }

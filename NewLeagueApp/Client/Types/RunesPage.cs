@@ -1,5 +1,5 @@
 ﻿namespace NewLeagueApp.Client.Types {
-    public partial class IRunesPage {
+    public partial class RunesPage {
 
         public int[] autoModifiedSelections { get; private set; } = new int[] { 0 };
         public bool? current { get; private set; } = true;
@@ -14,7 +14,7 @@
         public int primaryStyleId { get; set; }
         public int[] selectedPerkIds { get; set; }
         public int subStyleId { get; set; }
-        public IRunesPage(string name, int primaryRuneKeyStone, int secondaryRuneKeyStone, int[] selectedRunes)
+        public RunesPage(string name, int primaryRuneKeyStone, int secondaryRuneKeyStone, int[] selectedRunes)
         {
             this.name = name;
             this.primaryStyleId = primaryRuneKeyStone;

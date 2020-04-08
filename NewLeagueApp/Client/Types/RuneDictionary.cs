@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NewLeagueApp.Client.Types {
-    public class RuneDictionary {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string IconPath { get; set; }
+    public struct RuneDictionary {
+        public int id;
+        public string name;
+        public string IconPath;
     }
 
 
